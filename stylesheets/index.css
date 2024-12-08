@@ -1,9 +1,49 @@
 .main {
-    height: calc(100vh - 3.5rem);
+    height: calc(95vh);
     width: 100%;
-    background-image: url('/aonix/assets/img/main-bg2.png');
+    background-image: url('/aonix/assets/img/main-bg3.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    justify-content: space-evenly;
 }
+
+.main-bottom {
+    width: 100%;
+    margin-left: 5%;
+    margin-right: 5%;
+    padding: 2rem 3rem;
+    /* Smooth corners */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    /* Subtle shadow for depth */
+    text-align: center;
+    /* Center text inside the card */
+    /* Limit card width for better proportions */
+    margin: 20px auto;
+    /* Center card horizontally */
+}
+
+.search-container {
+    border-radius: 4rem;
+    padding: 3rem;
+    padding-bottom: 3rem;
+}
+
+.search-bar {
+    width: 100%;
+    padding: 12px 20px;
+    border-radius: 30px;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+    outline: none;
+}
+
+.search-bar:hover, .search-bar:focus {
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    border-color: black;
+}
+
+/* Placeholder text styling */
+.search-bar::placeholder {
+    color: #888; /* Light gray placeholder color */
+  }
