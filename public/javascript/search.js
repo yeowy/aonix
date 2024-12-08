@@ -8,6 +8,6 @@ searchInput.addEventListener('keydown', function(event) {
 
 function performSearch(query) {
   if (query) {
-    window.location.href = `/aonix/pages/store.html?q=${encodeURIComponent(query)}`;
+    window.location.href = `/aonix/public/pages/store.html?q=${encodeURIComponent(query)}`;
   }
 }
