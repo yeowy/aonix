@@ -11,6 +11,12 @@ const publicDir = path.join(__dirname, 'public');
 const apiDir = path.join(__dirname, 'api');
 const pagesDir = path.join(publicDir, 'pages');
 
+router.get('/api/firebase-config', (req, res) => {
+  res.json({
+    databaseURL: process.env.FIREBASE_DATABASE_URL,
+  });
+});
+
 router.get('/', (req, res) => {
   res.sendFile(path.join(publicDir, 'index.html'));
 });
