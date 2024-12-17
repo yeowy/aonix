@@ -1,0 +1,69 @@
+/* SET ROOT FONT SIZE */
+html {
+    font-size: clamp(12px, 1.5vw, 18px)
+}
+
+/* LAYOUTS */
+.fullpage {
+    width: 100%;
+    height: var(--fullpage)
+}
+
+/* CONTAINERS */
+.container {
+    max-width: 1920px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+}
+
+/* ALIGNMENT */
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* PARAMETERS */
+.flex {
+    display: flex;
+}
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.wrap {
+    flex-wrap: wrap;
+}
+
+/* HOVER EFFECTS */
+.hover-scale {
+    transition: transform 0.4s ease, box-shadow 0.4s ease
+}
+
+.hover-scale:hover {
+    transform: scale(1.2);
+}
+
+/* HEADER STYLING */
+header {
+    letter-spacing: 0.2rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: var(--header-height);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    font-size: 0.75rem;
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+}
+
+.logo {
+    font-size: 1.25rem;
+    font-weight: bold;
+}

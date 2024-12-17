@@ -1,0 +1,116 @@
+.container {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 95vh;
+    width: 100%;
+    margin: 0;
+    background-color: #f0f2f5;
+}
+
+.form-container {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+.error {
+    color: red;
+    text-align: center;
+}
+
+.hidden {
+    display: none;
+}
+
+#user-entries {
+    margin-top: 20px;
+    border-top: 1px solid #ddd;
+    padding-top: 20px;
+}
+
+.entry {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.social-login {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.divider {
+    position: relative;
+    text-align: center;
+    margin: 15px 0;
+}
+
+.divider::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    border-top: 1px solid #ccc;
+    z-index: 1;
+}
+
+.divider span {
+    background: white;
+    padding: 0 10px;
+    position: relative;
+    z-index: 2;
+    color: #777;
+}
+
+.google-signin-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    background-color: white;
+    border: 1px solid #dadce0;
+    border-radius: 4px;
+    padding: 10px;
+    margin-top: 10px;
+}
+
+.google-signin-btn img {
+    margin-right: 10px;
+    width: 20px;
+    height: 20px;
+}
+
+.google-signin-btn span {
+    color: #5f6368;
+    font-weight: 500;
+}
