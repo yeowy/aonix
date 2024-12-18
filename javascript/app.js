@@ -305,3 +305,4 @@ googleSignInButton.addEventListener('click', handleGoogleSignIn);
 document.addEventListener('DOMContentLoaded', () => {
     handleGoogleRedirectSignIn();
 });
+
