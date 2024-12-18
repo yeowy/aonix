@@ -1,7 +1,7 @@
 .hero {
     display: flex;
     flex-wrap: wrap;
-    background-color: red;
+    background-color: rgb(241, 238, 238);
     padding: 4em;
     justify-items: center;
     align-content: center;
@@ -23,4 +23,45 @@
     margin: 0 2em;
     padding:2em; */
     /* max-width: 485px; */
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block; 
+}
+
+.dropbtn {
+    background-color: transparent; 
+    border: none; 
+    cursor: pointer; 
+    color: white;
+}
+
+.dropdown-content {
+    display: none; 
+    position: absolute; 
+    background-color: #f9f9f9; 
+    min-width: 160px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+    z-index: 1; 
+}
+.dropdown:hover{
+    text-decoration: underline;
+    color: #000;
+}
+
+.dropdown-content a {
+    color: black; 
+    padding: 12px 16px; 
+    text-decoration: none; 
+    display: block; 
+}
+
+.dropdown-content a:hover {
+   color: #1D3557;
+   text-decoration: underline;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block; 
 }
