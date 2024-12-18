@@ -43,19 +43,26 @@ const logoutButton = document.getElementById('logout-button');
 const addEntryButton = document.getElementById('add-entry-button');
 const userEntriesContainer = document.getElementById('user-entries');
 const googleSignInButton = document.getElementById('google-signin');
-
+const divider = document.getElementById('divider');
 // Form Toggle Functions
+
 showRegisterLink.addEventListener('click', (e) => {
     e.preventDefault();
     loginForm.classList.add('hidden');
     registerForm.classList.remove('hidden');
+    googleSignInButton.style.display = 'none';  
+    divider.style.display = 'none';
 });
+
 
 showLoginLink.addEventListener('click', (e) => {
     e.preventDefault();
     registerForm.classList.add('hidden');
     loginForm.classList.remove('hidden');
+    googleSignInButton.style.display = 'block';  
+    divider.style.display = 'block';
 });
+
 
 // Authentication Functions
 async function registerUser(email, password) {
