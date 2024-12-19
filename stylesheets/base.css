@@ -40,6 +40,12 @@ html {
 }
 
 /* HOVER EFFECTS */
+.header-icons {
+    display: flex;
+    gap: 15px; 
+    align-items: center;
+}
+
 .hover-scale {
     transition: transform 0.4s ease, box-shadow 0.4s ease;
     cursor: pointer;
@@ -64,7 +70,8 @@ header {
     color: var(--secondary-color);
 }
 
-.logo {
-    font-size: 1.25rem;
-    font-weight: bold;
-}
+.logo-img {
+    width: 100px; 
+    height: 30px; 
+  }
+  
