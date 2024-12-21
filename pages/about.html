@@ -20,6 +20,9 @@
             <div class="hover-scale"><a href="/aonix/pages/store.html">STORE</a></div>
            
             <div class="header-icons">
+                <div class="hover-scale" onclick="toggleHint()">
+                    <iconify-icon icon="healthicons:magnifying-glass" width="24" height="24"></iconify-icon>
+                </div>
                 <div class="hover-scale">
                     <iconify-icon icon="typcn:shopping-cart" width="24" height="24"></iconify-icon>
                 </div>
@@ -34,6 +37,10 @@
                 </div>
             </div>
         </header>
+        <div class="search-hint" id="searchHint">
+            <input type="text" id="searchInput" placeholder="Search for products..."  />
+        </div>
+        <script src="/aonix/javascript/search.js"></script>
         <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
     </body>
 </html>

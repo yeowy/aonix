@@ -10,7 +10,7 @@
         <link rel="stylesheet" href="/aonix/stylesheets/variable.css">
         <link rel="stylesheet" href="/aonix/stylesheets/index.css">
         <link rel="stylesheet" href="/aonix/stylesheets/developer.css">
-
+        <link rel="stylesheet" href="/aonix/stylesheets/carousel.css">
         <title>aonix.</title>
     </head>
     <body>
@@ -20,6 +20,10 @@
             <div class="hover-scale"><a href="/aonix/pages/store.html">STORE</a></div>
            
             <div class="header-icons">
+                <div class="hover-scale" onclick="toggleHint()">
+                    <iconify-icon icon="healthicons:magnifying-glass" width="24" height="24"></iconify-icon>
+                </div>
+
                 <div class="hover-scale">
                     <iconify-icon icon="typcn:shopping-cart" width="24" height="24"></iconify-icon>
                 </div>
@@ -29,11 +33,18 @@
                     </button>
                     <div class="dropdown-content">
                         <a href="/aonix/pages/login.html">Login</a>
-                        <a href="#">User account</a>
+                        <a href="#">User Account</a>
                     </div>
                 </div>
-            </div>
+            </div>   
         </header>
+        <div class="search-hint" id="searchHint">
+            <input type="text" id="searchInput" placeholder="Search for products..."  />
+        </div>
+
+       
         <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+        <script src="/aonix/javascript/search.js"></script>
+        
     </body>
 </html>

@@ -49,7 +49,24 @@ html {
 .hover-scale {
     transition: transform 0.4s ease, box-shadow 0.4s ease;
     cursor: pointer;
+    position: relative; 
+    display: inline-block; 
 }
+/* .cart-count{
+    position: absolute; 
+    top: 7px; 
+    right: -13px; 
+    background-color: red;
+    width: 20px; 
+    height: 20px; 
+    border-radius: 50%; 
+    color: #fff;
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    font-size: 12px; 
+    font-weight: bold; 
+} */
 
 .hover-scale:hover {
     transform: scale(1.2);
