@@ -11,6 +11,7 @@
         <link rel="stylesheet" href="/aonix/stylesheets/index.css">
         <link rel="stylesheet" href="/aonix/stylesheets/developer.css">
         <link rel="stylesheet" href="/aonix/stylesheets/carousel.css">
+        <link rel="stylesheet" href="/aonix/stylesheets/store.css">
         <title>aonix.</title>
     </head>
     <body>
@@ -24,8 +25,9 @@
                     <iconify-icon icon="healthicons:magnifying-glass" width="24" height="24"></iconify-icon>
                 </div>
 
-                <div class="hover-scale">
+                <div class="hover-scale" onclick="toggleCart()">
                     <iconify-icon icon="typcn:shopping-cart" width="24" height="24"></iconify-icon>
+                    <span class="cart-count" id="cartCount">0</span>
                 </div>
                 <div class="hover-scale dropdown">
                     <button class="dropbtn">
@@ -42,9 +44,65 @@
             <input type="text" id="searchInput" placeholder="Search for products..."  />
         </div>
 
-       
+        <main class="products-container">
+            <div class="categories-sidebar">
+                <h3>商品分類</h3>
+                <div class="category-items">
+                    <div class="category-item" data-category="all">
+                        <img src="/aonix/imgs/categories/all.png" alt="所有商品">
+                        <span>所有商品</span>
+                    </div>
+                    <div class="category-item" data-category="laptop">
+                        <img src="/aonix/imgs/categories/laptop.png" alt="筆記型電腦">
+                        <span>筆記型電腦</span>
+                    </div>
+                    <div class="category-item" data-category="monitor">
+                        <img src="/aonix/imgs/categories/monitor.png" alt="顯示器">
+                        <span>顯示器</span>
+                    </div>
+                    <div class="category-item" data-category="desktop">
+                        <img src="/aonix/imgs/categories/desktop.png" alt="電腦">
+                        <span>電腦</span>
+                    </div>
+                    <div class="category-item" data-category="gpu">
+                        <img src="/aonix/imgs/categories/gpu.png" alt="顯示卡">
+                        <span>顯示卡</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-grid" id="productGrid">
+                <!-- 商品會通過 JavaScript 動態生成 -->
+            </div>
+        </main>
+
+        <div class="cart-modal" id="cartModal">
+            <div class="cart-content">
+                <div class="cart-header">
+                    <p>購物車</p>
+                    <div class="close-cart" onclick="toggleCart()">
+                        <iconify-icon icon="mdi:close"></iconify-icon>
+                    </div>
+                </div>
+                
+                <div class="cart-items" id="cartItems"></div>
+                
+    
+                <div class="cart-footer">
+                    <div class="cart-total">
+                        <span>總計:</span>
+                        <span>$<span id="cartTotal">0</span></span>
+                    </div>
+                    <button class="checkout-btn" onclick="checkout()">
+                        結帳
+                    </button>
+                </div>
+            </div>
+        </div>
+
         <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
         <script src="/aonix/javascript/search.js"></script>
-        
+        <script type="module" src="/aonix/javascript/store.js"></script>
+      
     </body>
 </html>
