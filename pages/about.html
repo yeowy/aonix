@@ -46,13 +46,24 @@
          <!-- 購物車介面 預設隱藏 -->
          <div class="cart-modal" id="cartModal">
             <div class="cart-content">
-                <button class="close-cart" onclick="toggleCart()">×</button>
-                <h2>購物車</h2>
-                <div id="cartItems"></div>
-                <!-- 結帳 -->
-                <div class="cart-summary">
-                    <p>總計: $<span id="cartTotal">0</span></p>
-                    <button onclick="checkout()" class="checkout-btn">結帳</button>
+                <div class="cart-header">
+                    <p>購物車</p>
+                    <div class="close-cart" onclick="toggleCart()">
+                        <iconify-icon icon="mdi:close"></iconify-icon>
+                    </div>
+                </div>
+                
+                <div class="cart-items" id="cartItems"></div>
+                
+    
+                <div class="cart-footer">
+                    <div class="cart-total">
+                        <span>總計:</span>
+                        <span>$<span id="cartTotal">0</span></span>
+                    </div>
+                    <button class="checkout-btn" onclick="checkout()">
+                        結帳
+                    </button>
                 </div>
             </div>
         </div>

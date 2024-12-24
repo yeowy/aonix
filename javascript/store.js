@@ -20,8 +20,7 @@ function initProducts() {
             <h7 class="product-description">${product.description}</h7>
             <p class="product-price">$${product.price.toLocaleString()}</p>
             <button ><a href="/aonix/pages/#.html">商品評價</a></button>
-            <button onclick="addToCart('${product.id}')">加入購物車</button>
-            
+            <button onclick="addToCart('${product.id}')">加入購物車</button>      
         </div>`
         
     ).join('');
