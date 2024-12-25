@@ -2,7 +2,7 @@
 import products from '../javascript/products.js';
 
 // 購物車數據
-let cart = [];
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
 // 初始化商品展示
 function initProducts() { 
@@ -51,6 +51,8 @@ window.addToCart = function(productId) {
         });
     }
     
+    // 保存到 localStorage
+    localStorage.setItem('cart', JSON.stringify(cart));
     updateCartDisplay();
 };
 
@@ -105,6 +107,7 @@ window.updateQuantity = function(productId, change) {
         if (item.quantity <= 0) {
             removeFromCart(productId);
         } else {
+            localStorage.setItem('cart', JSON.stringify(cart));
             updateCartDisplay();
         }
     }
@@ -112,6 +115,7 @@ window.updateQuantity = function(productId, change) {
 
 window.removeFromCart = function(productId) {
     cart = cart.filter(item => item.id !== productId);
+    localStorage.setItem('cart', JSON.stringify(cart));
     updateCartDisplay();
 };
 
@@ -122,6 +126,7 @@ window.checkout = function() {
     }
     alert('感謝您的購買！');
     cart = [];
+    localStorage.removeItem('cart');
     updateCartDisplay();
     toggleCart();
 };
@@ -130,4 +135,5 @@ window.checkout = function() {
 document.addEventListener('DOMContentLoaded', () => {
     console.log('頁面已加載');
     initProducts();
+    updateCartDisplay(); // 確保載入頁面時更新購物車顯示
 });
