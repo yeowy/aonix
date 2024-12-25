@@ -82,7 +82,7 @@ header {
     position: sticky;
     top: 0;
     z-index: 1000;
-    font-size: 0.75rem;
+    font-size: 0.8rem;
     background-color: var(--primary-color);
     color: var(--secondary-color);
 }

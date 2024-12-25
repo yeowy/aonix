@@ -28,7 +28,7 @@
     height: 100%;
     object-fit: cover;
 }
-
+/* 左右鍵 */
 .carousel .shift .btn {
     position: absolute;
     top: 0;
@@ -47,12 +47,15 @@
     user-select: none;
     opacity: 0.5;
 }
+
 .carousel .shift .left {
     left: 30px;
 }
 .carousel .shift .right {
-    right: 20px;
+    right: 30px;
 }
+
+/* 下方的指示器 */
 .carousel .bottom {
     position: absolute;
     bottom: 20px;

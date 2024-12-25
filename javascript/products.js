@@ -31,6 +31,7 @@ const products = [
         description: "Premium gaming laptop with RTX 4080 and Intel Core i9",
         image: "/aonix/imgs/products/razer-blade.jpg"
     }
+    
 ];
 
 export default products;
