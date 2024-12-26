@@ -1,6 +1,7 @@
 /* SET ROOT FONT SIZE */
 html {
-    font-size: clamp(12px, 1.5vw, 18px)
+    font-size: clamp(14px, 1.5vw, 18px);
+    scroll-behavior: smooth;
 }
 
 /* LAYOUTS */
@@ -39,56 +40,67 @@ html {
     flex-wrap: wrap;
 }
 
-/* HOVER EFFECTS */
+/* HEADER STYLING */
+header {
+    height: var(--header-height);
+    padding: 0 5%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 2rem;
+    background: rgba(20, 20, 20, 0.95);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid rgba(255, 0, 0, 0.2);
+    box-shadow: var(--header-glow, rgba(0, 0, 0, 1));
+}
+
+.logo-img {
+    height: 30px;
+    transition: var(--transition-normal);
+}
+.logo-img:hover {
+    filter: drop-shadow(0 0 8px rgba(255, 0, 0, 1));
+}
+
+/* HEADER ICONS */
 .header-icons {
     display: flex;
     gap: 15px; 
     align-items: center;
 }
 
-.hover-scale {
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
-    cursor: pointer;
-    position: relative; 
-    display: inline-block; 
+.header-icons iconify-icon {
+    color: var(--secondary-color);
+    transition: var(--transition-normal);
 }
-/* .cart-count{
-    position: absolute; 
-    top: 7px; 
-    right: -13px; 
-    background-color: red;
-    width: 20px; 
-    height: 20px; 
-    border-radius: 50%; 
-    color: #fff;
-    display: flex; 
-    justify-content: center; 
-    align-items: center; 
-    font-size: 12px; 
-    font-weight: bold; 
-} */
+
+.header-icons iconify-icon:hover {
+    color: var(--accent-color);
+}
+
+/* HOVER EFFECTS */
+.hover-scale {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    position: relative;
+    display: inline-block;
+}
 
 .hover-scale:hover {
-    transform: scale(1.2);
+    transform: scale(1.1);
 }
 
-/* HEADER STYLING */
-header {
-    letter-spacing: 0.2rem;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    height: var(--header-height);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    font-size: 0.8rem;
-    background-color: var(--primary-color);
+/* HEADER LINKS */
+header a {
     color: var(--secondary-color);
+    transition: var(--transition-normal);
+    letter-spacing: 1px;
 }
 
-.logo-img {
-    width: 100px; 
-    height: 30px; 
-  }
-  
+header a:hover {
+    color: var(--accent-color);
+    text-shadow: var(--text-glow);
+}
+

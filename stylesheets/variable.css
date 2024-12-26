@@ -1,13 +1,30 @@
 :root {
     /* COLOURS */
-    --primary-color: #1D3557;
+    --primary-color: #050505;
     --secondary-color: #FCFBFF;
-    --accent-1: #E63946;
-    --accent-2: #E25D67;
-
+    --accent-color: #ff0000;
+    --neon-glow: 0 0 10px rgba(255, 0, 0, 0.5);
+    --header-glow: 0 2px 15px rgba(255, 0, 0, 0.15);
+    --text-glow: 0 0 5px rgba(255, 0, 0, 0.3);
+    
+    /* 漸變色 */
+    --gradient-primary: linear-gradient(45deg, #050505, #1a1a1a);
+    --gradient-accent: linear-gradient(45deg, #ff0000, #cc0000);
+    
     /* HEADER */
     --header-height: 7vh;
     
     /* FULLPAGE HEIGHT */
-    --fullpage: calc(100vh - var(--header-height))
+    --fullpage: calc(100vh - var(--header-height));
+
+    /* TRANSITIONS */
+    --transition-normal: all 0.3s ease;
+    
+    /* SPACING */
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
 }
+body {
+    background: linear-gradient(135deg, rgba(7, 7, 7, 0.95), rgba(14, 12, 12, 0.9));
+}
+
