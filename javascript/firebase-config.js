@@ -4,7 +4,7 @@ import { getAuth, GoogleAuthProvider } from 'https://www.gstatic.com/firebasejs/
 import { getFirestore } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
 
 const firebaseConfig = {
-    apiKey: ${{ secrets.API_KEY }},
+    apiKey: "AIzaSyBFV13kCeawtN5z1Sm2FvSfsipkKpxajUY",
     authDomain: "aonix-a3806.firebaseapp.com",
     databaseURL: "https://aonix-a3806-default-rtdb.asia-southeast1.firebasedatabase.app",
     projectId: "aonix-a3806",
