@@ -17,12 +17,13 @@ function initProducts() {
         `<div class="product-card">
             <img src="${product.image}" alt="${product.name}">
             <h5>${product.name}</h5>
-            <h7 class="product-description">${product.description}</h7>
+            <div class="product-description">${product.description}</div>
             <p class="product-price">$${product.price.toLocaleString()}</p>
-            <button ><a href="/aonix/pages/#.html">商品評價</a></button>
-            <button onclick="addToCart('${product.id}')">加入購物車</button>      
+            <div class="button-container">
+                <button><a href="/aonix/pages/#.html">商品評價</a></button>
+                <button onclick="addToCart('${product.id}')">加入購物車</button>
+            </div>
         </div>`
-        
     ).join('');
 }
 
@@ -137,3 +138,6 @@ document.addEventListener('DOMContentLoaded', () => {
     initProducts();
     updateCartDisplay(); // 確保載入頁面時更新購物車顯示
 });
+
+
+

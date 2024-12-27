@@ -30,6 +30,30 @@ const products = [
         price: 2499.99,
         description: "Premium gaming laptop with RTX 4080 and Intel Core i9",
         image: "/aonix/imgs/products/razer-blade.jpg"
+    }, 
+    {
+        id: "P005",
+        name: "Razer Blade 5",
+        category: "laptop",
+        price: 2499.99,
+        description: "Premium gaming laptop with RTX 4080 and Intel Core i9",
+        image: "/aonix/imgs/products/razere.jpg"
+    }, 
+    {
+        id: "P006",
+        name: "Razer Blade 6",
+        category: "laptop",
+        price: 2499.99,
+        description: "Premium gaming laptop with RTX 4080 and Intel Core i9",
+        image: "/aonix/imgs/products/razere6.jpg"
+    }, 
+    {
+        id: "P007",
+        name: "Razer Blade 7",
+        category: "laptop",
+        price: 2499.99,
+        description: "Premium gaming laptop with RTX 4080 and Intel Core i9",
+        image: "/aonix/imgs/products/razere7.jpg"
     }
     
 ];

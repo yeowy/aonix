@@ -4,10 +4,10 @@
     border-radius: 16px;
     overflow: hidden;
     position: relative;
-    margin-left: 30px;
-    margin-top: 30px;
-    border: 1px solid rgba(255, 0, 0, 0.2);
-    box-shadow: 0 0 20px rgba(255, 0, 0, 0.1);
+    margin: 30px auto 0;  
+    border: 1px solid rgba(128, 128, 128, 0.2);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    background: rgba(0, 0, 0, 0.5);
 }
 
 .carousel .container {
@@ -107,14 +107,3 @@
     transform: scaleY(1.5);
 }
 
-/* 添加漸變遮罩 */
-.carousel::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 100px;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.5), transparent);
-    pointer-events: none;
-}
