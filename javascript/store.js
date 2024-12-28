@@ -1,31 +1,37 @@
 // 改去firebase
 // 使用相對路徑導入
-import products from '../javascript/products.js';
+import { fetchProducts } from './products.js';
 
 // 購物車數據
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
+let products = []; // Global variable to store fetched products
 
 // 初始化商品展示
-function initProducts() { 
+async function initProducts() { 
     const productGrid = document.getElementById('productGrid');
     if (!productGrid) {
         console.error('找不到 productGrid 元素');
         return;
     }
 
-    // 商品介面
-    productGrid.innerHTML = products.map(product => 
-        `<div class="product-card">
-            <img src="${product.image}" alt="${product.name}">
-            <h5>${product.name}</h5>
-            <div class="product-description">${product.description}</div>
-            <p class="product-price">$${product.price.toLocaleString()}</p>
-            <div class="button-container">
-                <button><a href="/aonix/pages/product_review.html?id=${product.id}">商品評價</a></button>
-                <button onclick="addToCart('${product.id}')">加入購物車</button>
-            </div>
-        </div>`
-    ).join('');
+    try {
+        products = await fetchProducts(); // Store fetched products in the global variable
+        // 商品介面
+        productGrid.innerHTML = products.map(product => 
+            `<div class="product-card">
+                <img src="${product.images[0]}" alt="${product.name}">
+                <h5>${product.name}</h5>
+                <div class="product-description">${product.description}</div>
+                <p class="product-price">$${product.price.toLocaleString()}</p>
+                <div class="button-container">
+                    <button><a href="/aonix/pages/product_review.html?id=${product.id}">商品評價</a></button>
+                    <button onclick="addToCart('${product.id}')">加入購物車</button>
+                </div>
+            </div>`
+        ).join('');
+    } catch (error) {
+        console.error('Error fetching products:', error);
+    }
 }
 
 // 購物車相關功能
@@ -41,7 +47,7 @@ window.toggleCart = function() {
 };
 
 window.addToCart = function(productId) {
-    const product = products.find(p => p.id === productId);
+    const product = products.find(p => p.id === productId); // Use the global products variable
     const existingItem = cart.find(item => item.id === productId);
     
     if (existingItem) {

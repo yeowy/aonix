@@ -1,20 +1,23 @@
-import products from './products.js';
+import { db } from './firebase-config.js';
+import { doc, getDoc, collection, addDoc, query, where, getDocs, updateDoc, deleteDoc } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
 
 // 從 URL 獲取商品 ID
 const urlParams = new URLSearchParams(window.location.search);
 const productId = urlParams.get('id');
 
 // 獲取或初始化評論數據
-let reviews = JSON.parse(localStorage.getItem('productReviews')) || {};
 let currentRating = 0;
 
 // 初始化頁面
-function initPage() {
-    const product = products.find(p => p.id === productId);
-    if (!product) {
+async function initPage() {
+    const productDoc = doc(db, 'products', productId);
+    const productSnapshot = await getDoc(productDoc);
+    if (!productSnapshot.exists()) {
         window.location.href = '/aonix/pages/store.html';
         return;
     }
+
+    const product = productSnapshot.data();
 
     // 填充商品信息
     document.querySelector('.product-name').textContent = product.name;
@@ -23,7 +26,7 @@ function initPage() {
     
     // 創建並設置商品圖片
     const productImage = document.createElement('img');
-    productImage.src = product.image;
+    productImage.src = product.images[0];
     document.querySelector('.product-image').appendChild(productImage);
 
     // 更新評分摘要
@@ -34,14 +37,14 @@ function initPage() {
 }
 
 // 更新評分摘要
-function updateRatingSummary() {
-    const productReviews = reviews[productId] || [];
-    const totalReviews = productReviews.length;
+async function updateRatingSummary() {
+    const reviews = await fetchReviews();
+    const totalReviews = reviews.length;
     
     // 計算平均評分
     let averageRating;
     if (totalReviews > 0) {
-        const sumOfRatings = productReviews.reduce((sum, review) => sum + review.rating, 0);
+        const sumOfRatings = reviews.reduce((sum, review) => sum + review.rating, 0);
         averageRating = (sumOfRatings / totalReviews).toFixed(1);
     } else {
         averageRating = '0.0';
@@ -71,18 +74,18 @@ function updateRatingSummary() {
 }
 
 // 載入評論列表
-function loadReviews() {
+async function loadReviews() {
     const reviewsList = document.querySelector('.reviews-list');
-    const productReviews = reviews[productId] || [];
+    const reviews = await fetchReviews();
 
-    if (productReviews.length === 0) {
+    if (reviews.length === 0) {
         reviewsList.innerHTML = '<h2>商品評論</h2><p class="no-reviews">暫無評論</p>';
         return;
     }
 
     reviewsList.innerHTML = `
         <h2>商品評論</h2>
-        ${productReviews.map((review, index) => `
+        ${reviews.map((review, index) => `
             <div class="review-item" data-index="${index}">
                 <div class="review-header">
                     <div class="star">
@@ -100,10 +103,10 @@ function loadReviews() {
                 <div class="review-content">
                     ${review.content}
                     <div class="review-actions">
-                        <button class="edit-btn" onclick="editReview(${index})">
+                        <button class="edit-btn" onclick="editReview('${review.id}')">
                             <iconify-icon icon="mdi:pencil"></iconify-icon>
                         </button>
-                        <button class="delete-btn" onclick="deleteReview(${index})">
+                        <button class="delete-btn" onclick="deleteReview('${review.id}')">
                             <iconify-icon icon="mdi:delete"></iconify-icon>
                         </button>
                     </div>
@@ -114,7 +117,7 @@ function loadReviews() {
 }
 
 // 處理評論提交
-document.getElementById('reviewForm').addEventListener('submit', (e) => {
+document.getElementById('reviewForm').addEventListener('submit', async (e) => {
     e.preventDefault();
     
     // 檢查是否已評分
@@ -135,28 +138,25 @@ document.getElementById('reviewForm').addEventListener('submit', (e) => {
     const newReview = {
         rating: currentRating,
         content,
-        date: new Date().toISOString()
+        date: new Date().toISOString(),
+        productId
     };
 
-    // 添加到評論列表
-    if (!reviews[productId]) {
-        reviews[productId] = [];
+    try {
+        await addDoc(collection(db, 'reviews'), newReview);
+        // 重置表單
+        e.target.reset();
+        currentRating = 0;
+        const starIcons = document.querySelectorAll('.rating-area .star-icon');
+        starIcons.forEach(icon => icon.setAttribute('icon', 'mdi:star-outline'));
+        document.querySelector('.rating-text').textContent = '請選擇評分';
+
+        // 更新頁面
+        updateRatingSummary();
+        loadReviews();
+    } catch (error) {
+        console.error('Error adding review:', error);
     }
-    reviews[productId].unshift(newReview);
-
-    // 保存到 localStorage
-    localStorage.setItem('productReviews', JSON.stringify(reviews));
-
-    // 重置表單
-    e.target.reset();
-    currentRating = 0;
-    const starIcons = document.querySelectorAll('.rating-area .star-icon');
-    starIcons.forEach(icon => icon.setAttribute('icon', 'mdi:star-outline'));
-    document.querySelector('.rating-text').textContent = '請選擇評分';
-
-    // 更新頁面
-    updateRatingSummary();
-    loadReviews();
 });
 
 // 處理星星評分
@@ -174,26 +174,28 @@ document.querySelectorAll('.rating-area .star-icon').forEach(star => {
 });
 
 // 添加刪除評論函數
-window.deleteReview = function(index) {
+window.deleteReview = async function(reviewId) {
     if (confirm('確定要刪除這則評論嗎？')) {
-        reviews[productId].splice(index, 1);
-        localStorage.setItem('productReviews', JSON.stringify(reviews));
-        updateRatingSummary();
-        loadReviews();
+        try {
+            await deleteDoc(doc(db, 'reviews', reviewId));
+            updateRatingSummary();
+            loadReviews();
+        } catch (error) {
+            console.error('Error deleting review:', error);
+        }
     }
 }
 
 // 添加編輯評論函數
-window.editReview = function(index) {
-    const review = reviews[productId][index];
-    const reviewItem = document.querySelector(`[data-index="${index}"]`);
+window.editReview = function(reviewId) {
+    const reviewItem = document.querySelector(`[data-index="${reviewId}"]`);
     const content = reviewItem.querySelector('.review-content');
     
     // 創建編輯表單
     const editForm = document.createElement('form');
     editForm.className = 'edit-form';
     editForm.innerHTML = `
-        <textarea required minlength="10" maxlength="500">${review.content}</textarea>
+        <textarea required minlength="10" maxlength="500">${content.textContent}</textarea>
         <div class="edit-actions">
             <button type="submit" class="save-btn">保存</button>
             <button type="button" class="cancel-btn">取消</button>
@@ -205,7 +207,7 @@ window.editReview = function(index) {
     content.appendChild(editForm);
 
     // 處理表單提交
-    editForm.addEventListener('submit', (e) => {
+    editForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         const newContent = editForm.querySelector('textarea').value;
         
@@ -214,9 +216,12 @@ window.editReview = function(index) {
             return;
         }
 
-        reviews[productId][index].content = newContent;
-        localStorage.setItem('productReviews', JSON.stringify(reviews));
-        loadReviews();
+        try {
+            await updateDoc(doc(db, 'reviews', reviewId), { content: newContent });
+            loadReviews();
+        } catch (error) {
+            console.error('Error updating review:', error);
+        }
     });
 
     // 處理取消編輯
@@ -225,5 +230,12 @@ window.editReview = function(index) {
     });
 }
 
+// Fetch reviews from Firestore
+async function fetchReviews() {
+    const q = query(collection(db, 'reviews'), where('productId', '==', productId));
+    const querySnapshot = await getDocs(q);
+    return querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+}
+
 // 頁面加載時初始化
-document.addEventListener('DOMContentLoaded', initPage); 
+document.addEventListener('DOMContentLoaded', initPage);
