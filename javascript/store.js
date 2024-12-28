@@ -16,22 +16,43 @@ async function initProducts() {
 
     try {
         products = await fetchProducts(); // Store fetched products in the global variable
-        // 商品介面
-        productGrid.innerHTML = products.map(product => 
-            `<div class="product-card">
-                <img src="${product.images[0]}" alt="${product.name}">
-                <h5>${product.name}</h5>
-                <div class="product-description">${product.description}</div>
-                <p class="product-price">$${product.price.toLocaleString()}</p>
-                <div class="button-container">
-                    <button><a href="/aonix/pages/product_review.html?id=${product.id}">商品評價</a></button>
-                    <button onclick="addToCart('${product.id}')">加入購物車</button>
-                </div>
-            </div>`
-        ).join('');
+        updateCategoryCounts(products);
+        displayProducts(products);
     } catch (error) {
         console.error('Error fetching products:', error);
     }
+}
+
+// 更新分類計數
+function updateCategoryCounts(products) {
+    const categoryCounts = products.reduce((counts, product) => {
+        const category = product.category.toLowerCase();
+        counts[category] = (counts[category] || 0) + 1;
+        counts['all'] = (counts['all'] || 0) + 1;
+        return counts;
+    }, {});
+
+    document.querySelectorAll('.category-count').forEach(span => {
+        const category = span.getAttribute('data-category');
+        span.textContent = categoryCounts[category] || 0;
+    });
+}
+
+// 顯示商品
+function displayProducts(productsToDisplay) {
+    const productGrid = document.getElementById('productGrid');
+    productGrid.innerHTML = productsToDisplay.map(product => 
+        `<div class="product-card">
+            <img src="${product.images[0]}" alt="${product.name}">
+            <h5>${product.name}</h5>
+            <div class="product-description">${product.description}</div>
+            <p class="product-price">$${product.price.toLocaleString()}</p>
+            <div class="button-container">
+                <button><a href="/aonix/pages/product_review.html?id=${product.id}">Product Review</a></button>
+                <button onclick="addToCart('${product.id}')">Add to Cart</button>
+            </div>
+        </div>`
+    ).join('');
 }
 
 // 購物車相關功能
@@ -76,7 +97,7 @@ function updateCartDisplay() {
         cartItems.innerHTML = 
             `<div class="empty-cart">
                 <iconify-icon icon="mdi:cart-off" ></iconify-icon>
-                <p>您的購物車是空的</p>
+                <p>Your cart is empty</p>
             </div>`   
         ;
         cartTotal.textContent = '0';
@@ -129,21 +150,45 @@ window.removeFromCart = function(productId) {
 
 window.checkout = function() {
     if (cart.length === 0) {
-        alert('購物車是空的！');
+        alert('Your cart is empty!');
         return;
     }
-    alert('感謝您的購買！');
+    alert('Thank you for your purchase!');
     cart = [];
     localStorage.removeItem('cart');
     updateCartDisplay();
     toggleCart();
 };
 
+// Filter products by category
+document.querySelectorAll('.category-item').forEach(item => {
+    item.addEventListener('click', () => {
+        const category = item.getAttribute('data-category');
+        if (category === 'all') {
+            displayProducts(products);
+        } else {
+            const filteredProducts = products.filter(product => product.category.toLowerCase() === category);
+            displayProducts(filteredProducts);
+        }
+    });
+});
+
+// Search products
+document.getElementById('searchInput').addEventListener('input', (e) => {
+    const searchTerm = e.target.value.toLowerCase();
+    const filteredProducts = products.filter(product => 
+        product.name.toLowerCase().includes(searchTerm) ||
+        product.description.toLowerCase().includes(searchTerm) ||
+        product.category.toLowerCase().includes(searchTerm)
+    );
+    displayProducts(filteredProducts);
+});
+
 // 頁面加載時初始化
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('頁面已加載');
+    console.log('Page loaded');
     initProducts();
-    updateCartDisplay(); // 確保載入頁面時更新購物車顯示
+    updateCartDisplay(); // Ensure cart display is updated when the page loads
 });
 
 

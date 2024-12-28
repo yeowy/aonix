@@ -62,30 +62,59 @@
             <input type="text" id="searchInput" placeholder="Search for products..."  />
         </div>
 
-        <main class="products-container">
-            <div class="categories-sidebar">
-                <h3>商品分類</h3>
-                <div class="category-items">
+        <main class="store-container">
+            <div class="filter-section">
+                <h3>Product Categories</h3>
+                <div class="category-items" id="categoryItems">
                     <div class="category-item" data-category="all">
-                        <span>所有商品</span>
+                        <span>All Products</span> (<span class="category-count" data-category="all">0</span>)
                     </div>
-                    <div class="category-item" data-category="laptop">
-                        <span>筆記型電腦</span>
+                    <div class="category-item" data-category="graphics cards">
+                        <span>Graphics Cards</span> (<span class="category-count" data-category="graphics cards">0</span>)
                     </div>
-                    <div class="category-item" data-category="monitor">
-                        <span>顯示器</span>
+                    <div class="category-item" data-category="laptops">
+                        <span>Laptops</span> (<span class="category-count" data-category="laptops">0</span>)
                     </div>
-                    <div class="category-item" data-category="desktop">
-                        <span>電腦</span>
+                    <div class="category-item" data-category="headphones">
+                        <span>Headphones</span> (<span class="category-count" data-category="headphones">0</span>)
                     </div>
-                    <div class="category-item" data-category="gpu">
-                        <span>顯示卡</span>
+                    <div class="category-item" data-category="processors">
+                        <span>Processors</span> (<span class="category-count" data-category="processors">0</span>)
+                    </div>
+                    <div class="category-item" data-category="memory">
+                        <span>Memory</span> (<span class="category-count" data-category="memory">0</span>)
+                    </div>
+                    <div class="category-item" data-category="storage">
+                        <span>Storage</span> (<span class="category-count" data-category="storage">0</span>)
+                    </div>
+                    <div class="category-item" data-category="motherboards">
+                        <span>Motherboards</span> (<span class="category-count" data-category="motherboards">0</span>)
+                    </div>
+                    <div class="category-item" data-category="cooling">
+                        <span>Cooling</span> (<span class="category-count" data-category="cooling">0</span>)
+                    </div>
+                    <div class="category-item" data-category="power supplies">
+                        <span>Power Supplies</span> (<span class="category-count" data-category="power supplies">0</span>)
+                    </div>
+                    <div class="category-item" data-category="mice">
+                        <span>Mice</span> (<span class="category-count" data-category="mice">0</span>)
+                    </div>
+                    <div class="category-item" data-category="keyboards">
+                        <span>Keyboards</span> (<span class="category-count" data-category="keyboards">0</span>)
+                    </div>
+                    <div class="category-item" data-category="monitors">
+                        <span>Monitors</span> (<span class="category-count" data-category="monitors">0</span>)
+                    </div>
+                    <div class="category-item" data-category="cases">
+                        <span>Cases</span> (<span class="category-count" data-category="cases">0</span>)
                     </div>
                 </div>
             </div>
 
-            <div class="product-grid" id="productGrid">
-                <!-- 商品會通過 JavaScript 動態生成 -->
+            <div class="products-container">
+                <div class="product-grid" id="productGrid">
+                    <!-- 商品會通過 JavaScript 動態生成 -->
+                </div>
             </div>
         </main>
 
