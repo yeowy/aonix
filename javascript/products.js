@@ -1,3 +1,5 @@
+// 改去firebase
+
 const products = [
     {
         id: "P001",

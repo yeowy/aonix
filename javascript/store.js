@@ -1,3 +1,4 @@
+// 改去firebase
 // 使用相對路徑導入
 import products from '../javascript/products.js';
 
@@ -20,7 +21,7 @@ function initProducts() {
             <div class="product-description">${product.description}</div>
             <p class="product-price">$${product.price.toLocaleString()}</p>
             <div class="button-container">
-                <button><a href="/aonix/pages/#.html">商品評價</a></button>
+                <button><a href="/aonix/pages/product_review.html?id=${product.id}">商品評價</a></button>
                 <button onclick="addToCart('${product.id}')">加入購物車</button>
             </div>
         </div>`

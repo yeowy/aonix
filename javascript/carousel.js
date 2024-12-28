@@ -32,13 +32,15 @@ function refresh() {
         index = 0; // 將index設置為第一張圖片
     }
 
-    let carousel = document.querySelector(".carousel"); 
-
-    let width = getComputedStyle(carousel).width; // 獲取輪播圖容器的寬度
-    width = Number(width.slice(0, -2)); // 去掉單位px，並將其轉換為數字
-
-    carousel.querySelector(".container").style.left = 
-        index * width * -1 + "px"; // 使其顯示對應的圖片
+    let carousel = document.querySelector(".carousel");
+    let container = carousel.querySelector(".container");
+    
+    container.style.transform = `translateX(-${index * 100}%)`; // 使用transform替代left属性
+    
+    // 更新指示器状态
+    document.querySelectorAll('.indicator').forEach((indicator, i) => {
+        indicator.classList.toggle('active', i === index);
+    });
 }
 
 let refreshWrapper = (func) => { 

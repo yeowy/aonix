@@ -1,0 +1,263 @@
+.review-container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+/* 商品區域樣式 */
+.product-section {
+    display: flex;
+    gap: 40px;
+    margin-bottom: 40px;
+    padding: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-radius: 15px;
+    padding: 35px;
+    box-shadow: 
+        0 0 30px rgba(255, 0, 0, 0.1),
+        inset 0 0 15px rgba(255, 255, 255, 0.1);
+}
+
+.product-details {
+    flex: 1;
+}
+
+.product-name {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: white;
+}
+
+.product-description {
+    color: white;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.product-price {
+    font-size: 24px;
+    color: var(--accent-color);
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.product-image {
+    width: 400px;
+    height: 400px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* 評分摘要區域 */
+.rating-summary {
+    margin-top: 20px;
+    color: white;
+}
+
+.average-rating {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.rating-number {
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.total-reviews {
+    color: white;
+}
+
+/* 評論區域樣式 */
+.review-section {
+    padding: 30px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-radius: 15px;
+    padding: 35px;
+    box-shadow: 
+        0 0 30px rgba(255, 0, 0, 0.1),
+        inset 0 0 15px rgba(255, 255, 255, 0.1);
+}
+
+.review-section h2 {
+    color: var(--secondary-color);
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+
+/* 評分區域樣式 */
+.rating-area {
+    margin: 20px 0;
+    text-align: center;
+    color: white;
+}
+
+.star {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    margin-bottom: 10px;
+}
+
+.star-icon {
+    cursor: pointer;
+    color: gold;
+}
+
+/* 評論表單樣式 */
+.review-form {
+    margin: 20px 0;
+}
+
+.review-form textarea {
+    width: 100%;
+    height: 180px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    resize: vertical;
+    margin-bottom: 15px;
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.2);
+}
+
+.review-form button {
+    padding: 10px 20px;
+    background: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.review-form button:hover {
+    opacity: 0.9;
+    transform: translateY(2px);
+    background: linear-gradient(135deg, #751a1a, #690202);
+}
+
+/* 評論列表樣式 */
+.reviews-list {
+    margin-top: 40px;
+}
+
+.review-item {
+    padding: 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.review-item:last-child {
+    border-bottom: none;
+}
+
+.review-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.review-date {
+    color: white;
+    font-size: 0.9em;
+}
+
+.review-content {
+    line-height: 1.6;
+    color: #f7f6f6;
+    position: relative;
+    padding-right: 40px; 
+}
+
+.review-actions {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    gap: 10px;
+}
+
+.edit-btn{
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #fff;
+    opacity: 0.7;
+    transition: opacity 0.3s;
+    padding: 5px;
+}
+.delete-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #d40404;
+    opacity: 0.7;
+    transition: opacity 0.3s;
+    padding: 5px;
+}
+.edit-btn:hover,.delete-btn:hover {
+    opacity: 1;
+}
+
+.edit-form {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.edit-form textarea {
+    width: 100%;
+    height: 100px;
+    padding: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    margin-bottom: 10px;
+}
+
+.edit-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.save-btn,.cancel-btn {
+    padding: 5px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.save-btn {
+    background: var(--accent-color);
+    color: white;
+}
+
+.cancel-btn {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
+.save-btn:hover,.cancel-btn:hover {
+    opacity: 0.8;
+}
+.no-reviews {
+    color: white;
+}
