@@ -1,5 +1,6 @@
-import { db } from './firebase-config.js';
+import { db, auth } from './firebase-config.js';
 import { doc, getDoc, collection, addDoc, query, where, getDocs, updateDoc, deleteDoc } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+import { onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
 
 // 從 URL 獲取商品 ID
 const urlParams = new URLSearchParams(window.location.search);
@@ -7,6 +8,7 @@ const productId = urlParams.get('id');
 
 // 獲取或初始化評論數據
 let currentRating = 0;
+let currentUser = null;
 
 // 初始化頁面
 async function initPage() {
@@ -126,6 +128,12 @@ document.getElementById('reviewForm').addEventListener('submit', async (e) => {
         return;
     }
 
+    // 檢查用戶是否已登錄
+    if (!currentUser) {
+        alert('You must be logged in to submit a review!');
+        return;
+    }
+
     const content = e.target.querySelector('textarea').value;
     
     // 檢查評論長度
@@ -139,7 +147,8 @@ document.getElementById('reviewForm').addEventListener('submit', async (e) => {
         rating: currentRating,
         content,
         date: new Date().toISOString(),
-        productId
+        productId,
+        userId: currentUser.uid
     };
 
     try {
@@ -238,4 +247,13 @@ async function fetchReviews() {
 }
 
 // 頁面加載時初始化
-document.addEventListener('DOMContentLoaded', initPage);
+document.addEventListener('DOMContentLoaded', () => {
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            currentUser = user;
+        } else {
+            currentUser = null;
+        }
+    });
+    initPage();
+});
