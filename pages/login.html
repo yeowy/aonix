@@ -26,12 +26,17 @@
                     <iconify-icon icon="typcn:shopping-cart" width="28" height="28"></iconify-icon>
                     <span class="cart-count" id="cartCount">0</span>
                 </div>
-                <div class="hover-scale" id="accountIcon">
-                    <iconify-icon icon="mdi:account" width="28" height="28" class="user"></iconify-icon>
+                <div class="hover-scale dropdown">
+                    <button class="dropbtn">
+                        <iconify-icon icon="mdi:account" width="28" height="28" class="user"></iconify-icon>
+                    </button>
+                    <div class="dropdown-content">
+                        <a href="/aonix/pages/login.html">Login</a>
+                        <a href="#">User Account</a>
+                    </div>
                 </div>
             </div>
         </header>
-        
         <div class="search-hint" id="searchHint">
             <input type="text" id="searchInput" placeholder="Search for products..."  />
         </div>
@@ -44,7 +49,7 @@
                     <input type="password" id="login-password" placeholder="Password" required >
                     <button id="login-button" class="button">Login</button>
                     <p id="login-error" class="error"></p>
-                    <p>Don't have an account? &nbsp <a href="/aonix/pages/register.html" class="register-link">Register</a></p>
+                    <p>Don't have an account? &nbsp <a href="#" id="show-register" class="register-link">Register</a></p>
                 </div>
                 
                 <!-- google login -->
@@ -103,11 +108,9 @@
                 </div>
             </div>
         </div>
-
         <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
         <script type="module" src="/aonix/javascript/app.js"></script>
         <script src="/aonix/javascript/search.js"></script>
         <script type="module" src="/aonix/javascript/store.js"></script>
-        <script type="module" src="/aonix/javascript/accountRedirect.js"></script>
     </body>
 </html>
