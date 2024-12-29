@@ -3,7 +3,10 @@
     padding: 5em 15em;
     margin: 0 auto;
     display: flex;
-    gap: 30px;
+    gap: 2em;
+    display: flex;
+    flex-wrap: wrap;
+    background: black;
 }
 
 .products-container {
@@ -12,30 +15,29 @@
 
 /* 側邊的分類欄設定 */
 .filter-section {
-    width: 225px;
+    position: sticky;
+    width: 250px;
     min-width: 200px;
-    padding: 15px;
-    margin: 0 1em;
-    background: rgba(58, 57, 57, 0.753);
+    background: var(--primary-color);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 12px;
-    top: 20px;
+    top: 10vh;
     height: fit-content;
+    padding: 0 1.5rem;
+    color: white;
+    padding-bottom: 0.5em;
 }
 
 /* 側邊的分類欄標題樣式 */
 .filter-section h3 {
-    margin-bottom: 15px;
-    padding-bottom: 8px;
+    margin-bottom: 10px;
     color: white;
-    border-bottom: 2px solid rgba(255, 255, 255, 0.3);
     font-size: 1.2rem;
     filter: drop-shadow(0 0 3px rgba(255, 0, 0, 1));
 }
 
 .category-dropdown {
+    
     position: relative;
     width: 100%;
     margin-bottom: 5px;
@@ -46,10 +48,22 @@
     justify-content: space-between;
     align-items: center;
     padding: 10px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 4px;
     cursor: pointer;
     color: white;
+}
+
+.category-count {
+    color: rgba(255, 255, 255, 0.411);
+    padding: 0;
+    margin-left: auto;
+}
+
+.line {
+    width: 100%;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+    filter: drop-shadow(0 0 3px rgba(255, 0, 0, 1));
+    margin-bottom: 1em;
+    opacity: 0.2;
 }
 
 .category-btn {
@@ -62,14 +76,12 @@
 .category-dropdown-content {
     display: none;
     position: relative;
-    background: rgba(0, 0, 0, 0.9);
     min-width: 160px;
-    border: 1px solid var(--accent-color);
-    border-radius: 4px;
-    box-shadow: var(--neon-glow);
+    padding-left: 1em;
     z-index: 1000;
     color: white;
     gap: 5px;
+    font-size: small;
 }
 
 .category-dropdown-content.active {
@@ -113,23 +125,138 @@
 /* 販賣商品的佈局 */
 .product-grid {
     flex: 1;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    display: flex;
+    flex-direction: column;
     gap: 20px;
 }
 
 /* 商品卡片樣式 */
 .product-card {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 12px;
+    background: var(--primary-color);
+    /* backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px); */
     padding: 1.5rem;
     color: white;
     display: flex;
+    flex-direction: row;
+    height: 200px;
+}
+
+.product-img img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+
+.product-details {
+    padding-left: 5px;
+    margin-left: 1em;
+    flex: 1;
+    display: flex;
     flex-direction: column;
-    height: 520px;
+    justify-content: unset;
+}
+
+.product-brand {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin: 0;
+}
+
+.product-name {
+    font-size: 1.1rem;
+    margin: 0px;
+    color: white;
+}
+
+.product-name h5 {
+    line-height: 0.8;
+}
+
+.product-tags {
+    display: flex;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin: 0;
+    padding: 0;
+    gap: 5px;
+    font-size: 0.7rem;
+}
+
+.tag {
+    margin: 0;
+    padding: 4px 16px;
+    background-color: rgb(39, 39, 39);
+}
+
+.product-bottom {
+    display: flex;
+    justify-self: flex-end;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+}
+
+.product-bottom-left {
+    display: flex;
+    gap: 5px;
+}
+
+.product-bottom-right {
+    display: flex;
+    gap: 1em;
+}
+
+.product-rating {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.product-rating iconify-icon {
+    display: block;
+}
+
+.rating {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 1rem;
+    color: gold;
+}
+
+.rating-count {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.206);
+}
+
+.product-price {
+    font-weight: bold;
+    color: white;
+    font-size: 1.2rem;
+}
+
+.add-to-cart-btn {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    padding: 10px;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: bold;
+}
+
+.add-to-cart-btn:hover {
+    transform: scale(1.05);
+    background: linear-gradient(135deg, #751a1a, #690202);
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
 }
 
 /* 商品圖片容器 */
@@ -152,7 +279,8 @@
 .product-description {
     font-size: 0.9rem;
     color: rgba(255, 255, 255, 0.8);
-    margin: 10px 0;
+    margin: 0;
+    padding: 1.5em 0;
     overflow: hidden;
     flex: 1;
 }
@@ -175,12 +303,12 @@
 
 /* 按鈕樣式 */
 .product-card button {
-    width: 100%;
-    padding: 10px;
+    width: auto;
+    padding: 10px 15px;
     background: linear-gradient(135deg, #f73030, #fd0202);
     color: white;
     border: none;
-    border-radius: 6px;
+    border-radius: 2px;
     cursor: pointer;
     transition: all 0.3s ease;
 }
@@ -400,4 +528,79 @@
     color: var(--secondary-color);
     opacity: 0.7;
     pointer-events: none;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+    .product-card {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .product-img img {
+        height: auto;
+        margin-bottom: 1rem;
+    }
+
+    .product-details {
+        padding-left: 0;
+        margin-left: 0;
+    }
+
+    .product-name {
+        font-size: 1rem;
+    }
+
+    .product-brand {
+        font-size: 0.8rem;
+    }
+
+    .product-tags {
+        font-size: 0.8rem;
+    }
+
+    .product-description {
+        font-size: 0.9rem;
+    }
+
+    .product-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .product-bottom-left,
+    .product-bottom-right {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .product-bottom-right {
+        margin-top: 0.5rem;
+    }
+
+    .add-to-cart-btn {
+        width: 100%;
+        margin-top: 1rem;
+    }
+
+    .filter-section {
+        position: unset;
+    }
+
+    .store-container {
+        padding: 2em;
+    }
+
+    .product-tags {
+        display: none;
+    }
+
+    .add-to-cart-btn {
+        justify-content: center;
+        margin-top: 0;
+    }
+
+    .filter-section {
+        display: none;
+    }
 }

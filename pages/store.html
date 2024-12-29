@@ -57,28 +57,29 @@
 
             <!-- Filter section -->
             <div class="filter-section">
-                <h3>FILTER</h3>
+                <h3>FILTERS</h3>
 
-                <div class="category-items" id="categoryItems">
+                <!-- Filter search bar -->
+                <div class="category-items" id="categoryItems"> 
                     <div class="filter-search">
-                        <input type="text" id="filterSearchInput" placeholder="Search for product..." />
+                        <input type="text" id="filterSearchInput" placeholder="Search for a product..." />
                         <iconify-icon icon="healthicons:magnifying-glass" width="20" height="20"></iconify-icon>
                     </div>
+
+                    <!-- Line split -->
+                    <div class="line"></div>
 
                     <!-- pc components Dropdown -->
                     <div class="category-dropdown">
                         <div class="category-header">
-                            <span>PC Components</span>
+                            <span>Essentials</span>
 
                             <button class="category-btn">
                                 <iconify-icon icon="mdi:chevron-down" width="20" height="20"></iconify-icon>
                             </button>
                         </div>
 
-                        <div class="category-dropdown-content">
-                            <div class="category-item" data-category="processors">Processors</div>
-                            <div class="category-item" data-category="motherboards">Motherboards</div>
-                            <div class="category-item" data-category="ram">RAM</div>
+                        <div class="category-dropdown-content" data-category="processors">
                             <!-- Storage Dropdown -->
                             <div class="category-dropdown">
                                 <div class="category-header">
@@ -88,17 +89,23 @@
                                     </button>
                                 </div>
 
-                                <div class="category-dropdown-content">
+                                <div class="category-dropdown-content" data-category="storage">
                                     <div class="category-item" data-category="ssd">SSD</div>
                                     <div class="category-item" data-category="hdd">HDD</div>
                                 </div>
                             </div>
+                            
+                            <div class="category-item" data-category="processors">Processors</div>
+                            <div class="category-item" data-category="motherboards">Motherboards</div>
+                            <div class="category-item" data-category="ram">RAM</div>
+                            
 
                             <div class="category-item" data-category="graphics-cards">Graphics Cards</div>
                             <div class="category-item" data-category="power-supplies">Power Supplies</div>
                         </div>
                     </div>
 
+                    <div class="line"></div>
                     <div class="category-dropdown">
                         <div class="category-header">
                             <span>Cooling Solutions</span>
@@ -107,7 +114,7 @@
                             </button>
                         </div>
 
-                        <div class="category-dropdown-content">
+                        <div class="category-dropdown-content" data-category="cooling-solutions">
                             <div class="category-item" data-category="cpu-coolers">CPU Coolers</div>
                             <div class="category-item" data-category="case-fans">Case Fans</div>
                             <div class="category-item" data-category="thermal-paste">Thermal Paste</div>
@@ -115,15 +122,17 @@
                         </div>
                     </div>
 
+                    <div class="line"></div>
+
                     <div class="category-dropdown">
                         <div class="category-header">
-                            <span>PC Cases</span>
+                            <span>Cases</span>
                             <button class="category-btn">
                                 <iconify-icon icon="mdi:chevron-down" width="20" height="20"></iconify-icon>
                             </button>
                         </div>
 
-                        <div class="category-dropdown-content">
+                        <div class="category-dropdown-content" data-category="cases">
                             <div class="category-item" data-category="full-tower">Full-Tower</div>
                             <div class="category-item" data-category="mid-tower">Mid-Tower</div>
                             <div class="category-item" data-category="mini-tower">Mini-Tower</div>
@@ -131,6 +140,7 @@
                         </div>
                     </div>
 
+                    <div class="line"></div>
                     <!-- Peripherals Dropdown -->
                     <div class="category-dropdown">
                         <div class="category-header">
@@ -140,7 +150,7 @@
                             </button>
                         </div>
 
-                        <div class="category-dropdown-content">
+                        <div class="category-dropdown-content" data-category="peripherals">
                             <div class="category-item" data-category="keyboards">Keyboards</div>
                             <div class="category-item" data-category="mice">Mice</div>
                             <div class="category-item" data-category="monitors">Monitors</div>
@@ -149,6 +159,8 @@
                             <div class="category-item" data-category="controllers">Controllers</div>
                         </div>
                     </div>
+
+                    <div class="line"></div>
 
                     <!-- Networking Equipment Dropdown -->
                     <div class="category-dropdown">
@@ -159,13 +171,15 @@
                             </button>
                         </div>
 
-                        <div class="category-dropdown-content">
+                        <div class="category-dropdown-content" data-category="networking-equipment">
                             <div class="category-item" data-category="routers">Wi-Fi Routers</div>
                             <div class="category-item" data-category="adapters">Adapters</div>
                             <div class="category-item" data-category="switches">Network Switches</div>
                             <div class="category-item" data-category="network-cables">Cables</div>
                         </div>
                     </div>
+
+                    <div class="line"></div>
 
                     <!-- Accessories Dropdown -->
                     <div class="category-dropdown">
@@ -176,7 +190,7 @@
                             </button>
                         </div>
 
-                        <div class="category-dropdown-content">
+                        <div class="category-dropdown-content" data-category="accessories">
                             <div class="category-item" data-category="cables-adapters">Cables and Adapters</div>
                             <div class="category-item" data-category="docking">Docking Stations</div>
                             <div class="category-item" data-category="storage-devices">Storage Devices</div>
@@ -185,6 +199,8 @@
                         </div>
                     </div>
 
+                    <div class="line"></div>
+                    
                     <div class="category-dropdown">
                         <div class="category-header">
                             <span>Gaming Gear</span>
@@ -193,7 +209,7 @@
                             </button>
                         </div>
 
-                        <div class="category-dropdown-content">
+                        <div class="category-dropdown-content" data-category="gaming-gear">
                             <div class="category-item" data-category="chairs">Chairs</div>
                             <div class="category-item" data-category="desks">Desks</div>
                             <div class="category-item" data-category="vr">VR Headsets</div>
@@ -235,6 +251,7 @@
         </div>
 
         <!-- Scripts for search functionality, iconify icons, and store functionality -->
+        <script type="module" src="/aonix/javascript/base.js"></script>
         <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
         <script src="/aonix/javascript/search.js"></script>
         <script type="module" src="/aonix/javascript/store.js"></script>

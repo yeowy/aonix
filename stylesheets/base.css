@@ -57,8 +57,11 @@ header {
 }
 
 .logo-img {
-    height: 50px;
     transition: var(--transition-normal);
+    width: 100%;
+    max-width: 150px; /* Adjust max-width as needed */
+    height: auto;
+    object-fit: contain;
 }
 .logo-img:hover {
     filter: drop-shadow(0 0 8px rgba(255, 0, 0, 1));
@@ -103,4 +106,3 @@ header a:hover {
     color: var(--accent-color);
     text-shadow: var(--text-glow);
 }
-
