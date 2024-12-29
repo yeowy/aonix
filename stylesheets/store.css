@@ -6,7 +6,6 @@
     gap: 30px;
 }
 
-
 .products-container {
     flex: 1;  
 }
@@ -36,29 +35,80 @@
     filter: drop-shadow(0 0 3px rgba(255, 0, 0, 1));
 }
 
-/* 分類項目列表 */
-.category-items {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+
+.category-dropdown {
+    position: relative;
+    width: 100%;
+    margin-bottom: 5px;
 }
 
-/* 單個分類項目 */
+.category-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    cursor: pointer;
+    color: white;
+}
+
+.category-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: var(--secondary-color);
+}
+
+.category-dropdown-content {
+    display: none;
+    position: relative;  
+    background: rgba(0, 0, 0, 0.9);
+    min-width: 160px;
+    border: 1px solid var(--accent-color);
+    border-radius: 4px;
+    box-shadow: var(--neon-glow);
+    z-index: 1000;
+    color: white;
+    gap: 5px;
+}
+
+.category-dropdown-content.active {
+    display: block;
+}
+
+/* 子項目樣式 */
+/* 分類項目樣式 */
 .category-item {
     display: flex;
     align-items: center;
-    gap: 10px;
-    padding: 20px;
+    gap: 15px;
+    padding: 12px;
     color: white;
-    border-radius: 6px;
+    border-radius: 8px;
     transition: all 0.3s ease;
     cursor: pointer;
-    box-shadow: 0 1px 15px rgba(255, 0, 0, 0.082), 0 2px 10px rgba(0, 0, 0, 0.842);
 }
 
+/* 懸停效果 */
 .category-item:hover {
-    background: rgba(37, 23, 23, 0.459);
+    background: rgba(255, 255, 255, 0.2);
     transform: translateX(5px);
+}
+
+.category-item.selected {
+    background: rgba(255, 0, 0, 0.2);  
+    color: var(--accent-color);        
+    box-shadow: var(--neon-glow);      
+}
+.category-btn iconify-icon {
+    transition: transform 0.3s ease;
+}
+.category-btn iconify-icon {
+    transition: transform 0.3s ease;
+}
+.category-btn.active iconify-icon {
+    transform: rotate(180deg);
 }
 
 /* 販賣商品的佈局 */
@@ -321,4 +371,37 @@
     font-size: 3em;
     margin-bottom: 15px;
     opacity: 0.7;
+}
+.filter-search {
+    position: relative;  
+    height: 30px;
+    display: flex;
+    margin-bottom: 15px;  
+}
+
+.filter-search input {
+    width: 100%;
+    height: 100%;
+    padding: 0 25px 0 8px;  
+    border: 1px solid rgba(255, 0, 0, 0.3);
+    border-radius: 4px;
+    background: rgba(0, 0, 0, 0.8);
+    color: var(--secondary-color);
+    font-size: 12px;  
+}
+
+.filter-search input:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: var(--neon-glow);
+}
+
+.filter-search iconify-icon {
+    position: absolute;
+    right: 5px; 
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--secondary-color);
+    opacity: 0.7;
+    pointer-events: none;  
 }
