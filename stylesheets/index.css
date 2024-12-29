@@ -1,12 +1,32 @@
 /* Hero Section */
-.hero.fullpage {
+html, body {
+    overflow-x: hidden;
+}
+
+.hero {
     display: flex; 
     flex-direction: row; 
     align-items: center; 
     justify-content: center; 
     height: calc(100vh - var(--header-height));
     overflow: hidden;
-   
+    background-image: url('/aonix/imgs/hero-bg.webp');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    z-index: 1;
+    padding: 0 2rem;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6); /* Adjust the opacity and color as needed */
+    z-index: 1;
 }
 
 /* Hero Content */
