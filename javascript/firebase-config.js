@@ -1,8 +1,9 @@
-// Update firebase-config.js
+// Import Firebase functions
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
 import { getAuth, GoogleAuthProvider } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
 import { getFirestore } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
 
+// Firebase configuration object
 const firebaseConfig = {
     apiKey: "AIzaSyBFV13kCeawtN5z1Sm2FvSfsipkKpxajUY",
     authDomain: "aonix-a3806.firebaseapp.com",
@@ -12,7 +13,7 @@ const firebaseConfig = {
     messagingSenderId: "982397435402",
     appId: "1:982397435402:web:3489555089a48fa8db69f3",
     measurementId: "G-NRPQSDLD4R"
-  };
+};
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
@@ -28,4 +29,5 @@ googleProvider.setCustomParameters({
   'login_hint': 'user@example.com'
 });
 
+// Export Firebase services
 export { auth, db, googleProvider };

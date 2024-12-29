@@ -1,25 +1,36 @@
 <!DOCTYPE html>
+
 <html lang="en">
     <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- Meta tags for character set and viewport settings -->
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-        <link rel="stylesheet" href="/aonix/stylesheets/reset.css">
-        <link rel="stylesheet" href="/aonix/stylesheets/base.css">
-        <link rel="stylesheet" href="/aonix/stylesheets/font.css">
-        <link rel="stylesheet" href="/aonix/stylesheets/variable.css">
-        <link rel="stylesheet" href="/aonix/stylesheets/index.css">
-        <link rel="stylesheet" href="/aonix/stylesheets/developer.css">
-        <link rel="stylesheet" href="/aonix/stylesheets/carousel.css">
-        <link rel="stylesheet" href="/aonix/stylesheets/store.css">
+        <!-- Stylesheets for resetting default styles, base styles, fonts, variables, and specific page styles -->
+        <link rel="stylesheet" href="/aonix/stylesheets/reset.css" />
+        <link rel="stylesheet" href="/aonix/stylesheets/base.css" />
+        <link rel="stylesheet" href="/aonix/stylesheets/font.css" />
+        <link rel="stylesheet" href="/aonix/stylesheets/variable.css" />
+        <link rel="stylesheet" href="/aonix/stylesheets/index.css" />
+        <link rel="stylesheet" href="/aonix/stylesheets/developer.css" />
+        <link rel="stylesheet" href="/aonix/stylesheets/carousel.css" />
+        <link rel="stylesheet" href="/aonix/stylesheets/store.css" />
+
+        <!-- Page title -->
         <title>aonix.</title>
     </head>
+
     <body>
+        <!-- Header section -->
         <header>
-            <div class="hover-scale"><a href="/aonix/index.html"><img src="/aonix/imgs/anoix.png"  class="logo-img"></a></div>
+            <!-- Logo and navigation links -->
+            <div class="hover-scale"
+                ><a href="/aonix/index.html"><img src="/aonix/imgs/anoix.png" class="logo-img" /></a
+            ></div>
             <div class="hover-scale"><a href="/aonix/pages/about.html">ABOUT</a></div>
             <div class="hover-scale"><a href="/aonix/pages/store.html">STORE</a></div>
-           
+
+            <!-- Header icons for search, cart, and user account -->
             <div class="header-icons">
                 <div class="hover-scale" onclick="toggleHint()">
                     <iconify-icon icon="healthicons:magnifying-glass" width="28" height="28"></iconify-icon>
@@ -27,38 +38,41 @@
 
                 <div class="hover-scale" onclick="toggleCart()">
                     <iconify-icon icon="typcn:shopping-cart" width="28" height="28"></iconify-icon>
+
                     <span class="cart-count" id="cartCount">0</span>
                 </div>
+
                 <div class="hover-scale" id="accountIcon">
                     <iconify-icon icon="mdi:account" width="28" height="28" class="user"></iconify-icon>
                 </div>
-            </div>   
+            </div>
         </header>
+
+        <!-- Carousel -->
         <div class="carousel">
             <div class="container">
-               
-                    <img src="/aonix/imgs/test.avif" />
-              
-              
-                    <img src="/aonix/imgs/test2.webp" />
-               
-                
-                    <img src="/aonix/imgs/tt3jpg.jpg" />
-
+                <img src="/aonix/imgs/test.avif" />
+                <img src="/aonix/imgs/test2.webp" />
+                <img src="/aonix/imgs/tt3jpg.jpg" />
             </div>
+
             <div class="shift">
                 <div class="btn left" onclick="leftShift()">&lt;</div>
                 <div class="btn right" onclick="rightShift()">&gt;</div>
             </div>
+
             <div class="bottom"></div>
         </div>
+
+        <!-- Search hint section -->
         <div class="search-hint" id="searchHint">
-            <input type="text" id="searchInput" placeholder="Search for products..."  />
+            <input type="text" id="searchInput" placeholder="Search for products..." />
         </div>
 
         <main class="store-container">
             <div class="filter-section">
                 <h3>Product Categories</h3>
+
                 <div class="category-items" id="categoryItems">
                     <div class="filter-search">
                         <input type="text" id="filterSearchInput" placeholder="product ..." />
@@ -69,10 +83,12 @@
                     <div class="category-dropdown">
                         <div class="category-header">
                             <span>PC Components</span>
+
                             <button class="category-btn">
                                 <iconify-icon icon="mdi:chevron-down" width="20" height="20"></iconify-icon>
                             </button>
                         </div>
+
                         <div class="category-dropdown-content">
                             <div class="category-item" data-category="processors">Processors</div>
                             <div class="category-item" data-category="motherboards">Motherboards</div>
@@ -85,16 +101,18 @@
                                         <iconify-icon icon="mdi:chevron-down" width="20" height="20"></iconify-icon>
                                     </button>
                                 </div>
+
                                 <div class="category-dropdown-content">
                                     <div class="category-item" data-category="ssd">SSD</div>
                                     <div class="category-item" data-category="hdd">HDD</div>
                                 </div>
                             </div>
+
                             <div class="category-item" data-category="graphics-cards">Graphics Cards</div>
                             <div class="category-item" data-category="power-supplies">Power Supplies</div>
                         </div>
                     </div>
-                    
+
                     <div class="category-dropdown">
                         <div class="category-header">
                             <span>Cooling Solutions</span>
@@ -102,6 +120,7 @@
                                 <iconify-icon icon="mdi:chevron-down" width="20" height="20"></iconify-icon>
                             </button>
                         </div>
+
                         <div class="category-dropdown-content">
                             <div class="category-item" data-category="cpu-coolers">CPU Coolers</div>
                             <div class="category-item" data-category="case-fans">Case Fans</div>
@@ -110,7 +129,6 @@
                         </div>
                     </div>
 
-                   
                     <div class="category-dropdown">
                         <div class="category-header">
                             <span>PC Cases</span>
@@ -118,6 +136,7 @@
                                 <iconify-icon icon="mdi:chevron-down" width="20" height="20"></iconify-icon>
                             </button>
                         </div>
+
                         <div class="category-dropdown-content">
                             <div class="category-item" data-category="full-tower">Full-Tower</div>
                             <div class="category-item" data-category="mid-tower">Mid-Tower</div>
@@ -134,6 +153,7 @@
                                 <iconify-icon icon="mdi:chevron-down" width="20" height="20"></iconify-icon>
                             </button>
                         </div>
+
                         <div class="category-dropdown-content">
                             <div class="category-item" data-category="keyboards">Keyboards</div>
                             <div class="category-item" data-category="mice">Mice</div>
@@ -152,6 +172,7 @@
                                 <iconify-icon icon="mdi:chevron-down" width="20" height="20"></iconify-icon>
                             </button>
                         </div>
+
                         <div class="category-dropdown-content">
                             <div class="category-item" data-category="routers">Wi-Fi Routers</div>
                             <div class="category-item" data-category="adapters">Adapters</div>
@@ -168,6 +189,7 @@
                                 <iconify-icon icon="mdi:chevron-down" width="20" height="20"></iconify-icon>
                             </button>
                         </div>
+
                         <div class="category-dropdown-content">
                             <div class="category-item" data-category="cables-adapters">Cables and Adapters</div>
                             <div class="category-item" data-category="docking">Docking Stations</div>
@@ -177,7 +199,6 @@
                         </div>
                     </div>
 
-               
                     <div class="category-dropdown">
                         <div class="category-header">
                             <span>Gaming Gear</span>
@@ -185,6 +206,7 @@
                                 <iconify-icon icon="mdi:chevron-down" width="20" height="20"></iconify-icon>
                             </button>
                         </div>
+
                         <div class="category-dropdown-content">
                             <div class="category-item" data-category="chairs">Chairs</div>
                             <div class="category-item" data-category="desks">Desks</div>
@@ -201,35 +223,35 @@
             </div>
         </main>
 
+        <!-- Shopping cart modal (hidden by default) -->
         <div class="cart-modal" id="cartModal">
             <div class="cart-content">
                 <div class="cart-header">
                     <p>購物車</p>
+
                     <div class="close-cart" onclick="toggleCart()">
                         <iconify-icon icon="mdi:close"></iconify-icon>
                     </div>
                 </div>
-                
+
                 <div class="cart-items" id="cartItems"></div>
-                
-    
+
                 <div class="cart-footer">
                     <div class="cart-total">
                         <span>總計:</span>
                         <span>$<span id="cartTotal">0</span></span>
                     </div>
-                    <button class="checkout-btn" onclick="checkout()">
-                        結帳
-                    </button>
+
+                    <button class="checkout-btn" onclick="checkout()">結帳</button>
                 </div>
             </div>
         </div>
 
+        <!-- Scripts for search functionality, iconify icons, and store functionality -->
         <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
         <script src="/aonix/javascript/search.js"></script>
         <script type="module" src="/aonix/javascript/store.js"></script>
         <script src="/aonix/javascript/carousel.js"></script>
         <script type="module" src="/aonix/javascript/accountRedirect.js"></script>
-        
     </body>
 </html>

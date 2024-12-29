@@ -1,13 +1,13 @@
 /* 主要容器佈局 */
 .store-container {
     padding: 25px;
-    margin: 0 auto;  
+    margin: 0 auto;
     display: flex;
     gap: 30px;
 }
 
 .products-container {
-    flex: 1;  
+    flex: 1;
 }
 
 /* 側邊的分類欄設定 */
@@ -20,9 +20,8 @@
     -webkit-backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 12px;
-    top: 20px;       
+    top: 20px;
     height: fit-content;
-
 }
 
 /* 側邊的分類欄標題樣式 */
@@ -34,7 +33,6 @@
     font-size: 1.2rem;
     filter: drop-shadow(0 0 3px rgba(255, 0, 0, 1));
 }
-
 
 .category-dropdown {
     position: relative;
@@ -62,7 +60,7 @@
 
 .category-dropdown-content {
     display: none;
-    position: relative;  
+    position: relative;
     background: rgba(0, 0, 0, 0.9);
     min-width: 160px;
     border: 1px solid var(--accent-color);
@@ -97,9 +95,9 @@
 }
 
 .category-item.selected {
-    background: rgba(255, 0, 0, 0.2);  
-    color: var(--accent-color);        
-    box-shadow: var(--neon-glow);      
+    background: rgba(255, 0, 0, 0.2);
+    color: var(--accent-color);
+    box-shadow: var(--neon-glow);
 }
 .category-btn iconify-icon {
     transition: transform 0.3s ease;
@@ -130,7 +128,7 @@
     color: white;
     display: flex;
     flex-direction: column;
-    height: 520px;  
+    height: 520px;
 }
 
 /* 商品圖片容器 */
@@ -155,20 +153,20 @@
     color: rgba(255, 255, 255, 0.8);
     margin: 10px 0;
     overflow: hidden;
-    flex: 1;  
+    flex: 1;
 }
 
 /* 商品價格 */
 .product-price {
     font-weight: bold;
-    color: white ;
+    color: white;
     margin: auto 0px;
-    font-size: 1.2rem
+    font-size: 1.2rem;
 }
 
 /* 按鈕容器 */
 .product-card .button-container {
-    margin-top: auto;  
+    margin-top: auto;
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -307,15 +305,14 @@
     display: flex;
     align-items: center;
     gap: 8px;
-
 }
-.quantity-controls button{
-        background: rgba(255, 255, 255, 0.1);
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        color: white;
-        border-radius: 4px;
-        padding: 5px 10px;
-        transition: all 0.3s ease;
+.quantity-controls button {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    border-radius: 4px;
+    padding: 5px 10px;
+    transition: all 0.3s ease;
 }
 /* 移除商品按鈕 */
 .remove-item {
@@ -352,7 +349,6 @@
     font-weight: 600;
     transition: all 0.3s ease;
     box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
-
 }
 .checkout-btn:hover {
     transform: translateY(-2px);
@@ -365,7 +361,6 @@
     text-align: center;
     color: white;
     padding: 30px;
-    
 }
 .empty-carticonify-icon {
     font-size: 3em;
@@ -373,21 +368,21 @@
     opacity: 0.7;
 }
 .filter-search {
-    position: relative;  
+    position: relative;
     height: 30px;
     display: flex;
-    margin-bottom: 15px;  
+    margin-bottom: 15px;
 }
 
 .filter-search input {
     width: 100%;
     height: 100%;
-    padding: 0 25px 0 8px;  
+    padding: 0 25px 0 8px;
     border: 1px solid rgba(255, 0, 0, 0.3);
     border-radius: 4px;
     background: rgba(0, 0, 0, 0.8);
     color: var(--secondary-color);
-    font-size: 12px;  
+    font-size: 12px;
 }
 
 .filter-search input:focus {
@@ -398,10 +393,10 @@
 
 .filter-search iconify-icon {
     position: absolute;
-    right: 5px; 
+    right: 5px;
     top: 50%;
     transform: translateY(-50%);
     color: var(--secondary-color);
     opacity: 0.7;
-    pointer-events: none;  
+    pointer-events: none;
 }

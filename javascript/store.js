@@ -1,12 +1,11 @@
-// 改去firebase
-// 使用相對路徑導入
+// Import fetchProducts from products.js
 import { fetchProducts } from './products.js';
 
-// 購物車數據
+// Initialize cart data from localStorage or empty array
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
 let products = []; // Global variable to store fetched products
 
-// 初始化商品展示
+// Initialize product display
 async function initProducts() { 
     const productGrid = document.getElementById('productGrid');
     if (!productGrid) {
@@ -23,7 +22,7 @@ async function initProducts() {
     }
 }
 
-// 更新分類計數
+// Update category counts
 function updateCategoryCounts(products) {
     const categoryCounts = products.reduce((counts, product) => {
         const category = product.category.toLowerCase();
@@ -38,7 +37,7 @@ function updateCategoryCounts(products) {
     });
 }
 
-// 顯示商品
+// Display products
 function displayProducts(productsToDisplay) {
     const productGrid = document.getElementById('productGrid');
     productGrid.innerHTML = productsToDisplay.map(product => 
@@ -55,9 +54,7 @@ function displayProducts(productsToDisplay) {
     ).join('');
 }
 
-// 購物車相關功能
-
-// 關閉購物車 x
+// Toggle cart modal visibility
 window.toggleCart = function() {
     const cartModal = document.getElementById('cartModal');
     if (cartModal.style.display === 'block') {
@@ -67,6 +64,7 @@ window.toggleCart = function() {
     }
 };
 
+// Add product to cart
 window.addToCart = function(productId) {
     const product = products.find(p => p.id === productId); // Use the global products variable
     const existingItem = cart.find(item => item.id === productId);
@@ -80,17 +78,18 @@ window.addToCart = function(productId) {
         });
     }
     
-    // 保存到 localStorage
+    // Save to localStorage
     localStorage.setItem('cart', JSON.stringify(cart));
     updateCartDisplay();
 };
 
+// Update cart display
 function updateCartDisplay() {
     const cartItems = document.getElementById('cartItems');
     const cartCount = document.getElementById('cartCount');
     const cartTotal = document.getElementById('cartTotal');
     
-    // 購物車紅色圈內數量
+    // Update cart count in header
     cartCount.textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
     
     if (cart.length === 0) {
@@ -104,7 +103,7 @@ function updateCartDisplay() {
         return;
     }
     
-    // 購物車內介面顯示
+    // Display cart items
     cartItems.innerHTML = cart.map(item => 
         `<div class="cart-item">
             <img src="${item.image}" alt="${item.name}">
@@ -129,6 +128,7 @@ function updateCartDisplay() {
     cartTotal.textContent = total.toLocaleString();
 }
 
+// Update item quantity in cart
 window.updateQuantity = function(productId, change) {
     const item = cart.find(item => item.id === productId);
     if (item) {
@@ -142,12 +142,14 @@ window.updateQuantity = function(productId, change) {
     }
 };
 
+// Remove item from cart
 window.removeFromCart = function(productId) {
     cart = cart.filter(item => item.id !== productId);
     localStorage.setItem('cart', JSON.stringify(cart));
     updateCartDisplay();
 };
 
+// Handle checkout process
 window.checkout = function() {
     if (cart.length === 0) {
         alert('Your cart is empty!');
@@ -184,7 +186,7 @@ document.getElementById('searchInput').addEventListener('input', (e) => {
     displayProducts(filteredProducts);
 });
 
-// 頁面加載時初始化
+// Initialize page on load
 document.addEventListener('DOMContentLoaded', () => {
     console.log('Page loaded');
     initProducts();

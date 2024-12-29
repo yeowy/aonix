@@ -1,26 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-        <link rel="stylesheet" href="/aonix/stylesheets/reset.css">
-        <link rel="stylesheet" href="/aonix/stylesheets/base.css">
-        <link rel="stylesheet" href="/aonix/stylesheets/font.css">
-        <link rel="stylesheet" href="/aonix/stylesheets/variable.css">
-        <link rel="stylesheet" href="/aonix/stylesheets/index.css">
-        <link rel="stylesheet" href="/aonix/stylesheets/developer.css">
-        <link rel="stylesheet" href="/aonix/stylesheets/store.css">
-        <link rel="stylesheet" href="/aonix/stylesheets/member.css">
+        <link rel="stylesheet" href="/aonix/stylesheets/reset.css" />
+        <link rel="stylesheet" href="/aonix/stylesheets/base.css" />
+        <link rel="stylesheet" href="/aonix/stylesheets/font.css" />
+        <link rel="stylesheet" href="/aonix/stylesheets/variable.css" />
+        <link rel="stylesheet" href="/aonix/stylesheets/index.css" />
+        <link rel="stylesheet" href="/aonix/stylesheets/developer.css" />
+        <link rel="stylesheet" href="/aonix/stylesheets/store.css" />
+        <link rel="stylesheet" href="/aonix/stylesheets/member.css" />
 
         <title>aonix.</title>
     </head>
     <body>
         <header>
-            <div class="hover-scale"><a href="/aonix/index.html"><img src="/aonix/imgs/anoix.png"  class="logo-img"></a></div>
+            <div class="hover-scale"
+                ><a href="/aonix/index.html"><img src="/aonix/imgs/anoix.png" class="logo-img" /></a
+            ></div>
             <div class="hover-scale"><a href="/aonix/pages/about.html">ABOUT</a></div>
             <div class="hover-scale"><a href="/aonix/pages/store.html">STORE</a></div>
-           
+
             <div class="header-icons">
                 <div class="hover-scale" onclick="toggleHint()">
                     <iconify-icon icon="healthicons:magnifying-glass" width="28" height="28"></iconify-icon>
@@ -35,11 +37,11 @@
             </div>
         </header>
         <div class="search-hint" id="searchHint">
-            <input type="text" id="searchInput" placeholder="Search for products..."  />
+            <input type="text" id="searchInput" placeholder="Search for products..." />
         </div>
 
-         <!-- 購物車介面 預設隱藏 -->
-         <div class="cart-modal" id="cartModal">
+        <!-- 購物車介面 預設隱藏 -->
+        <div class="cart-modal" id="cartModal">
             <div class="cart-content">
                 <div class="cart-header">
                     <p>購物車</p>
@@ -47,18 +49,15 @@
                         <iconify-icon icon="mdi:close"></iconify-icon>
                     </div>
                 </div>
-                
+
                 <div class="cart-items" id="cartItems"></div>
-                
-    
+
                 <div class="cart-footer">
                     <div class="cart-total">
                         <span>總計:</span>
                         <span>$<span id="cartTotal">0</span></span>
                     </div>
-                    <button class="checkout-btn" onclick="checkout()">
-                        結帳
-                    </button>
+                    <button class="checkout-btn" onclick="checkout()"> 結帳 </button>
                 </div>
             </div>
         </div>

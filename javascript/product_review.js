@@ -1,49 +1,52 @@
+// Import Firebase services
 import { db, auth } from './firebase-config.js';
 import { doc, getDoc, collection, addDoc, query, where, getDocs, updateDoc, deleteDoc } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
 import { onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
 
-// 從 URL 獲取商品 ID
+// Get product ID from URL
 const urlParams = new URLSearchParams(window.location.search);
 const productId = urlParams.get('id');
 
-// 獲取或初始化評論數據
+// Initialize review data
 let currentRating = 0;
 let currentUser = null;
 
-// 初始化頁面
+// Initialize page
 async function initPage() {
+    // Get product document from Firestore
     const productDoc = doc(db, 'products', productId);
     const productSnapshot = await getDoc(productDoc);
     if (!productSnapshot.exists()) {
+        // Redirect to store page if product does not exist
         window.location.href = '/aonix/pages/store.html';
         return;
     }
 
     const product = productSnapshot.data();
 
-    // 填充商品信息
+    // Fill product information
     document.querySelector('.product-name').textContent = product.name;
     document.querySelector('.product-description').textContent = product.description;
     document.querySelector('.product-price').textContent = `$${product.price.toLocaleString()}`;
     
-    // 創建並設置商品圖片
+    // Create and set product image
     const productImage = document.createElement('img');
     productImage.src = product.images[0];
     document.querySelector('.product-image').appendChild(productImage);
 
-    // 更新評分摘要
+    // Update rating summary
     updateRatingSummary();
     
-    // 載入評論列表
+    // Load reviews
     loadReviews();
 }
 
-// 更新評分摘要
+// Update rating summary
 async function updateRatingSummary() {
     const reviews = await fetchReviews();
     const totalReviews = reviews.length;
     
-    // 計算平均評分
+    // Calculate average rating
     let averageRating;
     if (totalReviews > 0) {
         const sumOfRatings = reviews.reduce((sum, review) => sum + review.rating, 0);
@@ -52,11 +55,11 @@ async function updateRatingSummary() {
         averageRating = '0.0';
     }
 
-    // 更新UI
+    // Update UI
     document.querySelector('.rating-number').textContent = averageRating;
     document.querySelector('.total-reviews').textContent = `${totalReviews} 則評論`;
 
-    // 更新平均評分的星星
+    // Update average rating stars
     const averageStars = document.createElement('div');
     averageStars.className = 'star';
     for (let i = 1; i <= 5; i++) {
@@ -75,7 +78,7 @@ async function updateRatingSummary() {
     }
 }
 
-// 載入評論列表
+// Load reviews
 async function loadReviews() {
     const reviewsList = document.querySelector('.reviews-list');
     const reviews = await fetchReviews();
@@ -118,17 +121,17 @@ async function loadReviews() {
     `;
 }
 
-// 處理評論提交
+// Handle review submission
 document.getElementById('reviewForm').addEventListener('submit', async (e) => {
     e.preventDefault();
     
-    // 檢查是否已評分
+    // Check if rating is selected
     if (!currentRating) {
         alert('請選擇評分！');
         return;
     }
 
-    // 檢查用戶是否已登錄
+    // Check if user is logged in
     if (!currentUser) {
         alert('You must be logged in to submit a review!');
         return;
@@ -136,13 +139,13 @@ document.getElementById('reviewForm').addEventListener('submit', async (e) => {
 
     const content = e.target.querySelector('textarea').value;
     
-    // 檢查評論長度
+    // Check review length
     if (content.length < 10) {
         alert('評論內容至少需要10個字！');
         return;
     }
 
-    // 創建新評論
+    // Create new review
     const newReview = {
         rating: currentRating,
         content,
@@ -153,14 +156,14 @@ document.getElementById('reviewForm').addEventListener('submit', async (e) => {
 
     try {
         await addDoc(collection(db, 'reviews'), newReview);
-        // 重置表單
+        // Reset form
         e.target.reset();
         currentRating = 0;
         const starIcons = document.querySelectorAll('.rating-area .star-icon');
         starIcons.forEach(icon => icon.setAttribute('icon', 'mdi:star-outline'));
         document.querySelector('.rating-text').textContent = '請選擇評分';
 
-        // 更新頁面
+        // Update page
         updateRatingSummary();
         loadReviews();
     } catch (error) {
@@ -168,13 +171,13 @@ document.getElementById('reviewForm').addEventListener('submit', async (e) => {
     }
 });
 
-// 處理星星評分
+// Handle star rating
 document.querySelectorAll('.rating-area .star-icon').forEach(star => {
     star.addEventListener('click', function() {
         const rating = parseInt(this.getAttribute('data-index'));
         currentRating = rating;
         
-        // 更新星星顯示
+        // Update star display
         document.querySelectorAll('.rating-area .star-icon').forEach((icon, index) => {
             icon.setAttribute('icon', index < rating ? 'mdi:star' : 'mdi:star-outline');
         });
@@ -182,7 +185,7 @@ document.querySelectorAll('.rating-area .star-icon').forEach(star => {
     });
 });
 
-// 添加刪除評論函數
+// Add delete review function
 window.deleteReview = async function(reviewId) {
     if (confirm('確定要刪除這則評論嗎？')) {
         try {
@@ -195,12 +198,12 @@ window.deleteReview = async function(reviewId) {
     }
 }
 
-// 添加編輯評論函數
+// Add edit review function
 window.editReview = function(reviewId) {
     const reviewItem = document.querySelector(`[data-index="${reviewId}"]`);
     const content = reviewItem.querySelector('.review-content');
     
-    // 創建編輯表單
+    // Create edit form
     const editForm = document.createElement('form');
     editForm.className = 'edit-form';
     editForm.innerHTML = `
@@ -211,11 +214,11 @@ window.editReview = function(reviewId) {
         </div>
     `;
 
-    // 替換原有內容為編輯表單
+    // Replace original content with edit form
     content.innerHTML = '';
     content.appendChild(editForm);
 
-    // 處理表單提交
+    // Handle form submission
     editForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         const newContent = editForm.querySelector('textarea').value;
@@ -233,7 +236,7 @@ window.editReview = function(reviewId) {
         }
     });
 
-    // 處理取消編輯
+    // Handle cancel edit
     editForm.querySelector('.cancel-btn').addEventListener('click', () => {
         loadReviews();
     });
@@ -246,7 +249,7 @@ async function fetchReviews() {
     return querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
 }
 
-// 頁面加載時初始化
+// Initialize page on load
 document.addEventListener('DOMContentLoaded', () => {
     onAuthStateChanged(auth, (user) => {
         if (user) {
