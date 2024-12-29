@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/aonix/stylesheets/reset.css">
+        <link rel="stylesheet" href="/aonix/stylesheets/base.css">
+        <link rel="stylesheet" href="/aonix/stylesheets/font.css">
+        <link rel="stylesheet" href="/aonix/stylesheets/variable.css">
+        <link rel="stylesheet" href="/aonix/stylesheets/index.css">
+        <link rel="stylesheet" href="/aonix/stylesheets/developer.css">
+        <link rel="stylesheet" href="/aonix/stylesheets/store.css">
+        <link rel="stylesheet" href="/aonix/stylesheets/login.css">
+        <title>Register - aonix.</title>
+    </head>
+    <body>
+        <header>
+            <div class="hover-scale"><a href="/aonix/index.html"><img src="/aonix/imgs/anoix.png"  class="logo-img"></a></div>
+            <div class="hover-scale"><a href="/aonix/pages/about.html">ABOUT</a></div>
+            <div class="hover-scale"><a href="/aonix/pages/store.html">STORE</a></div>
+           
+            <div class="header-icons">
+                <div class="hover-scale" onclick="toggleHint()">
+                    <iconify-icon icon="healthicons:magnifying-glass" width="28" height="28"></iconify-icon>
+                </div>
+                <div class="hover-scale" onclick="toggleCart()">
+                    <iconify-icon icon="typcn:shopping-cart" width="28" height="28"></iconify-icon>
+                    <span class="cart-count" id="cartCount">0</span>
+                </div>
+                <div class="hover-scale dropdown">
+                    <button class="dropbtn">
+                        <iconify-icon icon="mdi:account" width="28" height="28" class="user"></iconify-icon>
+                    </button>
+                    <div class="dropdown-content">
+                        <a href="/aonix/pages/login.html">Login</a>
+                        <a href="#">User Account</a>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="search-hint" id="searchHint">
+            <input type="text" id="searchInput" placeholder="Search for products..."  />
+        </div>
+        <!-- 註冊介面  Register Interface -->
+        <div class="container">
+            <div class="form-container">
+                <div id="register-form">
+                    <h2 class="register">Register</h2>
+                    <input type="email" id="register-email" placeholder="Email" required>
+                    <input type="password" id="register-password" placeholder="Password" required>
+                    <input type="password" id="confirm-password" placeholder="Confirm Password" required>
+                    <button class="button" id="register-button">Register</button>
+                    <p id="register-error" class="error"></p>
+                    <p>Already have an account? &nbsp <a href="/aonix/pages/login.html" class="login-link">Login</a></p>
+                </div>
+            </div>
+        </div>
+        <!-- 購物車介面 預設隱藏 -->
+        <div class="cart-modal" id="cartModal">
+            <div class="cart-content">
+                <div class="cart-header">
+                    <p>購物車</p>
+                    <div class="close-cart" onclick="toggleCart()">
+                        <iconify-icon icon="mdi:close"></iconify-icon>
+                    </div>
+                </div>
+                
+                <div class="cart-items" id="cartItems"></div>
+                
+    
+                <div class="cart-footer">
+                    <div class="cart-total">
+                        <span>總計:</span>
+                        <span>$<span id="cartTotal">0</span></span>
+                    </div>
+                    <button class="checkout-btn" onclick="checkout()">
+                        結帳
+                    </button>
+                </div>
+            </div>
+        </div>
+        <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+        <script type="module" src="/aonix/javascript/app.js"></script>
+        <script src="/aonix/javascript/search.js"></script>
+        <script type="module" src="/aonix/javascript/store.js"></script>
+    </body>
+</html>
