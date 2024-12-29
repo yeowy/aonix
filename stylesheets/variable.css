@@ -7,9 +7,7 @@
     --header-glow: 0 2px 15px rgba(255, 0, 0, 0.15);
     --text-glow: 0 0 5px rgba(255, 0, 0, 0.3);
     
-    /* 漸變色 */
-    --gradient-primary: linear-gradient(45deg, #050505, #1a1a1a);
-    --gradient-accent: linear-gradient(45deg, #ff0000, #cc0000);
+    
     
     /* HEADER */
     --header-height: 7vh;

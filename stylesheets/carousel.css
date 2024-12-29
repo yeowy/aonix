@@ -4,7 +4,7 @@
     border-radius: 16px;
     overflow: hidden;
     position: relative;
-    margin: 30px auto 0;  
+    margin: 30px auto ;  
     border: 1px solid rgba(128, 128, 128, 0.2);
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
     background: rgba(0, 0, 0, 0.5);
@@ -19,20 +19,12 @@
     transition: all 1s;
 }
 
-.carousel .container a {
-    width: 100%;
-    height: 100%;
-    flex-shrink: 0;
-    
-}
-
-
-.carousel .container a img {
+.carousel .container  img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    flex-shrink: 0;
 }
-
 /* 左右按鈕 */
 .carousel .shift .btn {
     position: absolute;
