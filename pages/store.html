@@ -13,7 +13,6 @@
         <link rel="stylesheet" href="/aonix/stylesheets/variable.css" />
         <link rel="stylesheet" href="/aonix/stylesheets/index.css" />
         <link rel="stylesheet" href="/aonix/stylesheets/developer.css" />
-        <link rel="stylesheet" href="/aonix/stylesheets/carousel.css" />
         <link rel="stylesheet" href="/aonix/stylesheets/store.css" />
 
         <!-- Page title -->
@@ -48,34 +47,21 @@
             </div>
         </header>
 
-        <!-- Carousel -->
-        <div class="carousel">
-            <div class="container">
-                <img src="/aonix/imgs/test.avif" />
-                <img src="/aonix/imgs/test2.webp" />
-                <img src="/aonix/imgs/tt3jpg.jpg" />
-            </div>
-
-            <div class="shift">
-                <div class="btn left" onclick="leftShift()">&lt;</div>
-                <div class="btn right" onclick="rightShift()">&gt;</div>
-            </div>
-
-            <div class="bottom"></div>
-        </div>
-
         <!-- Search hint section -->
         <div class="search-hint" id="searchHint">
             <input type="text" id="searchInput" placeholder="Search for products..." />
         </div>
 
+        <!-- Main store container -->
         <main class="store-container">
+
+            <!-- Filter section -->
             <div class="filter-section">
-                <h3>Product Categories</h3>
+                <h3>FILTER</h3>
 
                 <div class="category-items" id="categoryItems">
                     <div class="filter-search">
-                        <input type="text" id="filterSearchInput" placeholder="product ..." />
+                        <input type="text" id="filterSearchInput" placeholder="Search for product..." />
                         <iconify-icon icon="healthicons:magnifying-glass" width="20" height="20"></iconify-icon>
                     </div>
 
@@ -216,6 +202,7 @@
                 </div>
             </div>
 
+            <!-- Products section -->
             <div class="products-container">
                 <div class="product-grid" id="productGrid">
                     <!-- 商品會通過 JavaScript 動態生成 -->

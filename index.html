@@ -11,6 +11,7 @@
         <link rel="stylesheet" href="/aonix/stylesheets/index.css">
         <link rel="stylesheet" href="/aonix/stylesheets/developer.css">
         <link rel="stylesheet" href="/aonix/stylesheets/store.css">
+        <link rel="stylesheet" href="/aonix/stylesheets/carousel.css">
         
         <title>aonix.</title>
     </head>
@@ -54,6 +55,20 @@
            
         </section>
 
+        <!-- Carousel section -->
+        <div class="carousel">
+            <div class="container">
+                <img src="/aonix/imgs/test.avif" />
+                <img src="/aonix/imgs/test2.webp" />
+                <img src="/aonix/imgs/tt3jpg.jpg" />
+            </div>
+            <div class="shift">
+                <div class="btn left" onclick="leftShift()">&lt;</div>
+                <div class="btn right" onclick="rightShift()">&gt;</div>
+            </div>
+            <div class="bottom"></div>
+        </div>
+
          <!-- 購物車介面 預設隱藏 -->
          <div class="cart-modal" id="cartModal">
             <div class="cart-content">
@@ -85,5 +100,6 @@
         <script src="/aonix/javascript/search.js"></script>
         <script type="module" src="/aonix/javascript/store.js"></script>
         <script type="module" src="/aonix/javascript/accountRedirect.js"></script>
+        <script src="/aonix/javascript/carousel.js"></script>
     </body>
 </html>
