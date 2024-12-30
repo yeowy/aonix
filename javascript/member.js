@@ -2,7 +2,7 @@
 
 import { auth, db } from './firebase-config.js';
 import { signOut, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
-import { collection, getDocs } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+import { collection, getDocs, doc, getDoc } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
 
 const userEmailDisplay = document.getElementById('user-email');
 const logoutButton = document.getElementById('logout-button');
@@ -30,7 +30,8 @@ async function loadShoppingHistory(userId) {
     const shoppingHistorySnapshot = await getDocs(shoppingHistoryRef);
     shoppingHistorySnapshot.forEach(doc => {
         const historyItem = document.createElement('div');
-        historyItem.textContent = `${doc.data().itemName} - ${doc.data().purchaseDate}`;
+        const purchaseDate = new Date(doc.data().purchaseDate).toLocaleDateString();
+        historyItem.textContent = `${doc.data().itemName} - ${purchaseDate}`;
         shoppingHistoryContainer.appendChild(historyItem);
     });
 }
@@ -39,8 +40,9 @@ async function loadShoppingHistory(userId) {
 async function loadReviewHistory(userId) {
     const reviewsRef = collection(db, 'users', userId, 'reviews');
     const reviewsSnapshot = await getDocs(reviewsRef);
-    reviewsSnapshot.forEach(doc => {
+    reviewsSnapshot.forEach(async doc => {
         const reviewItem = document.createElement('div');
+        const reviewDate = new Date(doc.data().reviewDate).toLocaleDateString();
         reviewItem.textContent = `${doc.data().reviewText} - ${doc.data().reviewDate}`;
         reviewsContainer.appendChild(reviewItem);
     });

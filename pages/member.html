@@ -31,7 +31,7 @@
                     <iconify-icon icon="typcn:shopping-cart" width="28" height="28"></iconify-icon>
                     <span class="cart-count" id="cartCount">0</span>
                 </div>
-                <div class="hover-scale" id="accountIcon">
+                <div class="hover-scale" id="accountIcon" onclick="toggleAccount()">
                     <iconify-icon icon="mdi:account" width="28" height="28" class="user"></iconify-icon>
                 </div>
             </div>
@@ -44,18 +44,18 @@
             <div class="form-container">
                 <div class="member-info">
                     <h2>會員資訊</h2>
-                    <p class="email">Email: &nbsp;<span id="user-email"></span></p>
+                    <p class="email">Email : <span id="user-email"></span></p>
                     <button id="logout-button" class="button">登出</button>
                 </div>
 
                 <div class="shopping-history">
                     <h2>購物履歴</h2>
-                    <div id="shopping-history"></div>
+                    <div id="shopping-history" class="email"></div>
                 </div>
 
                 <div class="reviews">
                     <h2>評論履歴</h2>
-                    <div id="reviews"></div>
+                    <div id="reviews" class="email"></div>
                 </div>
             </div>
         </div>

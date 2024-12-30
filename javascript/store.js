@@ -1,5 +1,7 @@
 // Import fetchProducts from products.js
 import { fetchProducts } from "./products.js";
+import { auth, db } from './firebase-config.js';
+import { addDoc, collection } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
 
 // Initialize cart data from localStorage or empty array
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -206,16 +208,36 @@ window.removeFromCart = function (productId) {
 };
 
 // Handle checkout process
-window.checkout = function () {
+window.checkout = async function () {
     if (cart.length === 0) {
         alert("Your cart is empty!");
         return;
     }
-    alert("Thank you for your purchase!");
-    cart = [];
-    localStorage.removeItem("cart");
-    updateCartDisplay();
-    toggleCart();
+
+    const user = auth.currentUser;
+    if (!user) {
+        alert("You must be logged in to checkout!");
+        return;
+    }
+
+    try {
+        const purchaseHistoryRef = collection(db, 'users', user.uid, 'shoppingHistory');
+        for (const item of cart) {
+            await addDoc(purchaseHistoryRef, {
+                itemName: item.name,
+                purchaseDate: new Date().toISOString(),
+                price: item.price,
+                quantity: item.quantity
+            });
+        }
+        alert("Thank you for your purchase!");
+        cart = [];
+        localStorage.removeItem("cart");
+        updateCartDisplay();
+        toggleCart();
+    } catch (error) {
+        console.error("Error saving purchase history:", error);
+    }
 };
 
 // Filter products by category

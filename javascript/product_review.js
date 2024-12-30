@@ -156,6 +156,11 @@ document.getElementById('reviewForm').addEventListener('submit', async (e) => {
 
     try {
         await addDoc(collection(db, 'reviews'), newReview);
+        await addDoc(collection(db, 'users', currentUser.uid, 'reviews'), {
+            reviewText: content,
+            reviewDate: new Date().toISOString(),
+            productId
+        });
         // Reset form
         e.target.reset();
         currentRating = 0;
