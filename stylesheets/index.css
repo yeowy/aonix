@@ -25,7 +25,13 @@ html, body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.6); /* Adjust the opacity and color as needed */
+    background: radial-gradient(
+        circle at center,
+        rgba(0, 0, 0, 0.74) 90%,  /* 中心點更暗 */
+        rgba(0, 0, 0, 0.541) 80%,  /* 中間區域 */
+        rgba(0, 0, 0, 0.541) 70%  /* 邊緣稍微透明 */
+    );
+
     z-index: 1;
 }
 
@@ -37,15 +43,17 @@ html, body {
     padding: 2rem;
 }
 
+
 .hero-left h1 {
     font-size: 4.5rem;
     margin-bottom: 1.5rem;
     color: var(--secondary-color);
     text-shadow: 
-        0 0 10px rgba(226, 5, 5, 0.8),
+        0 0 15px rgba(243, 3, 3, 0.884),
         0 0 20px rgba(212, 208, 208, 0.4),
         0 0 30px rgba(128, 125, 125, 0.2);
     line-height: 1.35;
+    
 }
 
 .hero-left p {
