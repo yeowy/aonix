@@ -191,13 +191,13 @@
 }
 
 /* .category-item.selected {
-    background: rgba(255, 0, 0, 0.2);
-    color: var(--accent-color);
-    box-shadow: var(--neon-glow);
+   
 } */
 
 .category-item.selected {
-    background: #323232;
+    background: rgba(255, 0, 0, 0.2);
+    color: var(--accent-color);
+    box-shadow: var(--neon-glow);
 }
 
 .category-btn iconify-icon {
