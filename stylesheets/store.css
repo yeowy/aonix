@@ -90,9 +90,22 @@
 }
 
 /* 側邊的分類欄設定 */
-.filter-section {
-    position: -webkit-sticky; /* For Safari */
+.left-container {
+    display: flex;
+    flex-direction: column;
     position: sticky;
+    top: 10vh;
+    height: auto;
+    max-height: 90vh; /* Viewport height minus top offset */
+    align-self: flex-start;
+    z-index: 10;
+    gap: 1em;
+    overflow-y: auto; /* Enable vertical scrolling */
+    scrollbar-width: thin; /* For Firefox */
+    scrollbar-color: rgba(255, 255, 255, 0.2) transparent; /* For Firefox */
+}
+
+.filter-section {
     width: 300px;
     min-width: 280px;
     background: rgba(25, 25, 28, 0.4);
@@ -102,7 +115,6 @@
     box-shadow: 
         0 8px 32px rgba(0, 0, 0, 0.2),
         inset 0 0 32px rgba(255, 255, 255, 0.05);
-    top: 10vh;
     height: fit-content;
     padding: 1.5rem 2rem;
     color: white;

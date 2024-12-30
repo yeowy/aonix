@@ -11,7 +11,7 @@
         <link rel="stylesheet" href="/aonix/stylesheets/base.css" />
         <link rel="stylesheet" href="/aonix/stylesheets/font.css" />
         <link rel="stylesheet" href="/aonix/stylesheets/variable.css" />
-        <link rel="stylesheet" href="/aonix/stylesheets/index.css" />
+        <!-- <link rel="stylesheet" href="/aonix/stylesheets/index.css" /> -->
         <link rel="stylesheet" href="/aonix/stylesheets/store.css" />
 
         <!-- Page title -->
@@ -19,206 +19,203 @@
     </head>
 
     <body>
-
         <header></header>
-        
+
         <!-- Search hint section -->
-        <div class="search-hint" id="searchHint">
+        <div class="search-hint" id="searchHint" style="display: none">
             <input type="text" id="searchInput" placeholder="Search for products..." />
         </div>
 
         <!-- Main store container -->
         <main class="store-container">
             <!-- Filter section -->
-            <div class="filter-section">
-                <h3>FILTERS</h3>
+            <div class="left-container">
+                <div class="filter-section">
+                    <h3>FILTERS</h3>
 
-                <!-- Filter search bar -->
-                <div class="category-items" id="categoryItems">
-                    <div class="filter-search">
-                        <input type="text" id="filterSearchInput" placeholder="Search for a product..." />
-                        <iconify-icon icon="healthicons:magnifying-glass" width="20" height="20"></iconify-icon>
-                    </div>
-
-                    <!-- Line split -->
-                    <div class="line"></div>
-
-                    <!-- pc components Dropdown -->
-                    <div class="category-dropdown">
-                        <div class="category-header">
-                            <span>Essentials</span>
-
-                            <button class="category-btn">
-                                <iconify-icon icon="mdi:chevron-up" width="20" height="20"></iconify-icon>
-                            </button>
+                    <!-- Filter search bar -->
+                    <div class="category-items" id="categoryItems">
+                        <div class="filter-search">
+                            <input type="text" id="filterSearchInput" placeholder="Search for a product..." />
+                            <iconify-icon icon="healthicons:magnifying-glass" width="20" height="20"></iconify-icon>
                         </div>
 
-                        <div class="category-dropdown-content" data-category="processors">
-                            <!-- Storage Dropdown -->
-                            <div class="category-dropdown">
-                                <div class="category-header">
-                                    <span class="two-level-category" >Storage</span>
-                                    <button class="category-btn">
-                                        <iconify-icon icon="mdi:chevron-down" width="20" height="20"></iconify-icon>
-                                    </button>
-                                </div>
+                        <!-- Line split -->
+                        <div class="line"></div>
 
-                                <div class="category-dropdown-content" data-category="storage">
-                                    <div class="category-item" data-category="ssd">SSD</div>
-                                    <div class="line"></div>
-                                    <div class="category-item" data-category="hdd">HDD</div>
-                                    <div class="line"></div>
-                                </div>
+                        <!-- pc components Dropdown -->
+                        <div class="category-dropdown">
+                            <div class="category-header">
+                                <span>Essentials</span>
+
+                                <button class="category-btn">
+                                    <iconify-icon icon="mdi:chevron-up" width="20" height="20"></iconify-icon>
+                                </button>
                             </div>
 
-                            <div class="category-item" data-category="processors">Processors</div>
-                            <div class="line"></div>
-                            <div class="category-item" data-category="motherboards">Motherboards</div>
-                            <div class="line"></div>
-                            <div class="category-item" data-category="ram">RAM</div>
-                            <div class="line"></div>
+                            <div class="category-dropdown-content" data-category="processors">
+                                <!-- Storage Dropdown -->
+                                <div class="category-dropdown">
+                                    <div class="category-header">
+                                        <span class="two-level-category">Storage</span>
+                                        <button class="category-btn">
+                                            <iconify-icon icon="mdi:chevron-down" width="20" height="20"></iconify-icon>
+                                        </button>
+                                    </div>
 
-                            <div class="category-item" data-category="graphics cards">Graphics Cards</div>
-                            <div class="line"></div>
-                            <div class="category-item" data-category="power supplies">Power Supplies</div>
-                        </div>
-                    </div>
+                                    <div class="category-dropdown-content" data-category="storage">
+                                        <div class="category-item" data-category="ssd">SSD</div>
+                                        <div class="line"></div>
+                                        <div class="category-item" data-category="hdd">HDD</div>
+                                        <div class="line"></div>
+                                    </div>
+                                </div>
 
-                    <div class="line"></div>
-                    <div class="category-dropdown">
-                        <div class="category-header">
-                            <span>Cooling Solutions</span>
-                            <button class="category-btn">
-                                <iconify-icon icon="mdi:chevron-down" width="20" height="20"></iconify-icon>
-                            </button>
-                        </div>
+                                <div class="category-item" data-category="processors">Processors</div>
+                                <div class="line"></div>
+                                <div class="category-item" data-category="motherboards">Motherboards</div>
+                                <div class="line"></div>
+                                <div class="category-item" data-category="ram">RAM</div>
+                                <div class="line"></div>
 
-                        <div class="category-dropdown-content" data-category="cooling-solutions">
-                            <div class="category-item" data-category="cpu coolers">CPU Coolers</div>
-                            <div class="line"></div>
-                            <div class="category-item" data-category="case fans">Case Fans</div>
-                            <div class="line"></div>
-                            <div class="category-item" data-category="thermal paste">Thermal Paste</div>
-                            <div class="line"></div>
-                            <div class="category-item" data-category="water cooling kits">Water Cooling Kits</div>
-                        </div>
-                    </div>
-
-                    <div class="line"></div>
-
-                    <div class="category-dropdown">
-                        <div class="category-header">
-                            <span>Cases</span>
-                            <button class="category-btn">
-                                <iconify-icon icon="mdi:chevron-down" width="20" height="20"></iconify-icon>
-                            </button>
+                                <div class="category-item" data-category="graphics cards">Graphics Cards</div>
+                                <div class="line"></div>
+                                <div class="category-item" data-category="power supplies">Power Supplies</div>
+                            </div>
                         </div>
 
-                        <div class="category-dropdown-content" data-category="cases">
-                            <div class="category-item" data-category="full-tower">Full-Tower</div>
-                            <div class="line"></div>
-                            <div class="category-item" data-category="mid-tower">Mid-Tower</div>
-                            <div class="line"></div>
-                            <div class="category-item" data-category="mini-tower">Mini-Tower</div>
-                            <div class="line"></div>
-                            <div class="category-item" data-category="small form factor">Small Form Factor</div>
-                        </div>
-                    </div>
+                        <div class="line"></div>
+                        <div class="category-dropdown">
+                            <div class="category-header">
+                                <span>Cooling Solutions</span>
+                                <button class="category-btn">
+                                    <iconify-icon icon="mdi:chevron-down" width="20" height="20"></iconify-icon>
+                                </button>
+                            </div>
 
-                    <div class="line"></div>
-                    <!-- Peripherals Dropdown -->
-                    <div class="category-dropdown">
-                        <div class="category-header">
-                            <span>Peripherals</span>
-                            <button class="category-btn">
-                                <iconify-icon icon="mdi:chevron-down" width="20" height="20"></iconify-icon>
-                            </button>
-                        </div>
-
-                        <div class="category-dropdown-content" data-category="peripherals">
-                            <div class="category-item" data-category="keyboards">Keyboards</div>
-                            <div class="line"></div>
-                            <div class="category-item" data-category="mice">Mice</div>
-                            <div class="line"></div>
-                            <div class="category-item" data-category="monitors">Monitors</div>
-                            <div class="line"></div>
-                            <div class="category-item" data-category="headsets">Headsets</div>
-                            <div class="line"></div>
-                            <div class="category-item" data-category="webcams">Webcams</div>
-                            <div class="line"></div>
-                            <div class="category-item" data-category="controllers">Controllers</div>
-                        </div>
-                    </div>
-
-                    <div class="line"></div>
-
-                    <!-- Networking Equipment Dropdown -->
-                    <div class="category-dropdown">
-                        <div class="category-header">
-                            <span>Networking Equipment</span>
-                            <button class="category-btn">
-                                <iconify-icon icon="mdi:chevron-down" width="20" height="20"></iconify-icon>
-                            </button>
+                            <div class="category-dropdown-content" data-category="cooling-solutions">
+                                <div class="category-item" data-category="cpu coolers">CPU Coolers</div>
+                                <div class="line"></div>
+                                <div class="category-item" data-category="case fans">Case Fans</div>
+                                <div class="line"></div>
+                                <div class="category-item" data-category="thermal paste">Thermal Paste</div>
+                                <div class="line"></div>
+                                <div class="category-item" data-category="water cooling kits">Water Cooling Kits</div>
+                            </div>
                         </div>
 
-                        <div class="category-dropdown-content" data-category="networking-equipment">
-                            <div class="category-item" data-category="wi-fi routers">Wi-Fi Routers</div>
-                            <div class="line"></div>
-                            <div class="category-item" data-category="adapters">Adapters</div>
-                            <div class="line"></div>
-                            <div class="category-item" data-category="network switches">Network Switches</div>
-                            <div class="line"></div>
-                            <div class="category-item" data-category="cables">Cables</div>
-                        </div>
-                    </div>
+                        <div class="line"></div>
 
-                    <div class="line"></div>
+                        <div class="category-dropdown">
+                            <div class="category-header">
+                                <span>Cases</span>
+                                <button class="category-btn">
+                                    <iconify-icon icon="mdi:chevron-down" width="20" height="20"></iconify-icon>
+                                </button>
+                            </div>
 
-                    <!-- Accessories Dropdown -->
-                    <div class="category-dropdown">
-                        <div class="category-header">
-                            <span>Accessories</span>
-                            <button class="category-btn">
-                                <iconify-icon icon="mdi:chevron-down" width="20" height="20"></iconify-icon>
-                            </button>
-                        </div>
-
-                        <div class="category-dropdown-content" data-category="accessories">
-                            <div class="category-item" data-category="cables and adapters">Cables and Adapters</div>
-                            <div class="line"></div>
-                            <div class="category-item" data-category="docking stations">Docking Stations</div>
-                            <div class="line"></div>
-                            <div class="category-item" data-category="storage devices">Storage Devices</div>
-                            <div class="line"></div>
-                            <div class="category-item" data-category="cleaning supplies">Cleaning Supplies</div>
-                            <div class="line"></div>
-                            <div class="category-item" data-category="rgb accessories">RGB Accessories</div>
-                        </div>
-                    </div>
-
-                    <div class="line"></div>
-
-                    <div class="category-dropdown">
-                        <div class="category-header">
-                            <span>Gaming Gear</span>
-                            <button class="category-btn">
-                                <iconify-icon icon="mdi:chevron-down" width="20" height="20"></iconify-icon>
-                            </button>
+                            <div class="category-dropdown-content" data-category="cases">
+                                <div class="category-item" data-category="full-tower">Full-Tower</div>
+                                <div class="line"></div>
+                                <div class="category-item" data-category="mid-tower">Mid-Tower</div>
+                                <div class="line"></div>
+                                <div class="category-item" data-category="mini-tower">Mini-Tower</div>
+                                <div class="line"></div>
+                                <div class="category-item" data-category="small form factor">Small Form Factor</div>
+                            </div>
                         </div>
 
-                        <div class="category-dropdown-content" data-category="gaming-gear">
-                            <div class="category-item" data-category="chairs">Chairs</div>
-                            <div class="line"></div>
-                            <div class="category-item" data-category="desks">Desks</div>
-                            <div class="line"></div>
-                            <div class="category-item" data-category="vr headsets">VR Headsets</div>
+                        <div class="line"></div>
+                        <!-- Peripherals Dropdown -->
+                        <div class="category-dropdown">
+                            <div class="category-header">
+                                <span>Peripherals</span>
+                                <button class="category-btn">
+                                    <iconify-icon icon="mdi:chevron-down" width="20" height="20"></iconify-icon>
+                                </button>
+                            </div>
+
+                            <div class="category-dropdown-content" data-category="peripherals">
+                                <div class="category-item" data-category="keyboards">Keyboards</div>
+                                <div class="line"></div>
+                                <div class="category-item" data-category="mice">Mice</div>
+                                <div class="line"></div>
+                                <div class="category-item" data-category="monitors">Monitors</div>
+                                <div class="line"></div>
+                                <div class="category-item" data-category="headsets">Headsets</div>
+                                <div class="line"></div>
+                                <div class="category-item" data-category="webcams">Webcams</div>
+                                <div class="line"></div>
+                                <div class="category-item" data-category="controllers">Controllers</div>
+                            </div>
+                        </div>
+
+                        <div class="line"></div>
+
+                        <!-- Networking Equipment Dropdown -->
+                        <div class="category-dropdown">
+                            <div class="category-header">
+                                <span>Networking Equipment</span>
+                                <button class="category-btn">
+                                    <iconify-icon icon="mdi:chevron-down" width="20" height="20"></iconify-icon>
+                                </button>
+                            </div>
+
+                            <div class="category-dropdown-content" data-category="networking-equipment">
+                                <div class="category-item" data-category="wi-fi routers">Wi-Fi Routers</div>
+                                <div class="line"></div>
+                                <div class="category-item" data-category="adapters">Adapters</div>
+                                <div class="line"></div>
+                                <div class="category-item" data-category="network switches">Network Switches</div>
+                                <div class="line"></div>
+                                <div class="category-item" data-category="cables">Cables</div>
+                            </div>
+                        </div>
+
+                        <div class="line"></div>
+
+                        <!-- Accessories Dropdown -->
+                        <div class="category-dropdown">
+                            <div class="category-header">
+                                <span>Accessories</span>
+                                <button class="category-btn">
+                                    <iconify-icon icon="mdi:chevron-down" width="20" height="20"></iconify-icon>
+                                </button>
+                            </div>
+
+                            <div class="category-dropdown-content" data-category="accessories">
+                                <div class="category-item" data-category="cables and adapters">Cables and Adapters</div>
+                                <div class="line"></div>
+                                <div class="category-item" data-category="docking stations">Docking Stations</div>
+                                <div class="line"></div>
+                                <div class="category-item" data-category="storage devices">Storage Devices</div>
+                                <div class="line"></div>
+                                <div class="category-item" data-category="cleaning supplies">Cleaning Supplies</div>
+                                <div class="line"></div>
+                                <div class="category-item" data-category="rgb accessories">RGB Accessories</div>
+                            </div>
+                        </div>
+
+                        <div class="line"></div>
+
+                        <div class="category-dropdown">
+                            <div class="category-header">
+                                <span>Gaming Gear</span>
+                                <button class="category-btn">
+                                    <iconify-icon icon="mdi:chevron-down" width="20" height="20"></iconify-icon>
+                                </button>
+                            </div>
+
+                            <div class="category-dropdown-content" data-category="gaming-gear">
+                                <div class="category-item" data-category="chairs">Chairs</div>
+                                <div class="line"></div>
+                                <div class="category-item" data-category="desks">Desks</div>
+                                <div class="line"></div>
+                                <div class="category-item" data-category="vr headsets">VR Headsets</div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <!-- Products section -->
-            <div class="products-container">
                 <div class="page-nav">
                     <!-- Dropdown for selecting number of products per page -->
                     <div class="products-per-page">
@@ -234,11 +231,18 @@
 
                     <!-- Pagination buttons -->
                     <div class="pagination">
-                        <button class="pagination-btn" id="prev-button"><iconify-icon icon="mingcute:left-fill"></iconify-icon></button>
-                        <button class="pagination-btn" id="next-button"><iconify-icon icon="mingcute:right-fill"></iconify-icon></button>
+                        <button class="pagination-btn" id="prev-button"
+                            ><iconify-icon icon="mingcute:left-fill"></iconify-icon
+                        ></button>
+                        <button class="pagination-btn" id="next-button"
+                            ><iconify-icon icon="mingcute:right-fill"></iconify-icon
+                        ></button>
                     </div>
                 </div>
-                
+            </div>
+
+            <!-- Products section -->
+            <div class="products-container">
                 <div class="product-grid" id="productGrid">
                     <!-- 商品會通過 JavaScript 動態生成 -->
                 </div>
@@ -276,6 +280,6 @@
         <script type="module" src="/aonix/javascript/store.js"></script>
         <script src="/aonix/javascript/carousel.js"></script>
         <script type="module" src="/aonix/javascript/accountRedirect.js"></script>
-        <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+        <!-- <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script> -->
     </body>
 </html>
