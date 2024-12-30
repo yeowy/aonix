@@ -105,7 +105,7 @@ function displayProducts(productsToDisplay) {
                 <div class="product-details">
 
                     <div class="product-brand">${product.brand}</div>
-                    <div class="product-name"><h5>${product.name}</h5></div>
+                    <div class="product-name"><a href="product_review.html?id=${product.id}"><h5>${product.name}</h5></a></div>
                         <div class="product-tags">
                             <div class="tag">${product.features[0]}</div>
                             <div class="tag">${product.features[1]}</div>    

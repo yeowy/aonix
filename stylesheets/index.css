@@ -10,7 +10,7 @@ html, body {
     justify-content: center; 
     height: calc(100vh - var(--header-height));
     overflow: hidden;
-    background-image: url('/aonix/imgs/hero-bg.webp');
+    background-image: url('/aonix/imgs/hero-bg-optimized.webp');
     background-size: cover;
     background-position: center;
     position: relative;
