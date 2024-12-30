@@ -79,3 +79,41 @@ async function fetchBestSellers() {
 }
 
 document.addEventListener("DOMContentLoaded", fetchBestSellers);
+
+document.addEventListener('wheel', (event) => {
+    event.preventDefault();
+    const delta = Math.sign(event.deltaY);
+    const scrollAmount = window.innerHeight;
+    window.scrollBy({
+        top: delta * scrollAmount,
+        left: 0,
+        behavior: 'smooth'
+    });
+}, { passive: false });
+
+// Loading animation script
+window.addEventListener('load', () => {
+    const loadingScreen = document.getElementById('loading-screen');
+    const letters = document.querySelectorAll('.loading-text .letter');
+    let delay = 0;
+
+    letters.forEach((letter, index) => {
+        letter.style.animationDelay = `${delay}s`;
+        delay += 0.2;
+    });
+
+    setTimeout(() => {
+        loadingScreen.classList.add('fade-out');
+        document.body.classList.remove('no-scroll');
+        document.querySelector('.featured').style.display = 'block';
+    }, delay * 1000 + 1300); // Adjust timing to match the animation duration
+
+    // Hero section animation
+    const heroOverlay = document.querySelector('.hero-overlay');
+    const heroItems = document.querySelectorAll('.hero-left > *');
+    heroOverlay.classList.add('fade-in');
+    heroItems.forEach((item, index) => {
+        item.style.animationDelay = `${index * 0.3}s`;
+        item.classList.add('fall-in');
+    });
+});

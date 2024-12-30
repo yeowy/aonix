@@ -1,0 +1,48 @@
+.hero {
+    position: relative;
+    background: url('/aonix/imgs/hero-bg-optimized.webp') no-repeat center center;
+    background-size: cover;
+    height: 93vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out;
+}
+
+.hero-overlay.fade-in {
+    opacity: 1;
+}
+
+.hero-left {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    color: white;
+    opacity: 0;
+    transform: translateY(50px);
+    animation: fall-in 1.5s forwards;
+}
+
+.hero-left > * {
+    opacity: 0;
+    transform: translateY(50px);
+    animation: fall-in 1.5s forwards;
+}
+
+@keyframes fall-in {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
