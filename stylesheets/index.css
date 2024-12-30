@@ -1,7 +1,7 @@
 /* Hero Section */
 html,
 body {
-    overflow-x: hidden;
+    overflow: hidden;
 }
 
 .hero {
@@ -248,4 +248,115 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+}
+
+/* Categories section */
+.categories-section {
+    box-sizing: border-box;
+    height: 100vh;
+    width: 100%;
+    padding: 2em;
+}
+
+.categories-section h1 {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+    color: var(--secondary-color);
+    text-shadow: 0 0 25px rgba(243, 3, 3, 0.884), 0 0 35px rgba(212, 208, 208, 0.4), 0 0 45px rgba(128, 125, 125, 0.2);
+    line-height: 1.35;
+    text-align: center;
+}
+
+.category-container {
+    box-sizing: border-box;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    gap: 0.5em;
+    padding-bottom: 15em;
+}
+
+.categories {
+    box-sizing: border-box;
+    display: flex;
+    width: 30%;
+    height: 60vh;
+    /* border: solid 1px red; */
+    flex-wrap: wrap;
+    gap: 0.5em;
+    justify-content: space-between;
+}
+
+.categories p {
+    color: white;
+    font-weight: bold;
+    text-align: center;
+}
+
+.category-1,
+.category-2,
+.category-3,
+.category-4,
+.category-5,
+.category-6,
+.category-7,
+.category-8,
+.category-9 {
+    box-sizing: border-box;
+    border: solid 1px black;
+    size: auto;
+    background: linear-gradient(to top, rgb(125, 120, 120), rgb(115, 115, 115), rgb(105, 105, 105), rgb(95, 95, 95), rgb(85, 85, 85), rgb(75, 75, 75), rgb(65, 65, 65), rgb(55, 55, 55), rgb(45, 45, 45), rgb(35, 35, 35), rgb(28, 35, 41));
+}
+
+.category-1 {
+    width: 100%;
+    height: auto;
+    background: 
+        url("https://xoticpc.com/cdn/shop/files/XPCKB.png?v=1734722691") center/cover no-repeat,
+        linear-gradient(to top, rgb(125, 120, 120), rgb(115, 115, 115), rgb(105, 105, 105), rgb(95, 95, 95), rgb(85, 85, 85), rgb(75, 75, 75), rgb(65, 65, 65), rgb(55, 55, 55), rgb(45, 45, 45), rgb(35, 35, 35), rgb(28, 35, 41));
+    background-blend-mode: overlay; /* Optional: Adjust blend mode if needed */
+    background-size: contain;
+    background-position:center;
+}
+
+.category-2 {
+    width: 50%;
+    height: auto;
+}
+
+.category-3 {
+    width: calc(50% - 0.5em);
+    height: auto;
+}
+
+.category-4 {
+    width: 100%;
+    height: auto;
+}
+
+.category-5 {
+    width: calc(50% - 0.5em);
+    height: auto;
+}
+
+.category-6 {
+    width: 50%;
+    height: auto;
+}
+
+.category-7 {
+    width: 100%;
+    height: auto;
+}
+
+.category-8 {
+    width: calc(50% - 0.5em);
+    height: auto;
+}
+
+.category-9 {
+    width: 50%;
+    height: auto;
 }
