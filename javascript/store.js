@@ -40,7 +40,7 @@ async function initProducts() {
         // Display products for the current page
         displayProductsForPage(currentPage);
         updatePaginationButtons();
-        openEssentialsDropdown(); // Open Essentials dropdown on page load
+        // openEssentialsDropdown(); // Open Essentials dropdown on page load
     } catch (error) {
         console.error("Error fetching products:", error);
     }
@@ -350,6 +350,7 @@ document.querySelectorAll(".category-header").forEach(header => {
         }
         if (icon) {
             icon.classList.toggle("active");
+            icon.style.transform = icon.classList.contains("active") ? "rotate(180deg)" : "rotate(0deg)";
         }
     });
 });

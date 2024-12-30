@@ -96,7 +96,7 @@
     position: sticky;
     top: 10vh;
     height: auto;
-    max-height: 90vh; /* Viewport height minus top offset */
+    max-height: 80vh; /* Viewport height minus top offset */
     align-self: flex-start;
     z-index: 10;
     gap: 1em;
