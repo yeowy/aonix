@@ -6,33 +6,36 @@
     gap: 2em;
     display: flex;
     flex-wrap: wrap;
-    background: black;
 }
 
 .products-container {
     flex: 1;
 }
 
-/* 側邊的分類欄設定 */
 .filter-section {
     position: sticky;
     width: 250px;
     min-width: 200px;
-    background: var(--primary-color);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    background: rgba(25, 25, 28, 0.4);  
+    backdrop-filter: blur(20px);  
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.2),
+        inset 0 0 32px rgba(255, 255, 255, 0.05); 
     top: 10vh;
     height: fit-content;
     padding: 0 1.5rem;
     color: white;
     padding-bottom: 0.5em;
+    border-radius: 12px;  
 }
 
 /* 側邊的分類欄標題樣式 */
 .filter-section h3 {
     margin-bottom: 10px;
     color: white;
-    font-size: 1.2rem;
+    font-size: 1.8rem;
     filter: drop-shadow(0 0 3px rgba(255, 0, 0, 1));
 }
 
@@ -50,6 +53,10 @@
     padding: 10px;
     cursor: pointer;
     color: white;
+    font-size: 1.2rem;
+}
+.category-header .two-level-category {
+    font-size: 1rem;
 }
 
 .category-count {
@@ -60,10 +67,9 @@
 
 .line {
     width: 100%;
-    border-bottom: 2px solid rgba(255, 255, 255, 0.3);
-    filter: drop-shadow(0 0 3px rgba(255, 0, 0, 1));
-    margin-bottom: 1em;
-    opacity: 0.2;
+    border-bottom: 2px solid rgba(240, 236, 236, 0.411);
+    margin-bottom: 1.25em;
+    opacity: 0.5;
 }
 
 .category-btn {
@@ -100,6 +106,7 @@
     border-radius: 4px;
     transition: all 0.3s ease;
     cursor: pointer;
+    
 }
 
 /* 懸停效果 */
@@ -109,13 +116,13 @@
 }
 
 /* .category-item.selected {
-    background: rgba(255, 0, 0, 0.2);
-    color: var(--accent-color);
-    box-shadow: var(--neon-glow);
+    
 } */
 
 .category-item.selected {
-    background: #323232;
+    background: rgba(255, 0, 0, 0.2);
+    color: var(--accent-color);
+    box-shadow: var(--neon-glow);
 }
 
 .category-btn iconify-icon {
@@ -138,14 +145,20 @@
 
 /* 商品卡片樣式 */
 .product-card {
-    background: var(--primary-color);
-    /* backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px); */
+    background: rgba(19, 19, 19, 0.699); /* 半透明背景 */
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(10px);
     padding: 1.5rem;
     color: white;
     display: flex;
     flex-direction: row;
     height: 200px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 
+    0 0 5px rgba(31, 26, 26, 0.479),
+    inset 0 0 15px rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 0, 0, 0.2);
+    border-top: 1px solid rgba(255, 0, 0, 0.2);
 }
 
 .product-img {
