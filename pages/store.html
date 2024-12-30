@@ -59,13 +59,12 @@
 
         <!-- Main store container -->
         <main class="store-container">
-
             <!-- Filter section -->
             <div class="filter-section">
                 <h3>FILTERS</h3>
 
                 <!-- Filter search bar -->
-                <div class="category-items" id="categoryItems"> 
+                <div class="category-items" id="categoryItems">
                     <div class="filter-search">
                         <input type="text" id="filterSearchInput" placeholder="Search for a product..." />
                         <iconify-icon icon="healthicons:magnifying-glass" width="20" height="20"></iconify-icon>
@@ -99,11 +98,10 @@
                                     <div class="category-item" data-category="hdd">HDD</div>
                                 </div>
                             </div>
-                            
+
                             <div class="category-item" data-category="processors">Processors</div>
                             <div class="category-item" data-category="motherboards">Motherboards</div>
                             <div class="category-item" data-category="ram">RAM</div>
-                            
 
                             <div class="category-item" data-category="graphics cards">Graphics Cards</div>
                             <div class="category-item" data-category="power supplies">Power Supplies</div>
@@ -205,7 +203,7 @@
                     </div>
 
                     <div class="line"></div>
-                    
+
                     <div class="category-dropdown">
                         <div class="category-header">
                             <span>Gaming Gear</span>
@@ -225,6 +223,25 @@
 
             <!-- Products section -->
             <div class="products-container">
+                <div class="page-nav">
+                    <!-- Dropdown for selecting number of products per page -->
+                    <div class="products-per-page">
+                        <select id="products-per-page">
+                            <option value="3" selected>3</option>
+                            <option value="5">5</option>
+                            <option value="10">10</option>
+                            <option value="20">20</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                        </select>
+                    </div>
+
+                    <!-- Pagination buttons -->
+                    <div class="pagination">
+                        <button class="pagination-btn" id="prev-button"><iconify-icon icon="mingcute:left-fill"></iconify-icon></button>
+                        <button class="pagination-btn" id="next-button"><iconify-icon icon="mingcute:right-fill"></iconify-icon></button>
+                    </div>
+                </div>
                 <div class="product-grid" id="productGrid">
                     <!-- 商品會通過 JavaScript 動態生成 -->
                 </div>

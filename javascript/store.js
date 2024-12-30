@@ -1,12 +1,16 @@
 // Import fetchProducts from products.js
 import { fetchProducts } from "./products.js";
 import { auth, db } from './firebase-config.js';
-import { addDoc, collection } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+import { addDoc, collection, query, orderBy, getDocs } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
 
 // Initialize cart data from localStorage or empty array
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 let products = []; // Global variable to store fetched products
+let allProducts = []; // Global variable to store all products
+let filteredProducts = []; // Global variable to store filtered products
 let selectedCategories = []; // Array to store selected categories
+let currentPage = 0; // Current page index
+let productsPerPage = 3; // Default number of products per page
 
 // Initialize product display
 async function initProducts() {
@@ -17,25 +21,44 @@ async function initProducts() {
     }
 
     try {
-        products = await fetchProducts(); // Store fetched products in the global variable
-        updateCategoryCounts(products);
-        displayProducts(products);
+        // Fetch all products for filters and category counts
+        const allProductsSnapshot = await fetchAllProducts();
+        allProducts = allProductsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        updateCategoryCounts(allProducts);
+
+        // Set filteredProducts to allProducts initially
+        filteredProducts = allProducts;
+
+        // Display products for the current page
+        displayProductsForPage(currentPage);
+        updatePaginationButtons();
         openEssentialsDropdown(); // Open Essentials dropdown on page load
     } catch (error) {
         console.error("Error fetching products:", error);
     }
 }
 
-// Open Essentials dropdown on page load
-function openEssentialsDropdown() {
-    const essentialsDropdown = document.querySelector(".category-dropdown-content[data-category='processors']");
-    if (essentialsDropdown) {
-        essentialsDropdown.classList.add("active");
-        const essentialsButton = essentialsDropdown.previousElementSibling.querySelector(".category-btn iconify-icon");
-        if (essentialsButton) {
-            essentialsButton.classList.add("active");
-        }
-    }
+// Fetch all products
+async function fetchAllProducts() {
+    const productsQuery = query(collection(db, 'products'), orderBy('name'));
+    return await getDocs(productsQuery);
+}
+
+// Display products for the current page
+function displayProductsForPage(page) {
+    const start = page * productsPerPage;
+    const end = start + productsPerPage;
+    const productsToDisplay = filteredProducts.slice(start, end);
+    displayProducts(productsToDisplay);
+}
+
+// Update pagination buttons
+function updatePaginationButtons() {
+    const nextButton = document.getElementById('next-button');
+    const prevButton = document.getElementById('prev-button');
+
+    nextButton.disabled = filteredProducts.length <= productsPerPage;
+    prevButton.disabled = filteredProducts.length <= productsPerPage;
 }
 
 // Update category counts
@@ -55,10 +78,15 @@ function updateCategoryCounts(products) {
     document.querySelectorAll(".category-item").forEach(item => {
         const category = item.getAttribute("data-category");
         const count = categoryCounts[category] || 0;
-        const countElement = document.createElement("div");
-        countElement.className = "category-count";
-        countElement.textContent = `${count}`;
-        item.appendChild(countElement);
+        const countElement = item.querySelector(".category-count");
+        if (countElement) {
+            countElement.textContent = `${count}`;
+        } else {
+            const newCountElement = document.createElement("div");
+            newCountElement.className = "category-count";
+            newCountElement.textContent = `${count}`;
+            item.appendChild(newCountElement);
+        }
     });
 }
 
@@ -123,7 +151,7 @@ window.toggleCart = function () {
 
 // Add product to cart
 window.addToCart = function (productId) {
-    const product = products.find(p => p.id === productId); // Use the global products variable
+    const product = allProducts.find(p => p.id === productId); // Use the global allProducts variable
     const existingItem = cart.find(item => item.id === productId);
 
     if (existingItem) {
@@ -257,33 +285,39 @@ document.querySelectorAll(".category-item").forEach(item => {
 
 // Filter products based on selected categories
 function filterProducts() {
-    const filteredProducts = selectedCategories.length === 0
-        ? products
-        : products.filter(product => selectedCategories.includes(product.category.toLowerCase()));
-    displayProducts(filteredProducts);
+    filteredProducts = selectedCategories.length === 0
+        ? allProducts
+        : allProducts.filter(product => selectedCategories.includes(product.category.toLowerCase()));
+    currentPage = 0; // Reset to the first page
+    displayProductsForPage(currentPage);
+    updatePaginationButtons();
 }
 
 // Search products
 document.getElementById("filterSearchInput").addEventListener("input", e => {
     const searchTerm = e.target.value.toLowerCase();
-    const filteredProducts = products.filter(
+    filteredProducts = allProducts.filter(
         product =>
             product.name.toLowerCase().includes(searchTerm) ||
             product.description.toLowerCase().includes(searchTerm) ||
             product.category.toLowerCase().includes(searchTerm)
     );
-    displayProducts(filteredProducts);
+    currentPage = 0; // Reset to the first page
+    displayProductsForPage(currentPage);
+    updatePaginationButtons();
 });
 
 document.getElementById("searchInput").addEventListener("input", e => {
     const searchTerm = e.target.value.toLowerCase();
-    const filteredProducts = products.filter(
+    filteredProducts = allProducts.filter(
         product =>
             product.name.toLowerCase().includes(searchTerm) ||
             product.description.toLowerCase().includes(searchTerm) ||
             product.category.toLowerCase().includes(searchTerm)
     );
-    displayProducts(filteredProducts);
+    currentPage = 0; // Reset to the first page
+    displayProductsForPage(currentPage);
+    updatePaginationButtons();
 });
 
 // Toggle dropdown visibility
@@ -305,4 +339,25 @@ document.addEventListener("DOMContentLoaded", () => {
     console.log("Page loaded");
     initProducts();
     updateCartDisplay(); // Ensure cart display is updated when the page loads
+});
+
+// Pagination buttons event listeners
+document.getElementById('next-button').addEventListener('click', () => {
+    currentPage = (currentPage + 1) % Math.ceil(filteredProducts.length / productsPerPage);
+    displayProductsForPage(currentPage);
+    updatePaginationButtons();
+});
+
+document.getElementById('prev-button').addEventListener('click', () => {
+    currentPage = (currentPage - 1 + Math.ceil(filteredProducts.length / productsPerPage)) % Math.ceil(filteredProducts.length / productsPerPage);
+    displayProductsForPage(currentPage);
+    updatePaginationButtons();
+});
+
+// Products per page dropdown event listener
+document.getElementById('products-per-page').addEventListener('change', (e) => {
+    productsPerPage = parseInt(e.target.value, 10);
+    currentPage = 0; // Reset to the first page
+    displayProductsForPage(currentPage);
+    updatePaginationButtons();
 });

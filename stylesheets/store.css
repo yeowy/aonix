@@ -439,6 +439,7 @@
 .quantity-controls {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 8px;
 }
 .quantity-controls button {
@@ -446,8 +447,13 @@
     border: 1px solid rgba(255, 255, 255, 0.2);
     color: white;
     border-radius: 4px;
-    padding: 5px 10px;
+    padding: 1px;
     transition: all 0.3s ease;
+    cursor: pointer;
+    margin: 0;
+    margin-left: 2px;
+    width: 1.3rem;
+    height: auto;
 }
 /* 移除商品按鈕 */
 .remove-item {
@@ -615,4 +621,41 @@
         height: auto;
         object-fit: auto;
     }
+}
+
+body {
+    background-color: black;
+}
+
+/* Pagination controls */
+.page-nav {
+    display: flex;
+    margin-bottom: 2em;
+    background: var(--primary-color);
+    padding: 1rem;
+    color: white;
+    height: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+.products-per-page select {
+    background-color:var(--primary-color);
+    border: 0;
+    padding: 0;
+    margin: 0;
+    color: white;
+    cursor: pointer;
+}
+
+.pagination {
+    margin-left: auto;
+    margin-top: 2px;
+}
+
+.pagination button {
+    background-color:var(--primary-color);
+    border: 0;
+    color: red;
+    cursor: pointer;
 }
