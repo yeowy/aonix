@@ -12,7 +12,6 @@
         <link rel="stylesheet" href="/aonix/stylesheets/font.css" />
         <link rel="stylesheet" href="/aonix/stylesheets/variable.css" />
         <link rel="stylesheet" href="/aonix/stylesheets/index.css" />
-        <link rel="stylesheet" href="/aonix/stylesheets/developer.css" />
         <link rel="stylesheet" href="/aonix/stylesheets/store.css" />
 
         <!-- Page title -->
@@ -20,37 +19,9 @@
     </head>
 
     <body>
+
         <!-- Header section -->
-        <header>
-            <!-- Logo and navigation links -->
-            <div class="hover-scale"
-                ><a href="/aonix/index.html"><img src="/aonix/imgs/anoix.png" class="logo-img" /></a
-            ></div>
-            <div class="hover-scale"><a href="/aonix/pages/about.html">ABOUT</a></div>
-            <div class="hover-scale"><a href="/aonix/pages/store.html">STORE</a></div>
-
-            <!-- Header icons for search, cart, and user account -->
-            <div class="header-icons">
-                <!-- <div class="hover-scale" onclick="toggleHint()">
-                    <iconify-icon icon="healthicons:magnifying-glass" width="28" height="28"></iconify-icon>
-                </div> -->
-
-                <!-- Translate button -->
-                <div class="hover-scale" id="translateButton" onclick="translatePage()">
-                    <iconify-icon icon="mdi:translate" width="28" height="28"></iconify-icon>
-                </div>
-
-                <div class="hover-scale" onclick="toggleCart()">
-                    <iconify-icon icon="typcn:shopping-cart" width="28" height="28"></iconify-icon>
-
-                    <span class="cart-count" id="cartCount">0</span>
-                </div>
-
-                <div class="hover-scale" id="accountIcon">
-                    <iconify-icon icon="mdi:account" width="28" height="28" class="user"></iconify-icon>
-                </div>
-            </div>
-        </header>
+        <header id="header"></header>
 
         <!-- Search hint section -->
         <div class="search-hint" id="searchHint">
@@ -79,11 +50,11 @@
                             <span>Essentials</span>
 
                             <button class="category-btn">
-                                <iconify-icon icon="mdi:chevron-up" width="20" height="20"></iconify-icon>
+                                <iconify-icon icon="mdi:chevron-up" width="20" height="20" class="active"></iconify-icon>
                             </button>
                         </div>
 
-                        <div class="category-dropdown-content" data-category="processors">
+                        <div class="category-dropdown-content active" data-category="processors">
                             <!-- Storage Dropdown -->
                             <div class="category-dropdown">
                                 <div class="category-header">
@@ -268,6 +239,7 @@
                         <button class="pagination-btn" id="next-button"><iconify-icon icon="mingcute:right-fill"></iconify-icon></button>
                     </div>
                 </div>
+                
                 <div class="product-grid" id="productGrid">
                     <!-- 商品會通過 JavaScript 動態生成 -->
                 </div>

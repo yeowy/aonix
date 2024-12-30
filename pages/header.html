@@ -1,0 +1,33 @@
+<!-- Logo and navigation links -->
+<div class="hover-scale"
+    ><a href="/aonix/index.html"><img src="/aonix/imgs/anoix.png" class="logo-img" /></a
+></div>
+<div class="hover-scale"><a href="/aonix/pages/about.html">ABOUT</a></div>
+<div class="hover-scale"><a href="/aonix/pages/store.html">STORE</a></div>
+
+<!-- Header icons for search, cart, and user account -->
+<div class="header-icons">
+    <!-- <div class="hover-scale" onclick="toggleHint()">
+            <iconify-icon icon="healthicons:magnifying-glass" width="28" height="28"></iconify-icon>
+        </div> -->
+
+    <div class="hover-scale" id="accountIcon">
+        <iconify-icon icon="mdi:account" width="28" height="28" class="user"></iconify-icon>
+    </div>
+
+    <!-- Translate button -->
+    <div class="hover-scale" id="translateButton" onclick="translatePage()">
+        <iconify-icon icon="mdi:translate" width="28" height="28"></iconify-icon>
+    </div>
+
+    <div class="hover-scale" onclick="toggleCart()">
+        <iconify-icon icon="typcn:shopping-cart" width="28" height="28"></iconify-icon>
+
+        <span class="cart-count" id="cartCount">0</span>
+    </div>
+
+    <!-- Developer mode toggle button -->
+    <div class="hover-scale" id="developerModeButton" onclick="toggleDeveloperMode()">
+        <iconify-icon icon="tabler:braces" width="28" height="28"></iconify-icon>
+    </div>
+</div>

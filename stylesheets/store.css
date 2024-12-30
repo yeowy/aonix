@@ -23,7 +23,6 @@
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 8px;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-    max-width: 450px;
 }
 
 /* 每頁商品數量選擇器 */
@@ -168,6 +167,14 @@
 
 .category-dropdown-content.active {
     display: block;
+}
+
+.category-dropdown-content[data-category="processors"] {
+    display: block;
+}
+
+.category-header .category-btn iconify-icon.active {
+    transform: rotate(180deg);
 }
 
 /* 子項目樣式 */

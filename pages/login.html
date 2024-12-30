@@ -9,37 +9,14 @@
         <link rel="stylesheet" href="/aonix/stylesheets/font.css" />
         <link rel="stylesheet" href="/aonix/stylesheets/variable.css" />
         <link rel="stylesheet" href="/aonix/stylesheets/login.css" />
-        <link rel="stylesheet" href="/aonix/stylesheets/developer.css" />
         <link rel="stylesheet" href="/aonix/stylesheets/store.css" />
         <title>aonix</title>
     </head>
     <body>
-        <header>
-            <div class="hover-scale"
-                ><a href="/aonix/index.html"><img src="/aonix/imgs/anoix.png" class="logo-img" /></a
-            ></div>
-            <div class="hover-scale"><a href="/aonix/pages/about.html">ABOUT</a></div>
-            <div class="hover-scale"><a href="/aonix/pages/store.html">STORE</a></div>
 
-            <div class="header-icons">
-                <div class="hover-scale" id="translateButton" onclick="translatePage()">
-                    <iconify-icon icon="mdi:translate" width="28" height="28"></iconify-icon>
-                </div>
-                <div class="hover-scale" onclick="toggleCart()">
-                    <iconify-icon icon="typcn:shopping-cart" width="28" height="28"></iconify-icon>
-                    <span class="cart-count" id="cartCount">0</span>
-                </div>
-                <div class="hover-scale dropdown">
-                    <button class="dropbtn">
-                        <iconify-icon icon="mdi:account" width="28" height="28" class="user"></iconify-icon>
-                    </button>
-                    <div class="dropdown-content">
-                        <a href="/aonix/pages/login.html">Login</a>
-                        <a href="#">User Account</a>
-                    </div>
-                </div>
-            </div>
-        </header>
+        <!-- Header section -->
+        <header id="header"></header>
+
         <div class="search-hint" id="searchHint">
             <input type="text" id="searchInput" placeholder="Search for products..." />
         </div>
@@ -114,6 +91,8 @@
                 </div>
             </div>
         </div>
+
+        <script type="module" src="/aonix/javascript/base.js"></script>
         <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
         <script type="module" src="/aonix/javascript/app.js"></script>
         <script src="/aonix/javascript/search.js"></script>

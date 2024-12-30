@@ -38,6 +38,18 @@ async function initProducts() {
     }
 }
 
+// Function to open Essentials dropdown on page load
+function openEssentialsDropdown() {
+    const essentialsDropdown = document.querySelector('.category-dropdown-content[data-category="processors"]');
+    const essentialsIcon = document.querySelector('.category-header .category-btn iconify-icon');
+    if (essentialsDropdown) {
+        essentialsDropdown.classList.add('active');
+    }
+    if (essentialsIcon) {
+        essentialsIcon.classList.add('active');
+    }
+}
+
 // Fetch all products
 async function fetchAllProducts() {
     const productsQuery = query(collection(db, 'products'), orderBy('name'));
