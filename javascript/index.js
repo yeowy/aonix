@@ -106,6 +106,7 @@ window.addEventListener('load', () => {
         loadingScreen.classList.add('fade-out');
         document.body.classList.remove('no-scroll');
         document.querySelector('.featured').style.display = 'block';
+        document.querySelector('.categories-section').style.display = 'block';
     }, delay * 1000 + 1300); // Adjust timing to match the animation duration
 
     // Hero section animation

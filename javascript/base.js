@@ -81,6 +81,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 document.head.appendChild(link);
             }
             link.disabled = developerMode !== "true";
+            if (developerMode === "true") {
+                document.head.appendChild(link); // Ensure developer.css is the last stylesheet
+            }
         });
 });
 
@@ -106,6 +109,9 @@ window.toggleDeveloperMode = function () {
     }
     link.disabled = !link.disabled;
     setCookie("developerMode", !link.disabled, 7);
+    if (!link.disabled) {
+        document.head.appendChild(link); // Ensure developer.css is the last stylesheet
+    }
 };
 
 // Helper function to set a cookie
