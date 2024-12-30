@@ -227,7 +227,8 @@ window.checkout = async function () {
                 itemName: item.name,
                 purchaseDate: new Date().toISOString(),
                 price: item.price,
-                quantity: item.quantity
+                quantity: item.quantity,
+                productId: item.id // Add productId to the purchase history
             });
         }
         alert("Thank you for your purchase!");

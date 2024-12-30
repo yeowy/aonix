@@ -26,24 +26,49 @@ logoutButton.addEventListener('click', async () => {
 
 // Load shopping history
 async function loadShoppingHistory(userId) {
-    const shoppingHistoryRef = collection(db, 'users', userId, 'shoppingHistory');
-    const shoppingHistorySnapshot = await getDocs(shoppingHistoryRef);
-    shoppingHistorySnapshot.forEach(doc => {
-        const historyItem = document.createElement('div');
-        const purchaseDate = new Date(doc.data().purchaseDate).toLocaleDateString();
-        historyItem.textContent = `${doc.data().itemName} - ${purchaseDate}`;
-        shoppingHistoryContainer.appendChild(historyItem);
-    });
+    try {
+        const shoppingHistoryRef = collection(db, 'users', userId, 'shoppingHistory');
+        const shoppingHistorySnapshot = await getDocs(shoppingHistoryRef);
+
+        if (shoppingHistorySnapshot.empty) {
+            shoppingHistoryContainer.textContent = "No contents";
+            return;
+        }
+
+        for (const docSnapshot of shoppingHistorySnapshot.docs) {
+            const data = docSnapshot.data();
+            if (!data.productId) {
+                console.error("No productId ", data);
+                continue;
+            }
+
+            const productDoc = await getDoc(doc(db, 'products', data.productId));
+            const productName = productDoc.exists() ? productDoc.data().name : 'Unknown Product';
+            const productId = productDoc.id;
+            const historyItem = document.createElement('div');
+            const purchaseDate = new Date(data.purchaseDate).toLocaleDateString();
+
+            historyItem.innerHTML = `<a href="/aonix/pages/product_review.html?id=${productId}">${productName}</a> - ${purchaseDate}`;
+            shoppingHistoryContainer.appendChild(historyItem);
+        }
+    } catch (error) {
+        console.error("Loading Error", error);
+    }
 }
 
 // Load review history
 async function loadReviewHistory(userId) {
     const reviewsRef = collection(db, 'users', userId, 'reviews');
     const reviewsSnapshot = await getDocs(reviewsRef);
-    reviewsSnapshot.forEach(doc => {
+    reviewsSnapshot.forEach(async reviewDoc => {
         const reviewItem = document.createElement('div');
-        const reviewDate = new Date(doc.data().reviewDate).toLocaleDateString(); 
-        reviewItem.textContent = `${doc.data().reviewText} - ${reviewDate}`;
+        const reviewDate = new Date(reviewDoc.data().reviewDate).toLocaleDateString();
+        const productDoc = await getDoc(doc(db, 'products', reviewDoc.data().productId));
+        const productName = productDoc.exists() ? productDoc.data().name : 'Unknown Product';
+        reviewItem.innerHTML = `
+            <div>${reviewDoc.data().reviewText}</div>
+            <div>${productName} - ${reviewDate}</div>
+        `;
         reviewsContainer.appendChild(reviewItem);
     });
 }
