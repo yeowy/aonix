@@ -1,16 +1,18 @@
+import {getCookie, setCookie} from './base.js';
+
 // Import fetchProducts from products.js
 import { fetchProducts } from "./products.js";
 import { auth, db } from './firebase-config.js';
 import { addDoc, collection, query, orderBy, getDocs } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
 
-// Initialize cart data from localStorage or empty array
-let cart = JSON.parse(localStorage.getItem("cart")) || [];
+// Initialize cart data from cookies or empty array
+let cart = JSON.parse(getCookie("cart")) || [];
 let products = []; // Global variable to store fetched products
 let allProducts = []; // Global variable to store all products
 let filteredProducts = []; // Global variable to store filtered products
 let selectedCategories = []; // Array to store selected categories
 let currentPage = 0; // Current page index
-let productsPerPage = 3; // Default number of products per page
+let productsPerPage = parseInt(getCookie("productsPerPage"), 10) || 3; // Default number of products per page
 
 // Initialize product display
 async function initProducts() {
@@ -18,6 +20,12 @@ async function initProducts() {
     if (!productGrid) {
         console.error("找不到 productGrid 元素");
         return;
+    }
+
+    // Set the productsPerPage dropdown to the correct value
+    const productsPerPageDropdown = document.getElementById("products-per-page");
+    if (productsPerPageDropdown) {
+        productsPerPageDropdown.value = productsPerPage;
     }
 
     try {
@@ -175,8 +183,8 @@ window.addToCart = function (productId) {
         });
     }
 
-    // Save to localStorage
-    localStorage.setItem("cart", JSON.stringify(cart));
+    // Save to cookies
+    setCookie("cart", JSON.stringify(cart), 7);
     updateCartDisplay();
 };
 
@@ -234,7 +242,7 @@ window.updateQuantity = function (productId, change) {
         if (item.quantity <= 0) {
             removeFromCart(productId);
         } else {
-            localStorage.setItem("cart", JSON.stringify(cart));
+            setCookie("cart", JSON.stringify(cart), 7);
             updateCartDisplay();
         }
     }
@@ -243,7 +251,7 @@ window.updateQuantity = function (productId, change) {
 // Remove item from cart
 window.removeFromCart = function (productId) {
     cart = cart.filter(item => item.id !== productId);
-    localStorage.setItem("cart", JSON.stringify(cart));
+    setCookie("cart", JSON.stringify(cart), 7);
     updateCartDisplay();
 };
 
@@ -273,7 +281,7 @@ window.checkout = async function () {
         }
         alert("Thank you for your purchase!");
         cart = [];
-        localStorage.removeItem("cart");
+        setCookie("cart", JSON.stringify(cart), 7); // Clear the cart cookie
         updateCartDisplay();
         toggleCart();
     } catch (error) {
@@ -349,6 +357,7 @@ document.querySelectorAll(".category-header").forEach(header => {
 // Initialize page on load
 document.addEventListener("DOMContentLoaded", () => {
     console.log("Page loaded");
+    cart = JSON.parse(getCookie("cart")) || []; // Reload cart from cookies
     initProducts();
     updateCartDisplay(); // Ensure cart display is updated when the page loads
 });
@@ -369,6 +378,7 @@ document.getElementById('prev-button').addEventListener('click', () => {
 // Products per page dropdown event listener
 document.getElementById('products-per-page').addEventListener('change', (e) => {
     productsPerPage = parseInt(e.target.value, 10);
+    setCookie("productsPerPage", productsPerPage, 7);
     currentPage = 0; // Reset to the first page
     displayProductsForPage(currentPage);
     updatePaginationButtons();

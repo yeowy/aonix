@@ -103,7 +103,7 @@ window.toggleDeveloperMode = function() {
 };
 
 // Helper function to set a cookie
-function setCookie(name, value, days) {
+export function setCookie(name, value, days) {
     const date = new Date();
     date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
     const expires = "expires=" + date.toUTCString();
@@ -111,7 +111,7 @@ function setCookie(name, value, days) {
 }
 
 // Helper function to get a cookie
-function getCookie(name) {
+export function getCookie(name) {
     const nameEQ = name + "=";
     const ca = document.cookie.split(';');
     for (let i = 0; i < ca.length; i++) {

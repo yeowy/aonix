@@ -169,14 +169,6 @@
     display: block;
 }
 
-.category-dropdown-content[data-category="processors"] {
-    display: block;
-}
-
-.category-header .category-btn iconify-icon.active {
-    transform: rotate(180deg);
-}
-
 /* 子項目樣式 */
 /* 分類項目樣式 */
 .category-item {
