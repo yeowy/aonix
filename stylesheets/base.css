@@ -106,3 +106,15 @@ header a:hover {
     color: var(--accent-color);
     text-shadow: var(--text-glow);
 }
+
+/* Hide the Google Translate banner and related elements */
+.goog-te-banner-frame.skiptranslate,
+.goog-te-gadget-icon,
+.goog-te-menu-value,
+.goog-te-gadget-simple {
+    display: none !important;
+}
+
+body {
+    top: 0px !important; /* Ensure the body is not pushed down */
+}

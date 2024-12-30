@@ -18,8 +18,21 @@ async function initProducts() {
         products = await fetchProducts(); // Store fetched products in the global variable
         updateCategoryCounts(products);
         displayProducts(products);
+        openEssentialsDropdown(); // Open Essentials dropdown on page load
     } catch (error) {
         console.error("Error fetching products:", error);
+    }
+}
+
+// Open Essentials dropdown on page load
+function openEssentialsDropdown() {
+    const essentialsDropdown = document.querySelector(".category-dropdown-content[data-category='processors']");
+    if (essentialsDropdown) {
+        essentialsDropdown.classList.add("active");
+        const essentialsButton = essentialsDropdown.previousElementSibling.querySelector(".category-btn iconify-icon");
+        if (essentialsButton) {
+            essentialsButton.classList.add("active");
+        }
     }
 }
 
@@ -248,6 +261,20 @@ document.getElementById("searchInput").addEventListener("input", e => {
             product.category.toLowerCase().includes(searchTerm)
     );
     displayProducts(filteredProducts);
+});
+
+// Toggle dropdown visibility
+document.querySelectorAll(".category-header").forEach(header => {
+    header.addEventListener("click", () => {
+        const dropdownContent = header.nextElementSibling;
+        const icon = header.querySelector(".category-btn iconify-icon");
+        if (dropdownContent) {
+            dropdownContent.classList.toggle("active");
+        }
+        if (icon) {
+            icon.classList.toggle("active");
+        }
+    });
 });
 
 // Initialize page on load

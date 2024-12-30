@@ -31,18 +31,23 @@
 
             <!-- Header icons for search, cart, and user account -->
             <div class="header-icons">
-                <div class="hover-scale" onclick="toggleHint()">
+                <!-- <div class="hover-scale" onclick="toggleHint()">
                     <iconify-icon icon="healthicons:magnifying-glass" width="28" height="28"></iconify-icon>
+                </div> -->
+
+                <div class="hover-scale" id="accountIcon">
+                    <iconify-icon icon="mdi:account" width="28" height="28" class="user"></iconify-icon>
+                </div>
+
+                <!-- Translate button -->
+                <div class="hover-scale" id="translateButton" onclick="translatePage()">
+                    <iconify-icon icon="mdi:translate" width="28" height="28"></iconify-icon>
                 </div>
 
                 <div class="hover-scale" onclick="toggleCart()">
                     <iconify-icon icon="typcn:shopping-cart" width="28" height="28"></iconify-icon>
 
                     <span class="cart-count" id="cartCount">0</span>
-                </div>
-
-                <div class="hover-scale" id="accountIcon">
-                    <iconify-icon icon="mdi:account" width="28" height="28" class="user"></iconify-icon>
                 </div>
             </div>
         </header>
@@ -75,7 +80,7 @@
                             <span>Essentials</span>
 
                             <button class="category-btn">
-                                <iconify-icon icon="mdi:chevron-down" width="20" height="20"></iconify-icon>
+                                <iconify-icon icon="mdi:chevron-up" width="20" height="20"></iconify-icon>
                             </button>
                         </div>
 
@@ -257,5 +262,6 @@
         <script type="module" src="/aonix/javascript/store.js"></script>
         <script src="/aonix/javascript/carousel.js"></script>
         <script type="module" src="/aonix/javascript/accountRedirect.js"></script>
+        <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
     </body>
 </html>
