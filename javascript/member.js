@@ -40,10 +40,10 @@ async function loadShoppingHistory(userId) {
 async function loadReviewHistory(userId) {
     const reviewsRef = collection(db, 'users', userId, 'reviews');
     const reviewsSnapshot = await getDocs(reviewsRef);
-    reviewsSnapshot.forEach(async doc => {
+    reviewsSnapshot.forEach(doc => {
         const reviewItem = document.createElement('div');
-        const reviewDate = new Date(doc.data().reviewDate).toLocaleDateString();
-        reviewItem.textContent = `${doc.data().reviewText} - ${doc.data().reviewDate}`;
+        const reviewDate = new Date(doc.data().reviewDate).toLocaleDateString(); 
+        reviewItem.textContent = `${doc.data().reviewText} - ${reviewDate}`;
         reviewsContainer.appendChild(reviewItem);
     });
 }
