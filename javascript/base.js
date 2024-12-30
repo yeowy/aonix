@@ -57,10 +57,10 @@ window.addEventListener('load', () => {
 
 // Loads the header
 document.addEventListener("DOMContentLoaded", function() {
-    fetch('/aonix/pages/header.html')
+    fetch('/aonix/pages/base.html')
         .then(response => response.text())
         .then(data => {
-            document.getElementById('header').innerHTML = data;
+            document.body.insertAdjacentHTML('afterbegin', data);
 
             // Add event listener for account icon after header is loaded
             document.getElementById('accountIcon').addEventListener('click', handleAccountRedirect);

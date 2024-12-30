@@ -14,12 +14,6 @@
     </head>
     <body>
 
-        <!-- Header section -->
-        <header id="header"></header>
-
-        <div class="search-hint" id="searchHint">
-            <input type="text" id="searchInput" placeholder="Search for products..." />
-        </div>
         <!-- 登入介面  Login Interface -->
         <div class="container">
             <div class="form-container">
@@ -67,27 +61,6 @@
                     <button id="add-entry-button" class="button">Add New Entry</button>
                     <div id="user-entries"></div>
                     <button id="logout-button" class="button">Logout</button>
-                </div>
-            </div>
-        </div>
-        <!-- 購物車介面 預設隱藏 -->
-        <div class="cart-modal" id="cartModal">
-            <div class="cart-content">
-                <div class="cart-header">
-                    <p>購物車</p>
-                    <div class="close-cart" onclick="toggleCart()">
-                        <iconify-icon icon="mdi:close"></iconify-icon>
-                    </div>
-                </div>
-
-                <div class="cart-items" id="cartItems"></div>
-
-                <div class="cart-footer">
-                    <div class="cart-total">
-                        <span>總計:</span>
-                        <span>$<span id="cartTotal">0</span></span>
-                    </div>
-                    <button class="checkout-btn" onclick="checkout()"> 結帳 </button>
                 </div>
             </div>
         </div>

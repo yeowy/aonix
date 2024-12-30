@@ -18,33 +18,6 @@
         <title>aonix.</title>
     </head>
     <body>
-        <!-- Header section -->
-        <header id="header"></header>
-
-        <!-- Search hint section -->
-        <div class="search-hint" id="searchHint">
-            <input type="text" id="searchInput" placeholder="Search for products..." />
-        </div>
-
-        <!-- Shopping cart modal (hidden by default) -->
-        <div class="cart-modal" id="cartModal">
-            <div class="cart-content">
-                <div class="cart-header">
-                    <p>Cart</p>
-                    <div class="close-cart" onclick="toggleCart()">
-                        <iconify-icon icon="mdi:close"></iconify-icon>
-                    </div>
-                </div>
-                <div class="cart-items" id="cartItems"></div>
-                <div class="cart-footer">
-                    <div class="cart-total">
-                        <span>總計:</span>
-                        <span>$<span id="cartTotal">0</span></span>
-                    </div>
-                    <button class="checkout-btn" onclick="checkout()"> 結帳 </button>
-                </div>
-            </div>
-        </div>
 
         <!-- Scripts for search functionality, iconify icons, and store functionality -->
         <script type="module" src="/aonix/javascript/base.js"></script>
