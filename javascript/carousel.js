@@ -17,7 +17,7 @@ let index = 0
         return setInterval(() => {
             index++
             refresh()
-        }, 3000)
+        }, 100000)
     }
 
     let autoTimer = createAuto()
@@ -36,7 +36,7 @@ let index = 0
         width = Number(width.slice(0, -2))
 
         carousel.querySelector(".container").style.left =
-            index * width * -1.01 + "px"
+            index * width * -0.99 + "px"
     }
 
     let refreshWrapper = (func) => {

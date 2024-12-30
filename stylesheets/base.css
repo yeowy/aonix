@@ -4,12 +4,6 @@ html {
     scroll-behavior: smooth;
 }
 
-/* LAYOUTS */
-.fullpage {
-    width: 100%;
-    height: var(--fullpage)
-}
-
 /* CONTAINERS */
 .container {
     max-width: 1920px;
@@ -49,7 +43,7 @@ header {
     align-items: center;
     gap: 2rem;
     background: rgba(20, 20, 20, 0.95);
-    position: sticky;
+    /* position: sticky; */
     top: 0;
     z-index: 100;
     border-bottom: 1px solid rgba(255, 0, 0, 0.2);

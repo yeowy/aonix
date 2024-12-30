@@ -1,6 +1,6 @@
 /* 主要容器佈局 */
 .store-container {
-    padding: 5em 8em;
+    padding: 5em 16em;
     margin: 0 auto;
     display: flex;
     gap: 2em;
@@ -89,9 +89,9 @@
     color: var(--secondary-color);
 }
 
-
 /* 側邊的分類欄設定 */
 .filter-section {
+    position: -webkit-sticky; /* For Safari */
     position: sticky;
     width: 300px;
     min-width: 280px;
@@ -118,7 +118,6 @@
 }
 
 .category-dropdown {
-    
     position: relative;
     width: 100%;
     margin-bottom: 5px;
@@ -233,7 +232,6 @@
         inset 0 0 15px rgba(255, 255, 255, 0.1);
     border-radius: 10px;
 }
-
 
 .product-img {
     width: 220px;

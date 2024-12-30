@@ -1,16 +1,17 @@
 /* Hero Section */
-html, body {
+html,
+body {
     overflow-x: hidden;
 }
 
 .hero {
-    display: flex; 
-    flex-direction: row; 
-    align-items: center; 
-    justify-content: center; 
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
     height: calc(100vh - var(--header-height));
     overflow: hidden;
-    background-image: url('/aonix/imgs/hero-bg-optimized.webp');
+    background-image: url("/aonix/imgs/hero-bg-optimized.webp");
     background-size: cover;
     background-position: center;
     position: relative;
@@ -19,7 +20,7 @@ html, body {
 }
 
 .hero::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
@@ -37,25 +38,19 @@ html, body {
     padding: 2rem;
 }
 
-
 .hero-left h1 {
     font-size: 4.5rem;
     margin-bottom: 1.5rem;
     color: var(--secondary-color);
-    text-shadow: 
-        0 0 15px rgba(243, 3, 3, 0.884),
-        0 0 20px rgba(212, 208, 208, 0.4),
-        0 0 30px rgba(128, 125, 125, 0.2);
+    text-shadow: 0 0 25px rgba(243, 3, 3, 0.884), 0 0 35px rgba(212, 208, 208, 0.4), 0 0 45px rgba(128, 125, 125, 0.2);
     line-height: 1.35;
-    
 }
 
 .hero-left p {
     font-size: 1.5rem;
     line-height: 1.85;
     margin-bottom: 2rem;
-    color: var(--secondary-color);
-
+    color: rgba(255, 255, 255, 0.8);
 }
 
 .hero-left .button {
@@ -64,7 +59,7 @@ html, body {
     color: var(--secondary-color);
     border: 1px solid var(--accent-color);
     padding: 1rem 2rem;
-    border-radius: 4px;
+    border-radius: 4em;
     cursor: pointer;
     position: relative;
     overflow: hidden;
@@ -156,5 +151,101 @@ html, body {
     display: block;
 }
 
+/* Featured section */
+.featured {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
 
+.best-sellers {
+    height: 60vh;
+    width: 100%;
+    box-sizing: border-box;
+}
 
+.featured-card {
+    box-sizing: border-box;
+    background: rgba(25, 25, 28, 0.7);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    padding: 10em 20em;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    width: 100%;
+    /* border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 
+        0 0 30px rgba(255, 0, 0, 0.1),
+        inset 0 0 15px rgba(255, 255, 255, 0.1);
+    border-radius: 10px; */
+}
+
+.featured-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+
+.featured-card h5 {
+    font-size: 1.1rem;
+    margin: 10px 0;
+    color: white;
+}
+
+.featured-card h1 {
+    position: absolute;
+    align-self: center;
+    top: 5%;
+    left: 15%;
+    font-size: 3rem;
+    text-shadow: 0 0 25px rgba(243, 3, 3, 0.884), 0 0 35px rgba(212, 208, 208, 0.4), 0 0 45px rgba(128, 125, 125, 0.2);
+}
+
+.featured-card .button-container {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* 按鈕樣式 */
+.featured-card button {
+    width: auto;
+    padding: 10px 15px;
+    background: linear-gradient(135deg, #f73030, #fd0202);
+    color: white;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* 評價按鈕 */
+.featured-card button a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    width: 100%;
+}
+
+/* 購物車按鈕懸停效果 */
+.featured-card button:hover {
+    transform: scale(1.05);
+    background: linear-gradient(135deg, #751a1a, #690202);
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
+}
+
+.featured-product-details {
+    padding-left: 2rem;
+    margin-left: 1em;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}

@@ -1,55 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-        <link rel="stylesheet" href="/aonix/stylesheets/reset.css">
-        <link rel="stylesheet" href="/aonix/stylesheets/base.css">
-        <link rel="stylesheet" href="/aonix/stylesheets/font.css">
-        <link rel="stylesheet" href="/aonix/stylesheets/variable.css">
-        <link rel="stylesheet" href="/aonix/stylesheets/index.css">
-        <link rel="stylesheet" href="/aonix/stylesheets/store.css">
-        <link rel="stylesheet" href="/aonix/stylesheets/carousel.css">
-        
+        <link rel="stylesheet" href="/aonix/stylesheets/reset.css" />
+        <link rel="stylesheet" href="/aonix/stylesheets/base.css" />
+        <link rel="stylesheet" href="/aonix/stylesheets/font.css" />
+        <link rel="stylesheet" href="/aonix/stylesheets/variable.css" />
+        <link rel="stylesheet" href="/aonix/stylesheets/index.css" />
+        <link rel="stylesheet" href="/aonix/stylesheets/store.css" />
+        <link rel="stylesheet" href="/aonix/stylesheets/carousel.css" />
+
         <title>aonix.</title>
     </head>
     <body>
-        
         <!-- Hero section -->
         <section class="hero fullpage">
             <div class="hero-left">
                 <h1>Power up your PC with AONIX.</h1>
                 <p>
-                    Whether you're a gamer, creator, or professional, AONIX has everything 
-                    you need to build and upgrade your dream PC. Explore our wide selection 
-                    of high-performance components designed for reliability and excellence.
+                    Whether you're a gamer, creator, or professional, AONIX has everything you need to build and upgrade
+                    your dream PC. Explore our wide selection of high-performance components designed for reliability
+                    and excellence.
                 </p>
-                <a href="/aonix/pages/store.html" class="button">Shop Now</a>
-
+                <a href="/aonix/pages/store.html" class="button">Upgrade now</a>
             </div>
         </section>
 
-        <!-- Carousel section -->
-        <div class="carousel">
-            <div class="container">
-                <img draggable=false src="/aonix/imgs/test.avif" />
-                <img draggable=false src="/aonix/imgs/test2.webp" />
-                <img draggable=false src="/aonix/imgs/tt3jpg.jpg" />
+        <!-- Featured section -->
+        <div class="featured">
+            <!-- Carousel -->
+            <div class="carousel">
+                <div class="container">
+                    <img draggable="false" src="/aonix/imgs/test.avif" />
+                    <img draggable="false" src="/aonix/imgs/test2.webp" />
+                    <img draggable="false" src="/aonix/imgs/tt3jpg.jpg" />
+                </div>
+                <div class="shift">
+                    <div class="btn left" onclick="leftShift()">&lt;</div>
+                    <div class="btn right" onclick="rightShift()">&gt;</div>
+                </div>
+                <div class="bottom"></div>
             </div>
-            <div class="shift">
-                <div class="btn left" onclick="leftShift()">&lt;</div>
-                <div class="btn right" onclick="rightShift()">&gt;</div>
-            </div>
-            <div class="bottom"></div>
+
+            
+            <!-- Best sellers (filled by js) -->
+            <div class="best-sellers"></div>
         </div>
-        
+
         <script type="module" src="/aonix/javascript/base.js"></script>
+        <script type="module" src="/aonix/javascript/index.js"></script>
         <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
         <script src="/aonix/javascript/search.js"></script>
         <script type="module" src="/aonix/javascript/store.js"></script>
         <script type="module" src="/aonix/javascript/accountRedirect.js"></script>
         <script src="/aonix/javascript/carousel.js"></script>
         <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+        <!-- Script to lock scroll to 100vh per scroll -->
+        <script>
+            document.addEventListener('wheel', (event) => {
+                event.preventDefault();
+                const delta = Math.sign(event.deltaY);
+                const scrollAmount = window.innerHeight;
+                window.scrollBy({
+                    top: delta * scrollAmount,
+                    left: 0,
+                    behavior: 'smooth'
+                });
+            }, { passive: false });
+        </script>
     </body>
 </html>
