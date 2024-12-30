@@ -35,10 +35,6 @@
                     <iconify-icon icon="healthicons:magnifying-glass" width="28" height="28"></iconify-icon>
                 </div> -->
 
-                <div class="hover-scale" id="accountIcon">
-                    <iconify-icon icon="mdi:account" width="28" height="28" class="user"></iconify-icon>
-                </div>
-
                 <!-- Translate button -->
                 <div class="hover-scale" id="translateButton" onclick="translatePage()">
                     <iconify-icon icon="mdi:translate" width="28" height="28"></iconify-icon>
@@ -48,6 +44,10 @@
                     <iconify-icon icon="typcn:shopping-cart" width="28" height="28"></iconify-icon>
 
                     <span class="cart-count" id="cartCount">0</span>
+                </div>
+
+                <div class="hover-scale" id="accountIcon">
+                    <iconify-icon icon="mdi:account" width="28" height="28" class="user"></iconify-icon>
                 </div>
             </div>
         </header>
@@ -97,6 +97,7 @@
                                     <div class="category-item" data-category="ssd">SSD</div>
                                     <div class="line"></div>
                                     <div class="category-item" data-category="hdd">HDD</div>
+                                    <div class="line"></div>
                                 </div>
                             </div>
 
@@ -252,12 +253,12 @@
                     <!-- Dropdown for selecting number of products per page -->
                     <div class="products-per-page">
                         <select id="products-per-page">
-                            <option value="3" selected>3</option>
-                            <option value="5">5</option>
-                            <option value="10">10</option>
-                            <option value="20">20</option>
-                            <option value="50">50</option>
-                            <option value="100">100</option>
+                            <option class="per-page-option" value="3" selected>3</option>
+                            <option class="per-page-option" value="5">5</option>
+                            <option class="per-page-option" value="10">10</option>
+                            <option class="per-page-option" value="20">20</option>
+                            <option class="per-page-option" value="50">50</option>
+                            <option class="per-page-option" value="100">100</option>
                         </select>
                     </div>
 
