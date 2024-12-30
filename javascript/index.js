@@ -80,7 +80,12 @@ async function fetchBestSellers() {
 
 document.addEventListener("DOMContentLoaded", fetchBestSellers);
 
+let isScrolling = false;
+
 document.addEventListener('wheel', (event) => {
+    if (isScrolling) return;
+    isScrolling = true;
+
     event.preventDefault();
     const delta = Math.sign(event.deltaY);
     const scrollAmount = window.innerHeight;
@@ -89,6 +94,10 @@ document.addEventListener('wheel', (event) => {
         left: 0,
         behavior: 'smooth'
     });
+
+    setTimeout(() => {
+        isScrolling = false;
+    }, 500);
 }, { passive: false });
 
 // Loading animation script
