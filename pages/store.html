@@ -35,10 +35,6 @@
                     <iconify-icon icon="healthicons:magnifying-glass" width="28" height="28"></iconify-icon>
                 </div> -->
 
-                <div class="hover-scale" id="accountIcon">
-                    <iconify-icon icon="mdi:account" width="28" height="28" class="user"></iconify-icon>
-                </div>
-
                 <!-- Translate button -->
                 <div class="hover-scale" id="translateButton" onclick="translatePage()">
                     <iconify-icon icon="mdi:translate" width="28" height="28"></iconify-icon>
@@ -48,6 +44,10 @@
                     <iconify-icon icon="typcn:shopping-cart" width="28" height="28"></iconify-icon>
 
                     <span class="cart-count" id="cartCount">0</span>
+                </div>
+
+                <div class="hover-scale" id="accountIcon">
+                    <iconify-icon icon="mdi:account" width="28" height="28" class="user"></iconify-icon>
                 </div>
             </div>
         </header>
@@ -87,7 +87,7 @@
                             <!-- Storage Dropdown -->
                             <div class="category-dropdown">
                                 <div class="category-header">
-                                    <span>Storage</span>
+                                    <span class="two-level-category" >Storage</span>
                                     <button class="category-btn">
                                         <iconify-icon icon="mdi:chevron-down" width="20" height="20"></iconify-icon>
                                     </button>
@@ -95,15 +95,21 @@
 
                                 <div class="category-dropdown-content" data-category="storage">
                                     <div class="category-item" data-category="ssd">SSD</div>
+                                    <div class="line"></div>
                                     <div class="category-item" data-category="hdd">HDD</div>
+                                    <div class="line"></div>
                                 </div>
                             </div>
 
                             <div class="category-item" data-category="processors">Processors</div>
+                            <div class="line"></div>
                             <div class="category-item" data-category="motherboards">Motherboards</div>
+                            <div class="line"></div>
                             <div class="category-item" data-category="ram">RAM</div>
+                            <div class="line"></div>
 
                             <div class="category-item" data-category="graphics cards">Graphics Cards</div>
+                            <div class="line"></div>
                             <div class="category-item" data-category="power supplies">Power Supplies</div>
                         </div>
                     </div>
@@ -119,8 +125,11 @@
 
                         <div class="category-dropdown-content" data-category="cooling-solutions">
                             <div class="category-item" data-category="cpu coolers">CPU Coolers</div>
+                            <div class="line"></div>
                             <div class="category-item" data-category="case fans">Case Fans</div>
+                            <div class="line"></div>
                             <div class="category-item" data-category="thermal paste">Thermal Paste</div>
+                            <div class="line"></div>
                             <div class="category-item" data-category="water cooling kits">Water Cooling Kits</div>
                         </div>
                     </div>
@@ -137,8 +146,11 @@
 
                         <div class="category-dropdown-content" data-category="cases">
                             <div class="category-item" data-category="full-tower">Full-Tower</div>
+                            <div class="line"></div>
                             <div class="category-item" data-category="mid-tower">Mid-Tower</div>
+                            <div class="line"></div>
                             <div class="category-item" data-category="mini-tower">Mini-Tower</div>
+                            <div class="line"></div>
                             <div class="category-item" data-category="small form factor">Small Form Factor</div>
                         </div>
                     </div>
@@ -155,10 +167,15 @@
 
                         <div class="category-dropdown-content" data-category="peripherals">
                             <div class="category-item" data-category="keyboards">Keyboards</div>
+                            <div class="line"></div>
                             <div class="category-item" data-category="mice">Mice</div>
+                            <div class="line"></div>
                             <div class="category-item" data-category="monitors">Monitors</div>
+                            <div class="line"></div>
                             <div class="category-item" data-category="headsets">Headsets</div>
+                            <div class="line"></div>
                             <div class="category-item" data-category="webcams">Webcams</div>
+                            <div class="line"></div>
                             <div class="category-item" data-category="controllers">Controllers</div>
                         </div>
                     </div>
@@ -176,8 +193,11 @@
 
                         <div class="category-dropdown-content" data-category="networking-equipment">
                             <div class="category-item" data-category="wi-fi routers">Wi-Fi Routers</div>
+                            <div class="line"></div>
                             <div class="category-item" data-category="adapters">Adapters</div>
+                            <div class="line"></div>
                             <div class="category-item" data-category="network switches">Network Switches</div>
+                            <div class="line"></div>
                             <div class="category-item" data-category="cables">Cables</div>
                         </div>
                     </div>
@@ -195,9 +215,13 @@
 
                         <div class="category-dropdown-content" data-category="accessories">
                             <div class="category-item" data-category="cables and adapters">Cables and Adapters</div>
+                            <div class="line"></div>
                             <div class="category-item" data-category="docking stations">Docking Stations</div>
+                            <div class="line"></div>
                             <div class="category-item" data-category="storage devices">Storage Devices</div>
+                            <div class="line"></div>
                             <div class="category-item" data-category="cleaning supplies">Cleaning Supplies</div>
+                            <div class="line"></div>
                             <div class="category-item" data-category="rgb accessories">RGB Accessories</div>
                         </div>
                     </div>
@@ -214,7 +238,9 @@
 
                         <div class="category-dropdown-content" data-category="gaming-gear">
                             <div class="category-item" data-category="chairs">Chairs</div>
+                            <div class="line"></div>
                             <div class="category-item" data-category="desks">Desks</div>
+                            <div class="line"></div>
                             <div class="category-item" data-category="vr headsets">VR Headsets</div>
                         </div>
                     </div>
@@ -227,12 +253,12 @@
                     <!-- Dropdown for selecting number of products per page -->
                     <div class="products-per-page">
                         <select id="products-per-page">
-                            <option value="3" selected>3</option>
-                            <option value="5">5</option>
-                            <option value="10">10</option>
-                            <option value="20">20</option>
-                            <option value="50">50</option>
-                            <option value="100">100</option>
+                            <option class="per-page-option" value="3" selected>3</option>
+                            <option class="per-page-option" value="5">5</option>
+                            <option class="per-page-option" value="10">10</option>
+                            <option class="per-page-option" value="20">20</option>
+                            <option class="per-page-option" value="50">50</option>
+                            <option class="per-page-option" value="100">100</option>
                         </select>
                     </div>
 
