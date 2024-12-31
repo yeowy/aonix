@@ -13,6 +13,11 @@ html {
     padding-right: 0.5rem;
 }
 
+.section-1 {
+    height: 93vh;
+    width: 100%;
+}
+
 /* ALIGNMENT */
 .center {
     display: flex;
