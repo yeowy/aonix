@@ -19,6 +19,7 @@ html {
     padding: 35px;
     padding-top: 0;
     max-width: 320px;
+    min-width: 300px; /* 最小幅を設定 */
 }
 
 .form-container h2 {

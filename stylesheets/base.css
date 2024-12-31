@@ -2,6 +2,7 @@
 html {
     font-size: clamp(14px, 1.5vw, 18px);
     scroll-behavior: smooth;
+    overflow: auto; /* Ensure scrolling is enabled */
 }
 
 /* CONTAINERS */
@@ -116,6 +117,7 @@ header a:hover {
 
 body {
     top: 0px !important; /* Ensure the body is not pushed down */
+    overflow: auto; /* Ensure scrolling is enabled */
 }
 
 /* Glow effects */
