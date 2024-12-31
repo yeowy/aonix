@@ -1,6 +1,6 @@
 /* 主要容器佈局 */
 .store-container {
-    padding: 5em 16em;
+    padding: 5em 8em;
     margin: 0 auto;
     display: flex;
     gap: 2em;
