@@ -7,7 +7,9 @@ import {
     signInWithPopup,
     signInWithRedirect,
     getRedirectResult,
-    GoogleAuthProvider
+    GoogleAuthProvider,
+    signInAnonymously,
+    GithubAuthProvider
 } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
 import {
     collection,
@@ -43,14 +45,18 @@ const logoutButton = document.getElementById('logout-button');
 const addEntryButton = document.getElementById('add-entry-button');
 const userEntriesContainer = document.getElementById('user-entries');
 const googleSignInButton = document.getElementById('google-signin');
+const githubSignInButton = document.getElementById('github-signin');
 const divider = document.getElementById('divider');
+const guestLoginButton = document.getElementById('guest-login');
 
 // Form Toggle Functions
 showRegisterLink.addEventListener('click', (e) => {
     e.preventDefault();
     loginForm.classList.add('hidden');
     registerForm.classList.remove('hidden');
-    googleSignInButton.style.display = 'none';  
+    googleSignInButton.style.display = 'none';
+    githubSignInButton.style.display = 'none';
+    guestLoginButton.style.display = 'none';
     divider.style.display = 'none';
 });
 
@@ -58,7 +64,9 @@ showLoginLink.addEventListener('click', (e) => {
     e.preventDefault();
     registerForm.classList.add('hidden');
     loginForm.classList.remove('hidden');
-    googleSignInButton.style.display = 'block';  
+    googleSignInButton.style.display = 'block';
+    githubSignInButton.style.display = 'block';
+    guestLoginButton.style.display = 'block';
     divider.style.display = 'block';
 });
 
@@ -133,6 +141,26 @@ async function handleGoogleRedirectSignIn() {
     } catch (error) {
         handleSignInError(error);
     }
+}
+
+// GitHub Sign-In Functions
+async function handleGitHubSignIn() {
+    try {
+        const githubProvider = new GithubAuthProvider();
+        const result = await signInWithPopup(auth, githubProvider);
+        await processGitHubSignInResult(result);
+    } catch (error) {
+        handleSignInError(error);
+    }
+}
+
+// Process GitHub Sign-In Result
+async function processGitHubSignInResult(result) {
+    const credential = GithubAuthProvider.credentialFromResult(result);
+    const token = credential.accessToken;
+    const user = result.user;
+    await createUserProfile(user);
+    switchToUserDashboard(user);
 }
 
 // Create or Update User Profile in Firestore
@@ -236,6 +264,16 @@ addEntryButton.addEventListener('click', async () => {
     }
 });
 
+// Guest Login Button Handler
+guestLoginButton.addEventListener('click', async () => {
+    try {
+        const userCredential = await signInAnonymously(auth);
+        switchToUserDashboard(userCredential.user);
+    } catch (error) {
+        console.error("Guest login error:", error);
+    }
+});
+
 // Switch to User Dashboard
 function switchToUserDashboard(user) {
     loginForm.classList.add('hidden');
@@ -243,6 +281,8 @@ function switchToUserDashboard(user) {
     userDashboard.classList.remove('hidden');
     userEmailDisplay.textContent = user.email;
     loadUserEntries();
+    // Redirect to member.html after successful login
+    window.location.href = '/aonix/pages/member.html';
 }
 
 // Switch to Login Form
@@ -299,9 +339,38 @@ auth.onAuthStateChanged((user) => {
 // Add event listener for Google Sign-In
 googleSignInButton.addEventListener('click', handleGoogleSignIn);
 
+// Add event listener for GitHub Sign-In
+githubSignInButton.addEventListener('click', handleGitHubSignIn);
+
 // Check for redirect result on page load
 document.addEventListener('DOMContentLoaded', () => {
     handleGoogleRedirectSignIn();
+});
+
+// Toggle Password Visibility
+function togglePasswordVisibility(inputId, toggleId) {
+    const passwordInput = document.getElementById(inputId);
+    const toggleIcon = document.getElementById(toggleId).querySelector('iconify-icon');
+
+    if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        toggleIcon.setAttribute('icon', 'mdi:eye');
+    } else {
+        passwordInput.type = 'password';
+        toggleIcon.setAttribute('icon', 'mdi:eye-off');
+    }
+}
+
+document.getElementById('toggle-login-password').addEventListener('click', () => {
+    togglePasswordVisibility('login-password', 'toggle-login-password');
+});
+
+document.getElementById('toggle-register-password').addEventListener('click', () => {
+    togglePasswordVisibility('register-password', 'toggle-register-password');
+});
+
+document.getElementById('toggle-confirm-password').addEventListener('click', () => {
+    togglePasswordVisibility('confirm-password', 'toggle-confirm-password');
 });
 
 

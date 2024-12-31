@@ -8,23 +8,43 @@
     width: 100%;
     margin: 0;
 }
+
+html {
+    font-size: 14px;
+}
 /* 登入介面 */
 .form-container {
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
-    border-radius: 15px;
     padding: 35px;
-    box-shadow: 
-        0 0 30px rgba(255, 0, 0, 0.1),
-        inset 0 0 15px rgba(255, 255, 255, 0.1);
+    padding-top: 0;
+    max-width: 320px;
 }
 
-.form-container h2{
+.form-container h2 {
     font-size: 1.8em;
     color: var(--secondary-color);
     filter: drop-shadow(0 0 3px rgba(255, 0, 0, 1));
+}
+
+.form-container p {
+    margin: 2px;
+}
+
+.form-container button {
+    margin-bottom: 15px;
+}
+
+.register-wrapper {
+    text-align: center;
+}
+
+.input-container {
+    position: relative;
+}
+
+.password-wrapper {
+    position: relative;
 }
 
 input {
@@ -38,6 +58,8 @@ input {
     color: #ffffff;
     font-size: 1em;
     transition: all 0.3s ease;
+    height: 40px;
+    min-width: 280px;
 }
 
 input:focus {
@@ -50,25 +72,60 @@ input:focus {
 input::placeholder {
     color: rgba(255, 255, 255, 0.6);
 }
-#login-form, #register-form {
-    padding: 20px;
-    margin: 10px auto;
-    width: 100%; 
-    max-width: 600px; 
-    box-sizing: border-box; 
-    color: var(--secondary-color);
+
+.toggle-password {
+    position: absolute;
+    right: 15px;
+    top: 45%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: rgba(255, 255, 255, 0.6);
 }
 
- .login,.register{
+#login-form,
+#register-form {
+    padding: 20px;
+    margin: 10px auto;
+    width: 100%;
+    max-width: 600px;
+    box-sizing: border-box;
+    color: var(--secondary-color);
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+
+.password-form {
+    margin-top: 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.password-form input {
+    margin: 0;
+}
+
+#login-form input {
+    margin-top: 0px;
+    margin-bottom: 10px;
+}
+
+.login,
+.register {
     text-align: center;
 }
 
-.register-link,.login-link {
+.register-link,
+.login-link {
     font-weight: bold;
     filter: drop-shadow(0 0 3px rgba(255, 0, 0, 1));
 }
 
-.button, .google-signin-btn {
+.button,
+.google-signin-btn,
+#guest-login,
+#github-signin {
     width: 100%;
     padding: 12px;
     border-radius: 8px;
@@ -76,6 +133,16 @@ input::placeholder {
     margin-top: 15px;
     font-size: 1em;
     transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+svg#guest-login {
+    margin-top: 10px;
+    margin-right: 20px;
+    width: 20px;
+    height: 20px;
 }
 
 .button {
@@ -83,7 +150,7 @@ input::placeholder {
     color: white;
     border: none;
     font-weight: 600;
-    box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
+    /* box-shadow: 0 0 20px rgba(255, 0, 0, 0.3); */
 }
 .button:hover {
     transform: translateY(2px);
@@ -105,7 +172,39 @@ input::placeholder {
 .google-signin-btn span {
     color: black;
     font-weight: bold;
-} 
+}
+
+#guest-login {
+    background: linear-gradient(135deg, #424242, #212121);
+    color: white;
+    border: none;
+    font-weight: 600;
+}
+
+#guest-login:hover {
+    transform: translateY(2px);
+}
+
+#github-signin {
+    background-color: #333;
+    color: white;
+    border: none;
+    font-weight: 600;
+}
+
+#github-signin:hover {
+    transform: translateY(2px);
+    background-color: #222;
+}
+
+.google-signin-btn img,
+#guest-login iconify-icon,
+#github-signin iconify-icon {
+    margin-right: 10px;
+    width: 20px;
+    height: 20px;
+}
+
 .error {
     color: #ff4d4d;
     text-align: center;
@@ -130,8 +229,12 @@ input::placeholder {
 }
 
 .social-login {
-    margin-top: 20px;
+    margin-top: 0;
     text-align: center;
+}
+
+.social-login button {
+    margin-bottom: 0px;
 }
 
 .divider {
@@ -141,7 +244,7 @@ input::placeholder {
 }
 
 .divider::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 50%;
     left: 0;
@@ -150,15 +253,30 @@ input::placeholder {
     z-index: 1;
 }
 
-.divider span {  
+.divider span {
     padding: 0 10px;
     position: relative;
     z-index: 2;
-    color:white;
+    color: white;
     filter: drop-shadow(0 0 3px rgba(255, 0, 0, 1));
 }
-.email{
+.email {
     align-items: center;
     padding: 10px;
     color: white;
+}
+
+@media (min-width: 768px) {
+    .form-container {
+        background-color: rgba(25, 25, 28, 0.7);
+        background: rgba(25, 25, 28, 0.7);
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        padding: 2rem;
+        padding-top: 0;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow: 0 0 30px rgba(255, 0, 0, 0.323), inset 0 0 15px rgba(255, 255, 255, 0.209), 0 10px 20px rgba(0, 0, 0, 0.5);
+        border-radius: 10px;
+        max-width: 1080px;
+    }
 }

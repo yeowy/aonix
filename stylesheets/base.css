@@ -112,3 +112,8 @@ header a:hover {
 body {
     top: 0px !important; /* Ensure the body is not pushed down */
 }
+
+/* Glow effects */
+.glow {
+    filter: drop-shadow(0 0 3px rgba(255, 0, 0, 1));
+}

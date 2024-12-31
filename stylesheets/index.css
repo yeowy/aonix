@@ -360,3 +360,42 @@ body {
     width: 50%;
     height: auto;
 }
+
+@media (max-width: 768px) {
+    .hero {
+        flex-direction: column;
+        height: auto;
+        padding: 1rem;
+    }
+
+    .hero-left h1 {
+        font-size: 3rem;
+    }
+
+    .hero-left p {
+        font-size: 1.2rem;
+        display: none;
+    }
+
+    .featured-card {
+        flex-direction: column;
+        padding: 2em;
+    }
+
+    .featured-card img {
+        height: auto;
+    }
+
+    .featured-card h1 {
+        font-size: 2rem;
+        top: 10%;
+        left: 10%;
+        display: none;
+    }
+
+    .categories-section {
+        display: none;
+    }
+
+    
+}
