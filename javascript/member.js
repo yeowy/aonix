@@ -11,35 +11,31 @@ document.addEventListener('DOMContentLoaded', () => {
     // 加載訂單歷史
     async function loadShoppingHistory(userId) {
         try {
-            const shoppingHistoryRef = collection(db, 'users', userId, 'shoppingHistory');
-            const shoppingHistorySnapshot = await getDocs(shoppingHistoryRef);
+            const purchasesRef = collection(db, 'users', userId, 'purchases');
+            const purchasesSnapshot = await getDocs(purchasesRef);
             const shoppingHistoryContainer = document.getElementById('shopping-history');
 
-            if (shoppingHistorySnapshot.empty) {
+            if (purchasesSnapshot.empty) {
                 shoppingHistoryContainer.textContent = "No contents";
                 return;
             }
 
             const orders = {};
 
-            for (const docSnapshot of shoppingHistorySnapshot.docs) {
+            for (const docSnapshot of purchasesSnapshot.docs) {
                 const data = docSnapshot.data();
-                if (!data.productId) {
-                    console.error("No productId ", data);
-                    continue;
-                }
-
-                const orderTime = new Date(data.purchaseDate).toISOString().slice(0, 19);
+                const orderTime = new Date(data.orderDate).toISOString().slice(0, 19);
                 if (!orders[orderTime]) {
                     orders[orderTime] = [];
                 }
 
-                const productDoc = await getDoc(doc(db, 'products', data.productId));
-                const productName = productDoc.exists() ? productDoc.data().name : 'Unknown Product';
-                const productId = productDoc.id;
-                const productImages = productDoc.exists() ? productDoc.data().images : [];
+                const productsRef = collection(docSnapshot.ref, 'products');
+                const productsSnapshot = await getDocs(productsRef);
 
-                orders[orderTime].push({ productName, productId, purchaseDate: data.purchaseDate, productImages });
+                for (const productDoc of productsSnapshot.docs) {
+                    const productData = productDoc.data();
+                    orders[orderTime].push(productData);
+                }
             }
 
             const sortedOrderTimes = Object.keys(orders).sort((a, b) => new Date(b) - new Date(a));
@@ -60,11 +56,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 items.forEach(item => {
                     const historyItem = document.createElement('div');
-                    const productImage = item.productImages.length > 0 ? item.productImages[0] : '';
                     historyItem.innerHTML = `
-                        <a href="/aonix/pages/product_review.html?id=${item.productId}">${item.productName}</a>
+                        <a href="/aonix/pages/product_review.html?id=${item.productId}">${item.itemName}</a>
                         <a href="/aonix/pages/product_review.html?id=${item.productId}">
-                            <img src="${productImage}" alt="${item.productName}">
+                            <img src="${item.productImage}" alt="${item.itemName}">
                         </a>`;
                     orderItemsDiv.appendChild(historyItem);
                 });

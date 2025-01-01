@@ -77,7 +77,21 @@ async function registerUser(email, password) {
             throw new Error("Passwords do not match");
         }
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-        return userCredential.user;
+        const user = userCredential.user;
+
+        // Create user profile in Firestore
+        const userRef = doc(db, 'users', user.uid);
+        await setDoc(userRef, {
+            uid: user.uid,
+            email: user.email,
+            displayName: user.displayName || '',
+            photoURL: user.photoURL || '',
+            providerId: user.providerId || 'password',
+            createdAt: new Date().toISOString(),
+            lastLogin: new Date().toISOString()
+        });
+
+        return user;
     } catch (error) {
         registerError.textContent = error.message;
         throw error;
