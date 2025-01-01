@@ -6,6 +6,8 @@
 
         <link rel="stylesheet" href="/aonix/stylesheets/base.css" />
         <link rel="stylesheet" href="/aonix/stylesheets/index.css" />
+        <link rel="stylesheet" href="/aonix/stylesheets/store.css" />
+        <link rel="stylesheet" href="/aonix/stylesheets/hero.css" />
 
         <title>aonix.</title>
     </head>
@@ -14,10 +16,13 @@
         <header></header>
 
         <!-- Loading screen -->
-        <div id="loading-screen"><div class="loading-background"></div></div></div>
+        <div id="loading-screen">
+            <div class="loading-background"></div>
+            </div>
+        </div>
 
         <!-- Hero section -->
-        <section class="hero">
+        <section class="hero fullpage">
             <div class="hero-overlay"></div>
             <div class="hero-left">
                 <h1>Power up your PC with AONIX.</h1>
@@ -26,17 +31,17 @@
                     your dream PC. Explore our wide selection of high-performance components designed for reliability
                     and excellence.
                 </p>
-
                 <a href="/aonix/pages/store.html" class="button">Upgrade now</a>
             </div>
         </section>
 
         <!-- Featured section -->
         <div class="featured" style="display: none;">
+          
+            
             
             <!-- Best sellers (filled by js) -->
             <div class="best-sellers"></div>
-
         </div>
 
         <!-- Categories section -->
@@ -65,7 +70,12 @@
 
         <script type="module" src="/aonix/javascript/base.js"></script>
         <script type="module" src="/aonix/javascript/index.js"></script>
+        <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+        <script src="/aonix/javascript/search.js"></script>
         <script type="module" src="/aonix/javascript/store.js"></script>
+        <script type="module" src="/aonix/javascript/accountRedirect.js"></script>
+        <script src="/aonix/javascript/carousel.js"></script>
+        <!-- <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script> -->
 
         <!-- <footer></footer> -->
     </body>
