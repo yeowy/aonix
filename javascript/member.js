@@ -159,6 +159,18 @@ document.addEventListener('DOMContentLoaded', () => {
         if (auth.currentUser) {
             document.getElementById('user-email').textContent = auth.currentUser.email;
         }
+
+        // Attach logout function to the button
+        document.getElementById('logout-button').addEventListener('click', logout);
+    }
+
+    async function logout() {
+        try {
+            await signOut(auth);
+            window.location.href = "/aonix/pages/login.html";
+        } catch (error) {
+            console.error("Error logging out:", error);
+        }
     }
 
     function showOrders() {
