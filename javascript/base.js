@@ -58,12 +58,18 @@ import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/fi
 // Ensure scrolling is enabled on page load
 
 
-// Loads the header
+// Dynamic loader
 document.addEventListener("DOMContentLoaded", function () {
     fetch("/aonix/pages/header.html")
         .then(response => response.text())
         .then(data => {
             document.querySelector("header").innerHTML = data;
+        });
+
+    fetch("/aonix/pages/footer.html")
+        .then(response => response.text())
+        .then(data => {
+            document.querySelector("footer").innerHTML = data;
         });
 
     fetch("/aonix/pages/base.html")
