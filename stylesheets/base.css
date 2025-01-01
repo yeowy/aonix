@@ -1,8 +1,8 @@
-@import url('reset.css');
-@import url('font.css');
-@import url('variable.css');
-@import url('header.css');
-@import url('footer.css');
+@import url("reset.css");
+@import url("font.css");
+@import url("variable.css");
+@import url("header.css");
+@import url("footer.css");
 
 /* SECTIONS */
 /* First section of page */
@@ -14,10 +14,24 @@
     justify-content: center;
 }
 
-/* SET ROOT FONT SIZE */
-html {
-    font-size: clamp(14px, 1.5vw, 18px);
-    scroll-behavior: smooth;
+.fullpage {
+    width: 100wh;
+    height: 86vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* CARD STYLING */
+.card {
+    background: rgba(25, 25, 28, 0.7);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    padding: 2em 3em;
+    margin-top: 0;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    
+    border-radius: 10px;
 }
 
 /* HOVER EFFECTS */
@@ -32,7 +46,8 @@ html {
     transform: scale(1.1);
 }
 
-/* Glow effects */
+/* GLOW EFFECTS */
 .glow {
-    filter: drop-shadow(0 0 3px rgba(255, 0, 0, 1));
+    /* filter: drop-shadow(0 0 3px rgba(255, 0, 0, 1)); */
+    box-shadow: 0 0 30px rgba(255, 0, 0, 0.1), inset 0 0 15px rgba(255, 255, 255, 0.1);
 }

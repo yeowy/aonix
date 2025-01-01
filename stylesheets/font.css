@@ -8,6 +8,12 @@ html, body {
     line-height: 1.6
 }
 
+/* SET ROOT FONT SIZE */
+html {
+    font-size: clamp(14px, 1.5vw, 18px);
+    scroll-behavior: smooth;
+}
+
 /* FONT SIZING */
 h1 {
     font-size: 3.815rem;

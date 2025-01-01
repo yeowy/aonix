@@ -1,26 +1,20 @@
 .member-container {
     display: flex;
     max-width: 1200px;
-    margin: 40px auto;
+    margin: 0;
     gap: 20px;
 }
 
 .preferences-menu {
-    width: 300px;
-    background: rgba(25, 25, 28, 0.4);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
     height: fit-content;
-    padding: 1.5rem 2rem;
-    border-radius: 10px;
+    padding: 2em 3em;
 }
 
 .preferences-menu h2 {
     margin-bottom: 10px;
+    margin-top: 0;
     color: white;
-    font-size: 1.2rem;
+    font-size: 2.441rem;
     filter: drop-shadow(0 0 3px rgba(255, 0, 0, 1));
 }
 
@@ -51,14 +45,13 @@
 }
 
 .preferences-content {
-    flex: 1;
-    padding: 30px;
-    background: rgba(25, 25, 28, 0.7);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 10px;
-    min-height: 600px;
+    min-width: 1000px;
+}
+
+.preferences-content h2 {
+    margin-top: 0;
+    color: white;
+    filter: drop-shadow(0 0 3px rgba(255, 0, 0, 1));
 }
 
 .shopping-history-container,
