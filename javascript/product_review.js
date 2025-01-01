@@ -94,6 +94,9 @@ async function loadReviews() {
         return;
     }
 
+    // Sort reviews by date in descending order
+    reviews.sort((a, b) => new Date(b.date) - new Date(a.date));
+
     reviewsList.innerHTML = '<h2>商品評論</h2>';
 
     let displayedReviews = 0;
