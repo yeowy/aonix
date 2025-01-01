@@ -289,20 +289,25 @@ window.checkout = async function () {
             alert("Your cart is empty!");
             return;
         }
-        
-        // Add items to "purchases" based on the Firestore cart snapshot
+
+        // Create a new order document in the "purchases" collection
         const userPurchasesRef = collection(db, "users", user.uid, "purchases");
+        const newOrderRef = await addDoc(userPurchasesRef, {
+            orderDate: new Date().toISOString(),
+            status: "Pending"
+        });
+
+        // Add products as sub-collections under the new order document
+        const orderProductsRef = collection(newOrderRef, "products");
         for (const docSnap of cartSnapshot.docs) {
             const item = docSnap.data();
-            // Retrieve the full product details
             const product = allProducts.find(p => p.id === item.productId);
             if (!product) continue;
-            await addDoc(userPurchasesRef, {
+            await addDoc(orderProductsRef, {
+                productId: item.productId,
                 itemName: product.name,
-                purchaseDate: new Date().toISOString(),
                 price: product.price,
-                quantity: item.quantity,
-                productId: item.productId
+                quantity: item.quantity
             });
         }
 

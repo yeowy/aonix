@@ -1,7 +1,7 @@
 // member.js
 
 import { auth, db } from './firebase-config.js';
-import { signOut } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
+import { signOut, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
 import { collection, getDocs, doc, getDoc } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -152,16 +152,20 @@ document.addEventListener('DOMContentLoaded', () => {
         contentArea.innerHTML = `
             <h2>Profile</h2>
             <div class="profile-info">
+                <img id="user-photo" alt="User Photo">
                 <p>Email: <span id="user-email"></span></p>
-                <button id="logout-button" class="button">登出</button>
             </div>
         `;
-        if (auth.currentUser) {
-            document.getElementById('user-email').textContent = auth.currentUser.email;
-        }
-
         // Attach logout function to the button
         document.getElementById('logout-button').addEventListener('click', logout);
+
+        // Fetch and display user email and photo
+        onAuthStateChanged(auth, user => {
+            if (user) {
+                document.getElementById('user-email').textContent = user.email;
+                document.getElementById('user-photo').src = user.photoURL || 'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0e/65/af/dd/photo4jpg.jpg?w=1200&h=-1&s=1';
+            }
+        });
     }
 
     async function logout() {
