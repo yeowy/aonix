@@ -1,18 +1,7 @@
 import {getCookie, setCookie} from './base.js';
-
-// Import fetchProducts from products.js
 import { fetchProducts } from "./products.js";
 import { auth, db } from './firebase-config.js';
-import { addDoc, collection, query, orderBy, getDocs } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
-
-// Initialize cart data from cookies or empty array
-let cart = JSON.parse(getCookie("cart")) || [];
-let products = []; // Global variable to store fetched products
-let allProducts = []; // Global variable to store all products
-let filteredProducts = []; // Global variable to store filtered products
-let selectedCategories = []; // Array to store selected categories
-let currentPage = 0; // Current page index
-let productsPerPage = parseInt(getCookie("productsPerPage"), 10) || 3; // Default number of products per page
+import { addDoc, collection, query, orderBy, getDocs, doc, getDoc, setDoc, updateDoc, increment, deleteDoc, onSnapshot } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
 
 // Initialize product display
 async function initProducts() {
@@ -22,25 +11,20 @@ async function initProducts() {
         return;
     }
 
-    // Set the productsPerPage dropdown to the correct value
     const productsPerPageDropdown = document.getElementById("products-per-page");
     if (productsPerPageDropdown) {
         productsPerPageDropdown.value = productsPerPage;
     }
 
     try {
-        // Fetch all products for filters and category counts
         const allProductsSnapshot = await fetchAllProducts();
         allProducts = allProductsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
         updateCategoryCounts(allProducts);
 
-        // Set filteredProducts to allProducts initially
         filteredProducts = allProducts;
 
-        // Display products for the current page
         displayProductsForPage(currentPage);
         updatePaginationButtons();
-        // openEssentialsDropdown(); // Open Essentials dropdown on page load
     } catch (error) {
         console.error("Error fetching products:", error);
     }
@@ -161,6 +145,7 @@ function displayProducts(productsToDisplay) {
 
 // Toggle cart modal visibility
 window.toggleCart = function () {
+    updateCartDisplay();
     const cartModal = document.getElementById("cartModal");
     if (cartModal.style.display === "block") {
         cartModal.style.display = "none";
@@ -169,69 +154,110 @@ window.toggleCart = function () {
     }
 };
 
-// Add product to cart
-window.addToCart = function (productId) {
-    const product = allProducts.find(p => p.id === productId); // Use the global allProducts variable
-    const existingItem = cart.find(item => item.id === productId);
+// Listen for cart changes in Firestore and update UI in real time
+function listenCartChanges() {
+    const user = auth.currentUser;
+    if (!user) return;
+    const cartRef = collection(db, "users", user.uid, "cart");
+    onSnapshot(cartRef, () => {
+        updateCartDisplay();
+    });
+}
 
-    if (existingItem) {
-        existingItem.quantity += 1;
-    } else {
-        cart.push({
-            ...product,
-            quantity: 1
-        });
+// Add product to cart or update quantity
+window.addToCart = async function(productId) {
+    const user = auth.currentUser;
+    if (!user) {
+        alert("You must be logged in to add items to the cart!");
+        return;
     }
-
-    // Save to cookies
-    setCookie("cart", JSON.stringify(cart), 7);
-    updateCartDisplay();
+    try {
+        const cartItemRef = doc(db, "users", user.uid, "cart", productId);
+        const snapshot = await getDoc(cartItemRef);
+        if (snapshot.exists()) {
+            await updateDoc(cartItemRef, { quantity: increment(1) });
+        } else {
+            const product = allProducts.find(p => p.id === productId);
+            await setDoc(cartItemRef, {
+                productId: product.id,
+                quantity: 1
+            });
+        }
+    } catch (error) {
+        console.error("Error adding to cart:", error);
+    }
 };
 
-// Update cart display
-function updateCartDisplay() {
+// Remove product from cart
+window.removeFromCart = async function(productId) {
+    const user = auth.currentUser;
+    if (!user) {
+        alert("You must be logged in!");
+        return;
+    }
+    try {
+        const cartItemRef = doc(db, "users", user.uid, "cart", productId);
+        await deleteDoc(cartItemRef);
+    } catch (error) {
+        console.error("Error removing from cart:", error);
+    }
+};
+
+// Display or update cart UI
+export async function updateCartDisplay() {
     const cartItems = document.getElementById("cartItems");
     const cartCount = document.getElementById("cartCount");
     const cartTotal = document.getElementById("cartTotal");
+    const user = auth.currentUser;
 
-    // Update cart count in header
-    cartCount.textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
-
-    if (cart.length === 0) {
+    if (!user || !cartItems) {
         cartItems.innerHTML = `<div class="empty-cart">
-                <iconify-icon icon="mdi:cart-off" ></iconify-icon>
-                <p>Your cart is empty</p>
-            </div>`;
+            <iconify-icon icon="mdi:cart-off"></iconify-icon>
+            <p>Your cart is empty</div>`;
+        cartCount.textContent = "0";
         cartTotal.textContent = "0";
         return;
     }
 
-    // Display cart items
-    cartItems.innerHTML = cart
-        .map(
-            item =>
-                `<div class="cart-item">
-            <img src="${item.images[0]}" alt="${item.name}">
-            <div class="cart-item-info">
-                <h7>${item.name}</h7>
-                <div class="price-quantity">
-                    <span class="price">$${item.price.toLocaleString()}</span>
-                    <div class="quantity-controls">
-                        <button onclick="updateQuantity('${item.id}', -1)">-</button>
-                        <span>${item.quantity}</span>
-                        <button onclick="updateQuantity('${item.id}', 1)">+</button>
-                    </div>
-                </div>
-            </div>
-            <button class="remove-item" onclick="removeFromCart('${item.id}')">
-                <iconify-icon icon="mdi:delete"></iconify-icon>
-            </button>
-        </div>`
-        )
-        .join("");
+    try {
+        const cartRef = collection(db, "users", user.uid, "cart");
+        const snapshot = await getDocs(cartRef);
+        let total = 0, count = 0, html = "";
 
-    const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-    cartTotal.textContent = total.toLocaleString();
+        for (const docSnap of snapshot.docs) {
+            const item = docSnap.data();
+            const product = allProducts.find(p => p.id === item.productId);
+            if (product) {
+                total += product.price * item.quantity;
+                count += item.quantity;
+                html += `<div class="cart-item">
+                    <img src="${product.images[0]}" alt="${product.name}">
+                    <div class="cart-item-info">
+                        <h7>${product.name}</h7>
+                        <div class="price-quantity">
+                            <span class="price">$${product.price.toLocaleString()}</span>
+                            <div class="quantity-controls">
+                                <button onclick="updateQuantity('${product.id}', -1)">-</button>
+                                <span>${item.quantity}</span>
+                                <button onclick="updateQuantity('${product.id}', 1)">+</button>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="remove-item" onclick="removeFromCart('${product.id}')">
+                        <iconify-icon icon="mdi:delete"></iconify-icon>
+                    </button>
+                </div>`;
+            }
+        }
+
+        cartItems.innerHTML = html || `<div class="empty-cart">
+            <iconify-icon icon="mdi:cart-off"></iconify-icon>
+            <p>Your cart is empty</div>`;
+        cartCount.textContent = count;
+        cartTotal.textContent = total.toLocaleString();
+    } catch (error) {
+        console.error("Error fetching cart data:", error);
+    }
 }
 
 // Update item quantity in cart
@@ -248,20 +274,8 @@ window.updateQuantity = function (productId, change) {
     }
 };
 
-// Remove item from cart
-window.removeFromCart = function (productId) {
-    cart = cart.filter(item => item.id !== productId);
-    setCookie("cart", JSON.stringify(cart), 7);
-    updateCartDisplay();
-};
-
 // Handle checkout process
 window.checkout = async function () {
-    if (cart.length === 0) {
-        alert("Your cart is empty!");
-        return;
-    }
-
     const user = auth.currentUser;
     if (!user) {
         alert("You must be logged in to checkout!");
@@ -269,23 +283,40 @@ window.checkout = async function () {
     }
 
     try {
-        const purchaseHistoryRef = collection(db, 'users', user.uid, 'shoppingHistory');
-        for (const item of cart) {
-            await addDoc(purchaseHistoryRef, {
-                itemName: item.name,
+        const cartRef = collection(db, "users", user.uid, "cart");
+        const cartSnapshot = await getDocs(cartRef);
+        if (cartSnapshot.empty) {
+            alert("Your cart is empty!");
+            return;
+        }
+        
+        // Add items to "purchases" based on the Firestore cart snapshot
+        const userPurchasesRef = collection(db, "users", user.uid, "purchases");
+        for (const docSnap of cartSnapshot.docs) {
+            const item = docSnap.data();
+            // Retrieve the full product details
+            const product = allProducts.find(p => p.id === item.productId);
+            if (!product) continue;
+            await addDoc(userPurchasesRef, {
+                itemName: product.name,
                 purchaseDate: new Date().toISOString(),
-                price: item.price,
+                price: product.price,
                 quantity: item.quantity,
-                productId: item.id // Add productId to the purchase history
+                productId: item.productId
             });
         }
-        alert("Thank you for your purchase!");
+
+        // Clear cart in Firestore
+        for (const docSnap of cartSnapshot.docs) {
+            await deleteDoc(docSnap.ref);
+        }
         cart = [];
-        setCookie("cart", JSON.stringify(cart), 7); // Clear the cart cookie
-        updateCartDisplay();
-        toggleCart();
+        setCookie("cart", JSON.stringify(cart), 7);
+        await updateCartDisplay();
+        window.open("https://buy.stripe.com/test_3cs9DOg7qbjy0VO4gi", "_blank");
+        window.location.href = "member.html";
     } catch (error) {
-        console.error("Error saving purchase history:", error);
+        console.error("Checkout error:", error);
     }
 };
 
@@ -308,7 +339,7 @@ function filterProducts() {
     filteredProducts = selectedCategories.length === 0
         ? allProducts
         : allProducts.filter(product => selectedCategories.includes(product.category.toLowerCase()));
-    currentPage = 0; // Reset to the first page
+    currentPage = 0;
     displayProductsForPage(currentPage);
     updatePaginationButtons();
 }
@@ -322,7 +353,7 @@ document.getElementById("filterSearchInput").addEventListener("input", e => {
             product.description.toLowerCase().includes(searchTerm) ||
             product.category.toLowerCase().includes(searchTerm)
     );
-    currentPage = 0; // Reset to the first page
+    currentPage = 0;
     displayProductsForPage(currentPage);
     updatePaginationButtons();
 });
@@ -335,7 +366,7 @@ document.getElementById("searchInput").addEventListener("input", e => {
             product.description.toLowerCase().includes(searchTerm) ||
             product.category.toLowerCase().includes(searchTerm)
     );
-    currentPage = 0; // Reset to the first page
+    currentPage = 0;
     displayProductsForPage(currentPage);
     updatePaginationButtons();
 });
@@ -358,9 +389,12 @@ document.querySelectorAll(".category-header").forEach(header => {
 // Initialize page on load
 document.addEventListener("DOMContentLoaded", () => {
     console.log("Page loaded");
-    cart = JSON.parse(getCookie("cart")) || []; // Reload cart from cookies
+    cart = JSON.parse(getCookie("cart")) || [];
     initProducts();
-    updateCartDisplay(); // Ensure cart display is updated when the page loads
+    updateCartDisplay();
+    auth.onAuthStateChanged(user => {
+        if (user) listenCartChanges();
+    });
 });
 
 // Pagination buttons event listeners
@@ -380,7 +414,16 @@ document.getElementById('prev-button').addEventListener('click', () => {
 document.getElementById('products-per-page').addEventListener('change', (e) => {
     productsPerPage = parseInt(e.target.value, 10);
     setCookie("productsPerPage", productsPerPage, 7);
-    currentPage = 0; // Reset to the first page
+    currentPage = 0;
     displayProductsForPage(currentPage);
     updatePaginationButtons();
 });
+
+// Initialize cart data from cookies or empty array
+let cart = JSON.parse(getCookie("cart")) || [];
+let products = [];
+let allProducts = [];
+let filteredProducts = [];
+let selectedCategories = [];
+let currentPage = 0;
+let productsPerPage = parseInt(getCookie("productsPerPage"), 10) || 3;
