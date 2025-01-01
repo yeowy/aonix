@@ -1,3 +1,8 @@
+header {
+    font-size: clamp(14px, 1.5vw, 18px);
+    scroll-behavior: smooth;
+}
+
 .review-container {
     max-width: 1200px;
     margin: 40px auto;

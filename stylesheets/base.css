@@ -34,6 +34,18 @@
     border-radius: 10px;
 }
 
+/* .card::after {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    border-radius: 10px;
+    box-shadow: 0 0 5px rgba(255, 0, 0, 0.8), 0 0 10px rgba(255, 0, 0, 0.6), 0 0 15px rgba(255, 0, 0, 0.4), 0 0 20px rgba(255, 0, 0, 0.2);
+    z-index: -1;
+} */
+
 /* BUTTON STYLING */
 .button-1 {
     display: inline-block;
@@ -70,4 +82,10 @@
 .glow {
     /* filter: drop-shadow(0 0 3px rgba(255, 0, 0, 1)); */
     box-shadow: 0 0 30px rgba(255, 0, 0, 0.1), inset 0 0 15px rgba(255, 255, 255, 0.1);
+    /* box-shadow: 0 0 30px rgba(255, 0, 0, 0.238), inset 0 0 15px rgba(255, 255, 255, 0.267); */
+    /* box-shadow: 0 0 10px rgba(255, 0, 0, 0.8), 0 0 20px rgba(255, 0, 0, 0.6), 0 0 30px rgba(255, 0, 0, 0.4), 0 0 40px rgba(255, 0, 0, 0.2); */
+}
+
+.text-glow {
+    filter: drop-shadow(0 0 3px rgba(255, 0, 0, 1));
 }
