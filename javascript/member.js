@@ -76,7 +76,9 @@ async function loadShoppingHistory(userId) {
                 const historyItem = document.createElement('div');
                 const productImage = item.productImages.length > 0 ? item.productImages[0] : '';
                 historyItem.innerHTML = `<a href="/aonix/pages/product_review.html?id=${item.productId}">${item.productName}</a>
-                    <img src="${productImage}" alt="${item.productName}" style="width: 70px; float: right;">`;
+                    <a href="/aonix/pages/product_review.html?id=${item.productId}">
+                        <img src="${productImage}" alt="${item.productName}" style="width: 70px; float: right;">
+                    </a>`;
                 orderItemsDiv.appendChild(historyItem);
             });
 
