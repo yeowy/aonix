@@ -18,7 +18,6 @@
 html {
     font-size: clamp(14px, 1.5vw, 18px);
     scroll-behavior: smooth;
-    overflow-x: hidden;
 }
 
 /* HOVER EFFECTS */
