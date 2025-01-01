@@ -4,11 +4,20 @@
 @import url('header.css');
 @import url('footer.css');
 
+/* SECTIONS */
+/* First section of page */
+.section-1 {
+    width: 100wh;
+    height: 86vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 /* SET ROOT FONT SIZE */
 html {
     font-size: clamp(14px, 1.5vw, 18px);
     scroll-behavior: smooth;
-    overflow-x: hidden;
 }
 
 /* HOVER EFFECTS */
