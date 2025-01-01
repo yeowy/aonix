@@ -332,8 +332,10 @@ document.querySelectorAll(".category-item").forEach(item => {
         const index = selectedCategories.indexOf(category);
         if (index > -1) {
             selectedCategories.splice(index, 1);
+            item.classList.remove("selected");
         } else {
             selectedCategories.push(category);
+            item.classList.add("selected");
         }
         filterProducts();
     });
