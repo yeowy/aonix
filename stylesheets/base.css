@@ -1,100 +1,14 @@
+@import url('reset.css');
+@import url('font.css');
+@import url('variable.css');
+@import url('header.css');
+@import url('footer.css');
+
 /* SET ROOT FONT SIZE */
 html {
     font-size: clamp(14px, 1.5vw, 18px);
     scroll-behavior: smooth;
-    overflow: auto; /* Ensure scrolling is enabled */
-}
-
-/* CONTAINERS */
-.container {
-    max-width: 1920px;
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
-}
-
-.section-1 {
-    height: 93vh;
-    width: 100%;
-}
-
-/* ALIGNMENT */
-.center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-/* PARAMETERS */
-.flex {
-    display: flex;
-}
-
-.flex-column {
-    display: flex;
-    flex-direction: column;
-}
-
-.wrap {
-    flex-wrap: wrap;
-}
-
-/* HEADER STYLING */
-header {
-    height: var(--header-height);
-    padding: 0 5%;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    gap: 2rem;
-    background: rgba(20, 20, 20, 0.95);
-    /* position: sticky; */
-    top: 0;
-    z-index: 100;
-    border-bottom: 1px solid rgba(255, 0, 0, 0.2);
-    box-shadow: var(--header-glow, rgba(0, 0, 0, 1));
-}
-
-.logo-img {
-    transition: var(--transition-normal);
-    width: 100%;
-    max-width: 150px; /* Adjust max-width as needed */
-    height: auto;
-    object-fit: contain;
-}
-.logo-img:hover {
-    filter: drop-shadow(0 0 8px rgba(255, 0, 0, 1));
-}
-
-/* HEADER ICONS */
-.header-icons {
-    display: flex;
-    gap: 15px; 
-    align-items: center;
-}
-
-.header-icons iconify-icon {
-    color: var(--secondary-color);
-    transition: var(--transition-normal);
-}
-
-.header-icons iconify-icon:hover {
-    color: var(--accent-color);
-}
-
-/* FOOTER */
-footer {
-    height: var(--header-height);
-    width: 100%;
-    padding: 0;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    gap: 2rem;
-    background: rgba(20, 20, 20, 0.95);
-    border-top: 1px solid rgba(255, 0, 0, 0.2);
-    box-shadow: var(--header-glow, rgba(0, 0, 0, 1));
+    overflow-x: hidden;
 }
 
 /* HOVER EFFECTS */
@@ -107,31 +21,6 @@ footer {
 
 .hover-scale:hover {
     transform: scale(1.1);
-}
-
-/* HEADER LINKS */
-header a {
-    color: var(--secondary-color);
-    transition: var(--transition-normal);
-    letter-spacing: 1px;
-}
-
-header a:hover {
-    color: var(--accent-color);
-    text-shadow: var(--text-glow);
-}
-
-/* Hide the Google Translate banner and related elements */
-.goog-te-banner-frame.skiptranslate,
-.goog-te-gadget-icon,
-.goog-te-menu-value,
-.goog-te-gadget-simple {
-    display: none !important;
-}
-
-body {
-    top: 0px !important; /* Ensure the body is not pushed down */
-    overflow: hidden; /* Ensure scrolling is enabled */
 }
 
 /* Glow effects */
