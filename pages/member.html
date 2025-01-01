@@ -15,23 +15,33 @@
     <body style="overflow: auto;">
 
         <header></header>
-        <div class="container">
-            <div class="form-container">
-                <div class="member-info">
-                    <h2>會員資訊</h2>
-                    <p class="email">Email : <span id="user-email"></span></p>
-                    <button id="logout-button" class="button">登出</button>
+        <div class="member-container">
+            <!-- 左側選單 -->
+            <div class="preferences-menu">
+                <h2>Preferences</h2>
+                <div class="menu-items">
+                    <div class="menu-item">
+                        <span>Profile</span>
+                        <iconify-icon icon="mdi:chevron-right"></iconify-icon>
+                    </div>
+                    <div class="menu-item">
+                        <span>Orders</span>
+                        <iconify-icon icon="mdi:chevron-right"></iconify-icon>
+                    </div>
+                    <div class="menu-item">
+                        <span>Reviews</span>
+                        <iconify-icon icon="mdi:chevron-right"></iconify-icon>
+                    </div>
+                    <div class="menu-item">
+                        <span>My Profile</span>
+                        <iconify-icon icon="mdi:chevron-right"></iconify-icon>
+                    </div>
                 </div>
+            </div>
 
-                <div class="shopping-history">
-                    <h2>購物履歴</h2>
-                    <div id="shopping-history" class="email"></div>
-                </div>
-
-                <div class="reviews">
-                    <h2>評論履歴</h2>
-                    <div id="reviews" class="email"></div>
-                </div>
+            <!-- 右側內容區 -->
+            <div class="preferences-content">
+                <!-- 內容會根據選單切換顯示 -->
             </div>
         </div>
         
