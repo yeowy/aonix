@@ -94,14 +94,34 @@ async function loadShoppingHistory(userId) {
 async function loadReviewHistory(userId) {
     const reviewsRef = collection(db, 'users', userId, 'reviews');
     const reviewsSnapshot = await getDocs(reviewsRef);
-    reviewsSnapshot.forEach(async reviewDoc => {
+    const reviews = reviewsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+
+    // Sort reviews by date in descending order
+    reviews.sort((a, b) => new Date(b.reviewDate) - new Date(a.reviewDate));
+
+    reviews.forEach(async review => {
         const reviewItem = document.createElement('div');
-        const reviewDate = new Date(reviewDoc.data().reviewDate).toLocaleDateString();
-        const productDoc = await getDoc(doc(db, 'products', reviewDoc.data().productId));
+        reviewItem.classList.add('review-item'); // Add class for spacing
+        const reviewDate = new Date(review.reviewDate).toLocaleString(); // 秒数まで表示
+        const productDoc = await getDoc(doc(db, 'products', review.productId));
         const productName = productDoc.exists() ? productDoc.data().name : 'Unknown Product';
+        const reviewText = review.reviewText;
+        const rating = review.rating;
+
+        // Create star rating elements
+        const stars = Array(5).fill('').map((_, i) => `
+            <iconify-icon 
+                icon="${i < rating ? 'mdi:star' : 'mdi:star-outline'}"
+                width="20" 
+                height="20"
+                style="color: gold;"
+            ></iconify-icon>
+        `).join('');
+
         reviewItem.innerHTML = `
-            <div>${reviewDoc.data().reviewText}</div>
+            <div class="review-rating">${stars}</div>
             <div>${productName} - ${reviewDate}</div>
+            <div>${reviewText}</div>
         `;
         reviewsContainer.appendChild(reviewItem);
     });
