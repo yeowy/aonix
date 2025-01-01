@@ -1,0 +1,49 @@
+.order {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.order-header {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.order-items {
+    display: grid;
+  
+    gap: 10px;
+    flex-direction: column;
+}
+
+.order-items a {
+    color: blue;
+    text-decoration: none;
+}
+
+.order-items a:hover {
+    color: darkblue;
+}
+
+.shopping-history {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.shopping-history::-webkit-scrollbar {
+    width: 12px;
+}
+
+.shopping-history::-webkit-scrollbar-track {
+    background: #38535c0f;
+}
+
+.shopping-history::-webkit-scrollbar-thumb {
+    background: #ffffff8b;
+    border-radius: 10px;
+    
+}
+
+.shopping-history::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}

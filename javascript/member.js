@@ -35,6 +35,8 @@ async function loadShoppingHistory(userId) {
             return;
         }
 
+        const orders = {};
+
         for (const docSnapshot of shoppingHistorySnapshot.docs) {
             const data = docSnapshot.data();
             if (!data.productId) {
@@ -42,14 +44,44 @@ async function loadShoppingHistory(userId) {
                 continue;
             }
 
+            const orderTime = new Date(data.purchaseDate).toISOString().slice(0, 19); // 秒単位で切り捨て
+            if (!orders[orderTime]) {
+                orders[orderTime] = [];
+            }
+
             const productDoc = await getDoc(doc(db, 'products', data.productId));
             const productName = productDoc.exists() ? productDoc.data().name : 'Unknown Product';
             const productId = productDoc.id;
-            const historyItem = document.createElement('div');
-            const purchaseDate = new Date(data.purchaseDate).toLocaleDateString();
+            const productImages = productDoc.exists() ? productDoc.data().images : [];
 
-            historyItem.innerHTML = `<a href="/aonix/pages/product_review.html?id=${productId}">${productName}</a> - ${purchaseDate}`;
-            shoppingHistoryContainer.appendChild(historyItem);
+            orders[orderTime].push({ productName, productId, purchaseDate: data.purchaseDate, productImages });
+        }
+
+        const sortedOrderTimes = Object.keys(orders).sort((a, b) => new Date(b) - new Date(a));
+
+        for (const orderTime of sortedOrderTimes) {
+            const items = orders[orderTime];
+            const orderDiv = document.createElement('div');
+            orderDiv.classList.add('order');
+
+            const orderHeader = document.createElement('div');
+            orderHeader.classList.add('order-header');
+            orderHeader.textContent = `Order Date: ${new Date(orderTime).toLocaleString()}`;
+            orderDiv.appendChild(orderHeader);
+
+            const orderItemsDiv = document.createElement('div');
+            orderItemsDiv.classList.add('order-items');
+
+            items.forEach(item => {
+                const historyItem = document.createElement('div');
+                const productImage = item.productImages.length > 0 ? item.productImages[0] : '';
+                historyItem.innerHTML = `<a href="/aonix/pages/product_review.html?id=${item.productId}">${item.productName}</a>
+                    <img src="${productImage}" alt="${item.productName}" style="width: 70px; float: right;">`;
+                orderItemsDiv.appendChild(historyItem);
+            });
+
+            orderDiv.appendChild(orderItemsDiv);
+            shoppingHistoryContainer.appendChild(orderDiv);
         }
     } catch (error) {
         console.error("Loading Error", error);
