@@ -3,6 +3,9 @@ import { db, auth } from './firebase-config.js';
 import { doc, getDoc, collection, addDoc, query, where, getDocs, updateDoc, deleteDoc } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
 import { onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
 
+// Import the fetchProducts function
+import { fetchProducts } from './products.js';
+
 // Get product ID from URL
 const urlParams = new URLSearchParams(window.location.search);
 const productId = urlParams.get('id');
@@ -39,6 +42,9 @@ async function initPage() {
     
     // Load reviews
     loadReviews();
+
+    // Load recommended products
+    loadRecommendedProducts();
 }
 
 // Update rating summary
@@ -252,6 +258,29 @@ async function fetchReviews() {
     const q = query(collection(db, 'reviews'), where('productId', '==', productId));
     const querySnapshot = await getDocs(q);
     return querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+}
+
+// Add this function to load recommended products
+async function loadRecommendedProducts() {
+    try {
+        const products = await fetchProducts();
+        // Filter out current product and get random 4 products
+        const recommendedProducts = products
+            .filter(product => product.id !== productId)
+            .sort(() => 0.5 - Math.random())
+            .slice(0, 3);
+
+        const productsGrid = document.querySelector('.products-grid');
+        productsGrid.innerHTML = recommendedProducts.map(product => `
+            <div class="product-card" onclick="location.href='/aonix/pages/product_review.html?id=${product.id}'">
+                <img src="${product.images[0]}" alt="${product.name}">
+                <h3>${product.name}</h3>
+                <div class="price">$${product.price.toLocaleString()}</div>
+            </div>
+        `).join('');
+    } catch (error) {
+        console.error('Error loading recommended products:', error);
+    }
 }
 
 // Initialize page on load
