@@ -1,7 +1,16 @@
-import {getCookie, setCookie} from './base.js';
+import { getCookie, setCookie } from './base.js';
 import { fetchProducts } from "./products.js";
 import { auth, db } from './firebase-config.js';
-import { addDoc, collection, query, orderBy, getDocs, doc, getDoc, setDoc, updateDoc, increment, deleteDoc, onSnapshot } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+import { addDoc, collection, query, orderBy, getDocs, getDoc, where, doc, setDoc, updateDoc, increment, deleteDoc, onSnapshot } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+
+// Initialize cart data from cookies or empty array
+let cart = JSON.parse(getCookie("cart")) || [];
+let products = []; // Global variable to store fetched products
+let allProducts = []; // Global variable to store all products
+let filteredProducts = []; // Global variable to store filtered products
+let selectedCategories = []; // Array to store selected categories
+let currentPage = 0; // Current page index
+let productsPerPage = parseInt(getCookie("productsPerPage"), 10) || 3; // Default number of products per page
 
 // Initialize product display
 async function initProducts() {
@@ -49,11 +58,11 @@ async function fetchAllProducts() {
 }
 
 // Display products for the current page
-function displayProductsForPage(page) {
+async function displayProductsForPage(page) {
     const start = page * productsPerPage;
     const end = start + productsPerPage;
     const productsToDisplay = filteredProducts.slice(start, end);
-    displayProducts(productsToDisplay);
+    await displayProducts(productsToDisplay);
 }
 
 // Update pagination buttons
@@ -95,52 +104,68 @@ function updateCategoryCounts(products) {
 }
 
 // Display products
-function displayProducts(productsToDisplay) {
+async function displayProducts(productsToDisplay) {
     const productGrid = document.getElementById("productGrid");
-    productGrid.innerHTML = productsToDisplay
-        .map(
-            product =>
-            `<div class="product-card">
-                <div class="product-img">
-                    <a href="product_review.html?id=${product.id}">
-                        <img src="${product.images[0]}" alt="${product.name}" draggable="false">
-                    </a>
+    productGrid.innerHTML = '';
+
+    for (const product of productsToDisplay) {
+        const productReviews = await fetchProductReviews(product.id);
+        const averageRating = calculateAverageRating(productReviews);
+        const reviewsCount = productReviews.length;
+
+        const productCard = document.createElement('div');
+        productCard.classList.add('product-card');
+        productCard.innerHTML = `
+            <div class="product-img">
+                <a href="product_review.html?id=${product.id}">
+                    <img src="${product.images[0]}" alt="${product.name}" draggable="false">
+                </a>
+            </div>
+            <div class="product-details">
+                <div class="product-brand">${product.brand}</div>
+                <div class="product-name"><a href="product_review.html?id=${product.id}"><h5>${product.name}</h5></a></div>
+                <div class="product-tags">
+                    <div class="tag">${product.features[0]}</div>
+                    <div class="tag">${product.features[1]}</div>    
+                    <div class="tag">${product.features[2]}</div>    
                 </div>
-                <div class="product-details">
-
-                    <div class="product-brand">${product.brand}</div>
-                    <div class="product-name"><a href="product_review.html?id=${product.id}"><h5>${product.name}</h5></a></div>
-                        <div class="product-tags">
-                            <div class="tag">${product.features[0]}</div>
-                            <div class="tag">${product.features[1]}</div>    
-                            <div class="tag">${product.features[2]}</div>    
+                <div class="product-description">${product.description}</div>
+                <div class="product-bottom">
+                    <div class="product-bottom-left">
+                        <div class="product-rating">
+                            <span class="rating">${averageRating}
+                            <iconify-icon
+                            icon="mdi:star"
+                            width="auto"
+                            height="auto"
+                            class="star-icon">
+                            </iconify-icon></span>
+                            <span class="rating-count">(${reviewsCount} reviews)</span>    
                         </div>
-
-                    <div class="product-description">${product.description}</div>
-
-                    <div class="product-bottom">
-                        <div class="product-bottom-left">
-                            <div class="product-rating">
-                                <span class="rating">${product.ratings.average}
-                                <iconify-icon
-                                icon="mdi:star"
-                                width="auto"
-                                height="auto"
-                                class="star-icon">
-                                </iconify-icon></span>
-                                <span class="rating-count">(${product.ratings.reviewsCount} reviews)</span>    
-                            </div>
-                        </div>
-
-                        <div class="product-bottom-right">
-                            <div class="product-price">$${product.price.toLocaleString()}</div>
-                            <button class="add-to-cart-btn" onclick="addToCart('${product.id}')">Purchase</button>
-                        </div> 
                     </div>
+                    <div class="product-bottom-right">
+                        <div class="product-price">$${product.price.toLocaleString()}</div>
+                        <button class="add-to-cart-btn" onclick="addToCart('${product.id}')">Purchase</button>
+                    </div> 
                 </div>
-        </div>`
-        )
-        .join("");
+            </div>
+        `;
+        productGrid.appendChild(productCard);
+    }
+}
+
+// Fetch product reviews from Firestore
+async function fetchProductReviews(productId) {
+    const reviewsQuery = query(collection(db, 'reviews'), where('productId', '==', productId));
+    const reviewsSnapshot = await getDocs(reviewsQuery);
+    return reviewsSnapshot.docs.map(doc => doc.data());
+}
+
+// Calculate average rating
+function calculateAverageRating(reviews) {
+    if (reviews.length === 0) return '0.0';
+    const sumOfRatings = reviews.reduce((sum, review) => sum + review.rating, 0);
+    return (sumOfRatings / reviews.length).toFixed(1);
 }
 
 // Toggle cart modal visibility
@@ -419,11 +444,4 @@ document.getElementById('products-per-page').addEventListener('change', (e) => {
     updatePaginationButtons();
 });
 
-// Initialize cart data from cookies or empty array
-let cart = JSON.parse(getCookie("cart")) || [];
-let products = [];
-let allProducts = [];
-let filteredProducts = [];
-let selectedCategories = [];
-let currentPage = 0;
-let productsPerPage = parseInt(getCookie("productsPerPage"), 10) || 3;
+
