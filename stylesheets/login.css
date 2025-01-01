@@ -18,6 +18,7 @@ html {
     -webkit-backdrop-filter: blur(15px);
     padding: 35px;
     padding-top: 0;
+    width: 35%;
     max-width: 320px;
 }
 
@@ -275,7 +276,8 @@ svg#guest-login {
         padding: 2rem;
         padding-top: 0;
         border: 1px solid rgba(255, 255, 255, 0.08);
-        box-shadow: 0 0 30px rgba(255, 0, 0, 0.323), inset 0 0 15px rgba(255, 255, 255, 0.209), 0 10px 20px rgba(0, 0, 0, 0.5);
+        box-shadow: 0 0 20px rgba(255, 0, 0, 0.226), 
+            inset 0 0 15px rgba(255, 255, 255, 0.209), 0 10px 20px rgba(0, 0, 0, 0.5);
         border-radius: 10px;
         max-width: 1080px;
     }

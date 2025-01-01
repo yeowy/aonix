@@ -126,6 +126,7 @@
     margin: 20px 0;
 }
 
+/* 評論表單樣式 */
 .review-form textarea {
     width: 100%;
     height: 180px;
@@ -133,9 +134,22 @@
     border-radius: 8px;
     resize: vertical;
     margin-bottom: 15px;
-    box-shadow: 0 0 15px rgba(255, 0, 0, 0.2);
+    background: rgba(255, 255, 255, 0.45);
+    color: white; 
+    padding: 15px; 
 }
 
+.review-form textarea::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.review-form textarea:focus {
+    background: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 0, 0, 0.4);
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.2);
+    outline: none;
+    color: white; 
+}
 .review-form button {
     padding: 10px 20px;
     background: var(--accent-color);

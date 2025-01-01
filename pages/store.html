@@ -13,6 +13,7 @@
         <link rel="stylesheet" href="/aonix/stylesheets/variable.css" />
         <!-- <link rel="stylesheet" href="/aonix/stylesheets/index.css" /> -->
         <link rel="stylesheet" href="/aonix/stylesheets/store.css" />
+        <link rel="stylesheet" href="/aonix/stylesheets/carousel.css" />
 
         <!-- Page title -->
         <title>aonix.</title>
@@ -26,8 +27,23 @@
             <input type="text" id="searchInput" placeholder="Search for products..." />
         </div>
 
+        
+
         <!-- Main store container -->
         <main class="store-container">
+
+            <div class="carousel">
+                <div class="container">
+                    <img draggable="false" src="/aonix/imgs/carousel-1.webp" />
+                    <img draggable="false" src="/aonix/imgs/carousel-2.webp" />
+                    <img draggable="false" src="/aonix/imgs/carousel-3.webp" />
+                </div>
+                <div class="shift">
+                    <div class="btn left" onclick="leftShift()">&lt;</div>
+                    <div class="btn right" onclick="rightShift()">&gt;</div>
+                </div>
+                <div class="bottom"></div>
+            </div>
             <!-- Filter section -->
             <div class="left-container">
                 <div class="filter-section">
