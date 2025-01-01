@@ -55,6 +55,12 @@ import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/fi
 //     observer.observe(document.body, { childList: true, subtree: true });
 // });
 
+// Ensure scrolling is enabled on page load
+document.addEventListener('DOMContentLoaded', () => {
+    document.body.style.overflow = 'auto';
+    document.documentElement.style.overflow = 'auto';
+});
+
 // Loads the header
 document.addEventListener("DOMContentLoaded", function () {
     fetch("/aonix/pages/header.html")
