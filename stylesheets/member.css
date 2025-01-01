@@ -2,15 +2,25 @@ body, html {
     color: white;
 }
 
+html {
+    font-size: clamp(14px, 1.5vw, 18px);
+    scroll-behavior: smooth;
+}
+
 .member-container {
     display: flex;
-    max-width: 1200px;
+    width: 1500px;
+    height: auto;
     margin: 0;
     gap: 20px;
 }
 
+.left-menu span {
+    font-weight: 400;
+}
+
 .preferences-menu {
-    height: fit-content;
+    height: 410px;
     padding: 2em 3em;
 }
 
@@ -53,11 +63,14 @@ body, html {
 }
 
 .preferences-content {
-    min-width: 1000px;
+    padding-top: 1.5em;
+    width: 1500px;
+    height: 480px;
 }
 
 .preferences-content h2 {
     margin-top: 0;
+    margin-bottom: 1rem;
     color: white;
     filter: drop-shadow(0 0 3px rgba(255, 0, 0, 1));
 }
@@ -111,7 +124,82 @@ body, html {
 
 /* CONTENT STYLING */
 /* User profile */
+.profile-info {
+    display: flex;
+    justify-content: center;
+    gap: 1.6em;
+    size: fit-content;
+    padding-bottom: 1.8em;
+    font-size: 14px;
+}
+
+.image-box {
+    size: fit-content;
+    width: 350px;
+    height: 350px;
+}
 .profile-info img {
-    width: 200px;
-    height: 200px;
+    width: 350px;
+    height: 350px;
+    border-radius: 10px;
+}
+
+.profile-details {
+    margin-left: 2rem;
+}
+
+.input-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-container input {
+    flex: 1;
+    padding-right: 40px; /* Space for the icon */
+    cursor: not-allowed;
+}
+
+.input-container input:enabled {
+    border: 1px solid rgba(255, 0, 0, 0.601);
+    cursor: text;
+}
+
+.input-container button {
+    position: absolute;
+    right: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: white;
+}
+
+.input-container button iconify-icon {
+    width: 20px;
+    height: 20px;
+}
+
+.input-container hover {
+    
+}
+
+.input-container input {
+    flex: 1;
+    padding-right: 40px; /* Space for the icon */
+    cursor: not-allowed;
+}
+
+.input-container button {
+    top: 35%;
+    position: absolute;
+    right: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: white;
+}
+
+.input-container button iconify-icon {
+    width: 20px;
+    height: 20px;
 }

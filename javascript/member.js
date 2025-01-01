@@ -1,19 +1,19 @@
 // member.js
 
-import { auth, db } from './firebase-config.js';
-import { signOut, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
-import { collection, getDocs, doc, getDoc } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+import { auth, db } from "./firebase-config.js";
+import { signOut, onAuthStateChanged, updateEmail } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import { collection, getDocs, doc, getDoc, updateDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-document.addEventListener('DOMContentLoaded', () => {
-    const menuItems = document.querySelectorAll('.menu-item');
-    const contentArea = document.querySelector('.preferences-content');
+document.addEventListener("DOMContentLoaded", () => {
+    const menuItems = document.querySelectorAll(".menu-item");
+    const contentArea = document.querySelector(".preferences-content");
 
     // 加載訂單歷史
     async function loadShoppingHistory(userId) {
         try {
-            const purchasesRef = collection(db, 'users', userId, 'purchases');
+            const purchasesRef = collection(db, "users", userId, "purchases");
             const purchasesSnapshot = await getDocs(purchasesRef);
-            const shoppingHistoryContainer = document.getElementById('shopping-history');
+            const shoppingHistoryContainer = document.getElementById("shopping-history");
 
             if (purchasesSnapshot.empty) {
                 shoppingHistoryContainer.textContent = "No contents";
@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     orders[orderTime] = [];
                 }
 
-                const productsRef = collection(docSnapshot.ref, 'products');
+                const productsRef = collection(docSnapshot.ref, "products");
                 const productsSnapshot = await getDocs(productsRef);
 
                 for (const productDoc of productsSnapshot.docs) {
@@ -39,23 +39,23 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             const sortedOrderTimes = Object.keys(orders).sort((a, b) => new Date(b) - new Date(a));
-            shoppingHistoryContainer.innerHTML = '';
+            shoppingHistoryContainer.innerHTML = "";
 
             for (const orderTime of sortedOrderTimes) {
                 const items = orders[orderTime];
-                const orderDiv = document.createElement('div');
-                orderDiv.classList.add('order');
+                const orderDiv = document.createElement("div");
+                orderDiv.classList.add("order");
 
-                const orderHeader = document.createElement('div');
-                orderHeader.classList.add('order-header');
+                const orderHeader = document.createElement("div");
+                orderHeader.classList.add("order-header");
                 orderHeader.textContent = `Order Date: ${new Date(orderTime).toLocaleString()}`;
                 orderDiv.appendChild(orderHeader);
 
-                const orderItemsDiv = document.createElement('div');
-                orderItemsDiv.classList.add('order-items');
+                const orderItemsDiv = document.createElement("div");
+                orderItemsDiv.classList.add("order-items");
 
                 items.forEach(item => {
-                    const historyItem = document.createElement('div');
+                    const historyItem = document.createElement("div");
                     historyItem.innerHTML = `
                         <a href="/aonix/pages/product_review.html?id=${item.productId}">${item.itemName}</a>
                         <a href="/aonix/pages/product_review.html?id=${item.productId}">
@@ -75,38 +75,43 @@ document.addEventListener('DOMContentLoaded', () => {
     // 加載評論歷史
     async function loadReviewHistory(userId) {
         try {
-            const reviewsRef = collection(db, 'users', userId, 'reviews');
+            const reviewsRef = collection(db, "users", userId, "reviews");
             const reviewsSnapshot = await getDocs(reviewsRef);
-            const reviewsContainer = document.getElementById('reviews');
+            const reviewsContainer = document.getElementById("reviews");
 
             if (reviewsSnapshot.empty) {
                 reviewsContainer.textContent = "No reviews yet";
                 return;
             }
 
-            reviewsContainer.innerHTML = '';
+            reviewsContainer.innerHTML = "";
             const reviews = reviewsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
 
             // Sort reviews by date in descending order
             reviews.sort((a, b) => new Date(b.reviewDate) - new Date(a.reviewDate));
 
             for (const review of reviews) {
-                const reviewItem = document.createElement('div');
-                reviewItem.classList.add('review-item');
-                
+                const reviewItem = document.createElement("div");
+                reviewItem.classList.add("review-item");
+
                 const reviewDate = new Date(review.reviewDate).toLocaleString();
-                const productDoc = await getDoc(doc(db, 'products', review.productId));
-                const productName = productDoc.exists() ? productDoc.data().name : 'Unknown Product';
-                
+                const productDoc = await getDoc(doc(db, "products", review.productId));
+                const productName = productDoc.exists() ? productDoc.data().name : "Unknown Product";
+
                 // Create star rating elements
-                const stars = Array(5).fill('').map((_, i) => `
+                const stars = Array(5)
+                    .fill("")
+                    .map(
+                        (_, i) => `
                     <iconify-icon 
-                        icon="${i < review.rating ? 'mdi:star' : 'mdi:star-outline'}"
+                        icon="${i < review.rating ? "mdi:star" : "mdi:star-outline"}"
                         width="20" 
                         height="20"
                         style="color: gold;"
                     ></iconify-icon>
-                `).join('');
+                `
+                    )
+                    .join("");
 
                 reviewItem.innerHTML = `
                     <div class="review-rating">${stars}</div>
@@ -121,22 +126,22 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     menuItems.forEach(item => {
-        item.addEventListener('click', () => {
-            menuItems.forEach(i => i.classList.remove('active'));
-            item.classList.add('active');
+        item.addEventListener("click", () => {
+            menuItems.forEach(i => i.classList.remove("active"));
+            item.classList.add("active");
 
-            const content = item.querySelector('span').textContent;
-            switch(content) {
-                case 'Profile':
+            const content = item.querySelector("span").textContent;
+            switch (content) {
+                case "Profile":
                     showProfile();
                     break;
-                case 'Orders':
+                case "Orders":
                     showOrders();
                     break;
-                case 'Reviews':
+                case "Reviews":
                     showReviews();
                     break;
-                case 'My Profile':
+                case "My Cards":
                     showMyProfile();
                     break;
             }
@@ -147,18 +152,113 @@ document.addEventListener('DOMContentLoaded', () => {
         contentArea.innerHTML = `
             <h2>Profile</h2>
             <div class="profile-info">
-                <img id="user-photo" alt="User Photo">
-                <p>Email: <span id="user-email"></span></p>
+                <div class="image-box"><img id="user-photo" alt=" " draggable="false"></div>
+                <div class="profile-details">
+
+                    <label for="user-displayName">Display Name:</label>
+                    <div class="input-container">
+                        <input type="text" id="user-displayName" disabled>
+                        <button id="edit-displayName-button">
+                            <iconify-icon icon="lucide:edit"></iconify-icon>
+                        </button>
+                        <button id="save-displayName-button" style="display:none;">
+                            <iconify-icon icon="mdi:content-save"></iconify-icon>
+                        </button>
+                    </div>
+
+                    <label for="user-email">Email:</label>
+                    <div class="input-container">
+                        <input type="text" id="user-email" disabled>
+                        <button id="edit-email-button">
+                            <iconify-icon icon="lucide:edit"></iconify-icon>
+                        </button>
+                        <button id="save-email-button" style="display:none;">
+                            <iconify-icon icon="mdi:content-save"></iconify-icon>
+                        </button>
+                    </div>
+
+                    <label for="user-uid">UID:</label>
+                    <div class="input-container">
+                        <input type="text" id="user-uid" disabled>
+                    </div>
+    
+                    <label for="user-photoURL">Photo URL:</label>
+                    <div class="input-container">
+                        <input type="text" id="user-photoURL" disabled>
+                        <button id="edit-photoURL-button">
+                            <iconify-icon icon="lucide:edit"></iconify-icon>
+                        </button>
+                        <button id="save-photoURL-button" style="display:none;">
+                            <iconify-icon icon="mdi:content-save"></iconify-icon>
+                        </button>
+                    </div>
+
+                    
+                </div>
             </div>
         `;
         // Attach logout function to the button
-        document.getElementById('logout-button').addEventListener('click', logout);
+        document.getElementById("logout-button").addEventListener("click", logout);
 
         // Fetch and display user email and photo
-        onAuthStateChanged(auth, user => {
+        onAuthStateChanged(auth, async user => {
             if (user) {
-                document.getElementById('user-email').textContent = user.email;
-                document.getElementById('user-photo').src = user.photoURL || 'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0e/65/af/dd/photo4jpg.jpg?w=1200&h=-1&s=1';
+                const uidInput = document.getElementById("user-uid");
+                const displayNameInput = document.getElementById("user-displayName");
+                const photoURLInput = document.getElementById("user-photoURL");
+                const emailInput = document.getElementById("user-email");
+
+                uidInput.value = user.uid;
+                emailInput.value = user.email;
+
+                // Fetch user profile from Firestore
+                const userRef = doc(db, "users", user.uid);
+                const userDoc = await getDoc(userRef);
+                if (userDoc.exists()) {
+                    const userData = userDoc.data();
+                    displayNameInput.value = userData.displayName || '';
+                }
+
+                photoURLInput.value = user.photoURL;
+                document.getElementById("user-photo").src =
+                    user.photoURL || "https://community.fastly.steamstatic.com/economy/image/omZo-YJjnL2r9xAQz5PaYyxABqBEQKXhHMDDYZt2RMqsC6O4NomRzDzlWB3P-wtAlDWSo7zVwiBUTBZDvhB3o-ebMtSDpej5UYEIR_yPd2W7b-mzA64/360fx360f";
+                    // "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0e/65/af/dd/photo4jpg.jpg?w=1200&h=-1&s=1";
+
+                // Attach edit and save button functionality for each field
+                attachEditSaveFunctionality("displayName", displayNameInput, user);
+                attachEditSaveFunctionality("photoURL", photoURLInput, user);
+                attachEditSaveFunctionality("email", emailInput, user);
+            }
+        });
+    }
+
+    function attachEditSaveFunctionality(field, inputElement, user) {
+        document.getElementById(`edit-${field}-button`).addEventListener("click", () => {
+            inputElement.disabled = false;
+            inputElement.style.border = "1px solid red";
+            inputElement.style.cursor = "text";
+            document.getElementById(`edit-${field}-button`).style.display = "none";
+            document.getElementById(`save-${field}-button`).style.display = "inline";
+        });
+
+        document.getElementById(`save-${field}-button`).addEventListener("click", async () => {
+            const newValue = inputElement.value;
+            try {
+                if (field === "email") {
+                    await updateEmail(user, newValue);
+                } else if (field === "password") {
+                    await updatePassword(user, newValue);
+                } else {
+                    const userRef = doc(db, "users", user.uid);
+                    await setDoc(userRef, { [field]: newValue }, { merge: true });
+                }
+                inputElement.disabled = true;
+                inputElement.style.border = "";
+                inputElement.style.cursor = "not-allowed";
+                document.getElementById(`edit-${field}-button`).style.display = "inline";
+                document.getElementById(`save-${field}-button`).style.display = "none";
+            } catch (error) {
+                console.error(`Error updating ${field}:`, error);
             }
         });
     }
@@ -194,7 +294,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function showMyProfile() {
         contentArea.innerHTML = `
-            <h2>My Profile</h2>
+            <h2>My Cards</h2>
             <div class="my-profile-info">
                 <!-- Add profile content here -->
             </div>

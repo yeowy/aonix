@@ -311,11 +311,12 @@ function switchToLoginForm() {
 async function addUserEntry(entryText) {
     try {
         const user = auth.currentUser;
-        await addDoc(collection(db, 'user_entries'), {
+        const entryRef = doc(collection(db, 'user_entries'));
+        await setDoc(entryRef, {
             userId: user.uid,
             text: entryText,
             createdAt: new Date()
-        });
+        }, { merge: true });
     } catch (error) {
         console.error("Error adding entry:", error);
     }
