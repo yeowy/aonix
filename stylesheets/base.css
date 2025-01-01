@@ -117,7 +117,7 @@ header a:hover {
 
 body {
     top: 0px !important; /* Ensure the body is not pushed down */
-    overflow: auto; /* Ensure scrolling is enabled */
+    overflow: hidden; /* Ensure scrolling is enabled */
 }
 
 /* Glow effects */
