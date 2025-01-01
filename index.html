@@ -8,6 +8,7 @@
         <link rel="stylesheet" href="/aonix/stylesheets/index.css" />
         <link rel="stylesheet" href="/aonix/stylesheets/store.css" />
         <link rel="stylesheet" href="/aonix/stylesheets/hero.css" />
+        <link rel="stylesheet" href="/aonix/stylesheets/carousel.css" />
 
         <title>aonix.</title>
     </head>
@@ -37,7 +38,20 @@
 
         <!-- Featured section -->
         <div class="featured" style="display: none;">
-          
+
+            <!-- Carousel -->
+            <div class="carousel">
+                <div class="container">
+                    <img draggable="false" src="/aonix/imgs/carousel-1.webp" />
+                    <img draggable="false" src="/aonix/imgs/carousel-2.webp" />
+                    <img draggable="false" src="/aonix/imgs/carousel-3.webp" />
+                </div>
+                <div class="shift">
+                    <div class="btn left" onclick="leftShift()">&lt;</div>
+                    <div class="btn right" onclick="rightShift()">&gt;</div>
+                </div>
+                <div class="bottom"></div>
+            </div>
             
             
             <!-- Best sellers (filled by js) -->
@@ -45,7 +59,7 @@
         </div>
 
         <!-- Categories section -->
-         <div class="categories-section" style="display: none;">
+        <div class="categories-section" style="display: none;">
 
             <h1>Categories</h1>
 
@@ -65,8 +79,16 @@
                     <div class="category-9"><p>CPU COOLERS</p></div>
                 </div>
             </div>
-            
          </div>
+
+        <div class="hero-left last-section">
+            <div class="box">
+                <h1 class="flash-text">What are you waiting for?</h1>
+            </div>
+
+            <div id="but" class="box"><a href="/aonix/pages/store.html" class="button">Upgrade now</a></div>
+            <div class="invisible-box" onclick="scrollToTop()"></div>
+        </div>
 
         <script type="module" src="/aonix/javascript/base.js"></script>
         <script type="module" src="/aonix/javascript/index.js"></script>
@@ -77,6 +99,6 @@
         <script src="/aonix/javascript/carousel.js"></script>
         <!-- <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script> -->
 
-        <!-- <footer></footer> -->
+        <footer></footer>
     </body>
 </html>

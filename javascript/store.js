@@ -318,7 +318,7 @@ window.checkout = async function () {
         cart = [];
         setCookie("cart", JSON.stringify(cart), 7);
         await updateCartDisplay();
-        window.open("https://buy.stripe.com/test_3cs9DOg7qbjy0VO4gi", "_blank");
+        window.open("https://buy.stripe.com/test_8wMeY86wQ2N2cEwdQT", "_blank");
         window.location.href = "member.html";
     } catch (error) {
         console.error("Checkout error:", error);
