@@ -94,10 +94,14 @@ async function loadReviews() {
         return;
     }
 
-    reviewsList.innerHTML = `
-        <h2>商品評論</h2>
-        ${reviews.map((review, index) => `
-            <div class="review-item" data-index="${index}">
+    reviewsList.innerHTML = '<h2>商品評論</h2>';
+
+    let displayedReviews = 0;
+
+    function displayNextReviews() {
+        const nextReviews = reviews.slice(displayedReviews, displayedReviews + 5);
+        reviewsList.innerHTML += nextReviews.map((review, index) => `
+            <div class="review-item" data-index="${displayedReviews + index}">
                 <div class="review-header">
                     <div class="star">
                         ${Array(5).fill('').map((_, i) => `
@@ -123,8 +127,27 @@ async function loadReviews() {
                     </div>
                 </div>
             </div>
-        `).join('')}
-    `;
+        `).join('');
+
+        displayedReviews += nextReviews.length;
+
+        if (displayedReviews < reviews.length) {
+            const showMoreButton = document.createElement('button');
+            showMoreButton.textContent = 'Show More Reviews';
+            showMoreButton.classList.add('show-more-btn');
+            showMoreButton.style.display = 'block';
+            showMoreButton.style.margin = '20px auto';
+            showMoreButton.style.backgroundColor = 'black';
+            showMoreButton.style.color = 'white'; 
+            showMoreButton.addEventListener('click', () => {
+                showMoreButton.remove();
+                displayNextReviews();
+            });
+            reviewsList.appendChild(showMoreButton);
+        }
+    }
+
+    displayNextReviews();
 }
 
 // Handle review submission
