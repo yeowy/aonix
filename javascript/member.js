@@ -28,7 +28,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 const productsRef = collection(docSnapshot.ref, "products");
                 const productsSnapshot = await getDocs(productsRef);
 
-                const items = productsSnapshot.docs.map(productDoc => productDoc.data());
+                const items = await Promise.all(productsSnapshot.docs.map(async productDoc => {
+                    const productData = productDoc.data();
+                    const productDocRef = doc(db, "products", productData.productId);
+                    const productDocSnapshot = await getDoc(productDocRef);
+                    const productImages = productDocSnapshot.exists() ? productDocSnapshot.data().images : [];
+                    return { ...productData, images: productImages };
+                }));
                 orders.push({ orderDate, items });
             }
 
@@ -52,7 +58,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     historyItem.innerHTML = `
                         <a href="/aonix/pages/product_review.html?id=${item.productId}">${item.itemName}</a>
                         <a href="/aonix/pages/product_review.html?id=${item.productId}">
-                            <img src="${item.productImage}" alt="${item.itemName}">
+                            <img src="${item.images[0]}" alt="${item.itemName}">
                         </a>`;
                     orderItemsDiv.appendChild(historyItem);
                 });
