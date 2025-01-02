@@ -221,7 +221,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 photoURLInput.value = user.photoURL;
                 document.getElementById("user-photo").src =
-                    user.photoURL || "https://community.fastly.steamstatic.com/economy/image/omZo-YJjnL2r9xAQz5PaYyxABqBEQKXhHMDDYZt2RMqsC6O4NomRzDzlWB3P-wtAlDWSo7zVwiBUTBZDvhB3o-ebMtSDpej5UYEIR_yPd2W7b-mzA64/360fx360f";
+                    user.photoURL || "https://cdn3.iconfinder.com/data/icons/android-app-solid/128/03_Account-512.png";
                     // "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0e/65/af/dd/photo4jpg.jpg?w=1200&h=-1&s=1";
 
                 // Attach edit and save button functionality for each field
