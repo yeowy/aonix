@@ -21,7 +21,16 @@
                 <div class="product-details">
                     <h1 class="text-glow product-name"><!-- Filled by JS --></h1>
                     <p class="product-description"><!-- Filled by JS --></p>
-                    <p class="product-price"><!-- Filled by JS --></p>
+                    <div class="product-bottom-right">
+                        <div class="product-price"><!-- Filled by JS --></div>
+                        <div class="quantity-controls">
+                            <button onclick="updateQuantity(-1)">-</button>
+                            <span id="quantity">1</span>
+                            <button onclick="updateQuantity(1)">+</button>
+                        </div>
+                        <button class="add-to-cart-btn" onclick="addToCart()">Purchase</button>
+                        
+                    </div> 
 
                     <div class="rating-summary">
                         <div class="average-rating">

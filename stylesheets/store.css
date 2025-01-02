@@ -347,25 +347,6 @@
     font-size: 1.2rem;
 }
 
-.add-to-cart-btn {
-    display: flex;
-    justify-content: flex-end;
-    width: 100%;
-    padding: 10px;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-weight: bold;
-}
-
-.add-to-cart-btn:hover {
-    transform: scale(1.05);
-    background: linear-gradient(135deg, #751a1a, #690202);
-    box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
-}
-
 /* 商品圖片容器 */
 .product-card img {
     width: 100%;
@@ -685,11 +666,6 @@
         margin-top: 0.5rem;
     }
 
-    .add-to-cart-btn {
-        width: 100%;
-        margin-top: 1rem;
-    }
-
     .filter-section {
         position: unset;
     }
@@ -700,11 +676,6 @@
 
     .product-tags {
         display: none;
-    }
-
-    .add-to-cart-btn {
-        justify-content: center;
-        margin-top: 0;
     }
 
     .filter-section {

@@ -348,3 +348,58 @@ header {
     right: 15px; /
     
 }
+
+/* ...existing code... */
+
+.product-bottom-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.quantity-controls {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.quantity-controls button {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    border-radius: 4px;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.quantity-controls button:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.quantity-controls span {
+    color: white;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.add-to-cart-btn {
+    background: linear-gradient(135deg, #ff3333, #ff0000);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
+    padding: 10px 20px;
+}
+
+.add-to-cart-btn:hover {
+    background: linear-gradient(135deg, #851b1b, #690303);
+    box-shadow: 0 0 30px rgba(68, 2, 2, 0.5);
+    transform: translateY(-2px);
+}
+
+/* ...existing code... */
