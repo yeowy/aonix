@@ -1,12 +1,16 @@
-// Import fetchProducts from products.js
+import { getCookie, setCookie } from './base.js';
 import { fetchProducts } from "./products.js";
 import { auth, db } from './firebase-config.js';
-import { addDoc, collection } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+import { addDoc, collection, query, orderBy, getDocs, doc, getDoc, setDoc, updateDoc, increment, deleteDoc, onSnapshot, where } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
 
-// Initialize cart data from localStorage or empty array
-let cart = JSON.parse(localStorage.getItem("cart")) || [];
-let products = []; // Global variable to store fetched products
-let selectedCategories = []; // Array to store selected categories
+// Initialize cart data from cookies or empty array
+let cart = JSON.parse(getCookie("cart")) || [];
+let products = [];
+let allProducts = [];
+let filteredProducts = [];
+let selectedCategories = [];
+let currentPage = 0;
+let productsPerPage = parseInt(getCookie("productsPerPage"), 10) || 3;
 
 // Initialize product display
 async function initProducts() {
@@ -16,26 +20,46 @@ async function initProducts() {
         return;
     }
 
+    const productsPerPageDropdown = document.getElementById("products-per-page");
+    if (productsPerPageDropdown) {
+        productsPerPageDropdown.value = productsPerPage;
+    }
+
     try {
-        products = await fetchProducts(); // Store fetched products in the global variable
-        updateCategoryCounts(products);
-        displayProducts(products);
-        openEssentialsDropdown(); // Open Essentials dropdown on page load
+        const allProductsSnapshot = await fetchAllProducts();
+        allProducts = allProductsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        updateCategoryCounts(allProducts);
+
+        filteredProducts = allProducts;
+
+        await displayProductsForPage(currentPage);
+        updatePaginationButtons();
     } catch (error) {
         console.error("Error fetching products:", error);
     }
 }
 
-// Open Essentials dropdown on page load
-function openEssentialsDropdown() {
-    const essentialsDropdown = document.querySelector(".category-dropdown-content[data-category='processors']");
-    if (essentialsDropdown) {
-        essentialsDropdown.classList.add("active");
-        const essentialsButton = essentialsDropdown.previousElementSibling.querySelector(".category-btn iconify-icon");
-        if (essentialsButton) {
-            essentialsButton.classList.add("active");
-        }
-    }
+// Fetch all products
+async function fetchAllProducts() {
+    const productsQuery = query(collection(db, 'products'), orderBy('name'));
+    return await getDocs(productsQuery);
+}
+
+// Display products for the current page
+async function displayProductsForPage(page) {
+    const start = page * productsPerPage;
+    const end = start + productsPerPage;
+    const productsToDisplay = filteredProducts.slice(start, end);
+    await displayProducts(productsToDisplay);
+}
+
+// Update pagination buttons
+function updatePaginationButtons() {
+    const nextButton = document.getElementById('next-button');
+    const prevButton = document.getElementById('prev-button');
+
+    nextButton.disabled = filteredProducts.length <= productsPerPage;
+    prevButton.disabled = filteredProducts.length <= productsPerPage;
 }
 
 // Update category counts
@@ -55,64 +79,76 @@ function updateCategoryCounts(products) {
     document.querySelectorAll(".category-item").forEach(item => {
         const category = item.getAttribute("data-category");
         const count = categoryCounts[category] || 0;
-        const countElement = document.createElement("div");
-        countElement.className = "category-count";
-        countElement.textContent = `${count}`;
-        item.appendChild(countElement);
+        const countElement = item.querySelector(".category-count");
+        if (countElement) {
+            countElement.textContent = `${count}`;
+        } else {
+            const newCountElement = document.createElement("div");
+            newCountElement.className = "category-count";
+            newCountElement.textContent = `${count}`;
+            item.appendChild(newCountElement);
+        }
     });
 }
 
 // Display products
-function displayProducts(productsToDisplay) {
+async function displayProducts(productsToDisplay) {
     const productGrid = document.getElementById("productGrid");
-    productGrid.innerHTML = productsToDisplay
-        .map(
-            product =>
-            `<div class="product-card">
+    const productHTML = await Promise.all(productsToDisplay.map(async product => {
+        const reviews = await fetchReviews(product.id);
+        const totalReviews = reviews.length;
+        const averageRating = totalReviews > 0 ? (reviews.reduce((sum, review) => sum + review.rating, 0) / totalReviews).toFixed(1) : '0.0';
+
+        return `
+            <div class="product-card">
                 <div class="product-img">
                     <a href="product_review.html?id=${product.id}">
                         <img src="${product.images[0]}" alt="${product.name}" draggable="false">
                     </a>
                 </div>
                 <div class="product-details">
-
                     <div class="product-brand">${product.brand}</div>
-                    <div class="product-name"><h5>${product.name}</h5></div>
-                        <div class="product-tags">
-                            <div class="tag">${product.features[0]}</div>
-                            <div class="tag">${product.features[1]}</div>    
-                            <div class="tag">${product.features[2]}</div>    
-                        </div>
-
+                    <div class="product-name"><a href="product_review.html?id=${product.id}"><h5>${product.name}</h5></a></div>
+                    <div class="product-tags">
+                        <div class="tag">${product.features[0]}</div>
+                        <div class="tag">${product.features[1]}</div>    
+                        <div class="tag">${product.features[2]}</div>    
+                    </div>
                     <div class="product-description">${product.description}</div>
-
                     <div class="product-bottom">
                         <div class="product-bottom-left">
                             <div class="product-rating">
-                                <span class="rating">${product.ratings.average}
+                                <span class="rating">${averageRating}
                                 <iconify-icon
                                 icon="mdi:star"
                                 width="auto"
                                 height="auto"
                                 class="star-icon">
                                 </iconify-icon></span>
-                                <span class="rating-count">(${product.ratings.reviewsCount} reviews)</span>    
+                                <span class="rating-count">(${totalReviews} reviews)</span>    
                             </div>
                         </div>
-
                         <div class="product-bottom-right">
                             <div class="product-price">$${product.price.toLocaleString()}</div>
                             <button class="add-to-cart-btn" onclick="addToCart('${product.id}')">Purchase</button>
                         </div> 
                     </div>
                 </div>
-        </div>`
-        )
-        .join("");
+            </div>`;
+    }));
+    productGrid.innerHTML = productHTML.join("");
+}
+
+// Fetch reviews from Firestore
+async function fetchReviews(productId) {
+    const q = query(collection(db, 'reviews'), where('productId', '==', productId));
+    const querySnapshot = await getDocs(q);
+    return querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
 }
 
 // Toggle cart modal visibility
 window.toggleCart = function () {
+    updateCartDisplay();
     const cartModal = document.getElementById("cartModal");
     if (cartModal.style.display === "block") {
         cartModal.style.display = "none";
@@ -121,99 +157,140 @@ window.toggleCart = function () {
     }
 };
 
-// Add product to cart
-window.addToCart = function (productId) {
-    const product = products.find(p => p.id === productId); // Use the global products variable
-    const existingItem = cart.find(item => item.id === productId);
+// Listen for cart changes in Firestore and update UI in real time
+function listenCartChanges() {
+    const user = auth.currentUser;
+    if (!user) return;
+    const cartRef = collection(db, "users", user.uid, "cart");
+    onSnapshot(cartRef, () => {
+        updateCartDisplay();
+    });
+}
 
-    if (existingItem) {
-        existingItem.quantity += 1;
-    } else {
-        cart.push({
-            ...product,
-            quantity: 1
-        });
+// Add product to cart or update quantity
+window.addToCart = async function(productId) {
+    const user = auth.currentUser;
+    if (!user) {
+        alert("You must be logged in to add items to the cart!");
+        return;
     }
-
-    // Save to localStorage
-    localStorage.setItem("cart", JSON.stringify(cart));
-    updateCartDisplay();
+    try {
+        const cartItemRef = doc(db, "users", user.uid, "cart", productId);
+        const snapshot = await getDoc(cartItemRef);
+        if (snapshot.exists()) {
+            await updateDoc(cartItemRef, { quantity: increment(1) });
+        } else {
+            const product = allProducts.find(p => p.id === productId);
+            await setDoc(cartItemRef, {
+                productId: product.id,
+                quantity: 1
+            });
+        }
+        updateCartDisplay(); // Ensure cart display is updated after adding item
+    } catch (error) {
+        console.error("Error adding to cart:", error);
+    }
 };
 
-// Update cart display
-function updateCartDisplay() {
+// Remove product from cart
+window.removeFromCart = async function(productId) {
+    const user = auth.currentUser;
+    if (!user) {
+        alert("You must be logged in!");
+        return;
+    }
+    try {
+        const cartItemRef = doc(db, "users", user.uid, "cart", productId);
+        await deleteDoc(cartItemRef);
+        updateCartDisplay(); // Ensure cart display is updated after removing item
+    } catch (error) {
+        console.error("Error removing from cart:", error);
+    }
+};
+
+// Display or update cart UI
+export async function updateCartDisplay() {
     const cartItems = document.getElementById("cartItems");
     const cartCount = document.getElementById("cartCount");
     const cartTotal = document.getElementById("cartTotal");
+    const user = auth.currentUser;
 
-    // Update cart count in header
-    cartCount.textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
-
-    if (cart.length === 0) {
+    if (!user || !cartItems) {
         cartItems.innerHTML = `<div class="empty-cart">
-                <iconify-icon icon="mdi:cart-off" ></iconify-icon>
-                <p>Your cart is empty</p>
-            </div>`;
+            <iconify-icon icon="mdi:cart-off"></iconify-icon>
+            <p>Your cart is empty</div>`;
+        cartCount.textContent = "0";
         cartTotal.textContent = "0";
         return;
     }
 
-    // Display cart items
-    cartItems.innerHTML = cart
-        .map(
-            item =>
-                `<div class="cart-item">
-            <img src="${item.images[0]}" alt="${item.name}">
-            <div class="cart-item-info">
-                <h7>${item.name}</h7>
-                <div class="price-quantity">
-                    <span class="price">$${item.price.toLocaleString()}</span>
-                    <div class="quantity-controls">
-                        <button onclick="updateQuantity('${item.id}', -1)">-</button>
-                        <span>${item.quantity}</span>
-                        <button onclick="updateQuantity('${item.id}', 1)">+</button>
-                    </div>
-                </div>
-            </div>
-            <button class="remove-item" onclick="removeFromCart('${item.id}')">
-                <iconify-icon icon="mdi:delete"></iconify-icon>
-            </button>
-        </div>`
-        )
-        .join("");
+    try {
+        const cartRef = collection(db, "users", user.uid, "cart");
+        const snapshot = await getDocs(cartRef);
+        let total = 0, count = 0, html = "";
 
-    const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-    cartTotal.textContent = total.toLocaleString();
+        for (const docSnap of snapshot.docs) {
+            const item = docSnap.data();
+            const product = allProducts.find(p => p.id === item.productId);
+            if (product) {
+                total += product.price * item.quantity;
+                count += item.quantity;
+                html += `<div class="cart-item">
+                    <img src="${product.images[0]}" alt="${product.name}">
+                    <div class="cart-item-info">
+                        <h7>${product.name}</h7>
+                        <div class="price-quantity">
+                            <span class="price">$${product.price.toLocaleString()}</span>
+                            <div class="quantity-controls">
+                                <button onclick="updateQuantity('${product.id}', -1)">-</button>
+                                <span>${item.quantity}</span>
+                                <button onclick="updateQuantity('${product.id}', 1)">+</button>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="remove-item" onclick="removeFromCart('${product.id}')">
+                        <iconify-icon icon="mdi:delete"></iconify-icon>
+                    </button>
+                </div>`;
+            }
+        }
+
+        cartItems.innerHTML = html || `<div class="empty-cart">
+            <iconify-icon icon="mdi:cart-off"></iconify-icon>
+            <p>Your cart is empty</div>`;
+        cartCount.textContent = count;
+        cartTotal.textContent = total.toLocaleString();
+    } catch (error) {
+        console.error("Error fetching cart data:", error);
+    }
 }
 
 // Update item quantity in cart
-window.updateQuantity = function (productId, change) {
-    const item = cart.find(item => item.id === productId);
-    if (item) {
-        item.quantity += change;
-        if (item.quantity <= 0) {
-            removeFromCart(productId);
-        } else {
-            localStorage.setItem("cart", JSON.stringify(cart));
-            updateCartDisplay();
-        }
+window.updateQuantity = async function (productId, change) {
+    const user = auth.currentUser;
+    if (!user) {
+        alert("You must be logged in!");
+        return;
     }
-};
-
-// Remove item from cart
-window.removeFromCart = function (productId) {
-    cart = cart.filter(item => item.id !== productId);
-    localStorage.setItem("cart", JSON.stringify(cart));
-    updateCartDisplay();
+    try {
+        const cartItemRef = doc(db, "users", user.uid, "cart", productId);
+        const snapshot = await getDoc(cartItemRef);
+        if (snapshot.exists()) {
+            const newQuantity = snapshot.data().quantity + change;
+            if (newQuantity <= 0) {
+                await deleteDoc(cartItemRef);
+            } else {
+                await updateDoc(cartItemRef, { quantity: newQuantity });
+            }
+            updateCartDisplay(); // Ensure cart display is updated after quantity change
+        }
+    } catch (error) {
+        console.error("Error updating quantity:", error);
+    }
 };
 
 // Handle checkout process
 window.checkout = async function () {
-    if (cart.length === 0) {
-        alert("Your cart is empty!");
-        return;
-    }
-
     const user = auth.currentUser;
     if (!user) {
         alert("You must be logged in to checkout!");
@@ -221,23 +298,45 @@ window.checkout = async function () {
     }
 
     try {
-        const purchaseHistoryRef = collection(db, 'users', user.uid, 'shoppingHistory');
-        for (const item of cart) {
-            await addDoc(purchaseHistoryRef, {
-                itemName: item.name,
-                purchaseDate: new Date().toISOString(),
-                price: item.price,
-                quantity: item.quantity,
-                productId: item.id // Add productId to the purchase history
+        const cartRef = collection(db, "users", user.uid, "cart");
+        const cartSnapshot = await getDocs(cartRef);
+        if (cartSnapshot.empty) {
+            alert("Your cart is empty!");
+            return;
+        }
+
+        // Create a new order document in the "purchases" collection
+        const userPurchasesRef = collection(db, "users", user.uid, "purchases");
+        const newOrderRef = await addDoc(userPurchasesRef, {
+            orderDate: new Date().toISOString(),
+            status: "Pending"
+        });
+
+        // Add products as sub-collections under the new order document
+        const orderProductsRef = collection(newOrderRef, "products");
+        for (const docSnap of cartSnapshot.docs) {
+            const item = docSnap.data();
+            const product = allProducts.find(p => p.id === item.productId);
+            if (!product) continue;
+            await addDoc(orderProductsRef, {
+                productId: item.productId,
+                itemName: product.name,
+                price: product.price,
+                quantity: item.quantity
             });
         }
-        alert("Thank you for your purchase!");
+
+        // Clear cart in Firestore
+        for (const docSnap of cartSnapshot.docs) {
+            await deleteDoc(docSnap.ref);
+        }
         cart = [];
-        localStorage.removeItem("cart");
-        updateCartDisplay();
-        toggleCart();
+        setCookie("cart", JSON.stringify(cart), 7);
+        await updateCartDisplay();
+        window.open("https://buy.stripe.com/test_8wMeY86wQ2N2cEwdQT", "_blank");
+        window.location.href = "member.html";
     } catch (error) {
-        console.error("Error saving purchase history:", error);
+        console.error("Checkout error:", error);
     }
 };
 
@@ -246,75 +345,52 @@ document.querySelectorAll(".category-item").forEach(item => {
     item.addEventListener("click", () => {
         const category = item.getAttribute("data-category");
         const index = selectedCategories.indexOf(category);
-        
         if (index > -1) {
             selectedCategories.splice(index, 1);
-            item.classList.remove('selected');
+            item.classList.remove("selected");
         } else {
             selectedCategories.push(category);
-            item.classList.add('selected');
+            item.classList.add("selected");
         }
-        
         filterProducts();
     });
 });
 
 // Filter products based on selected categories
 function filterProducts() {
-    const filteredProducts = selectedCategories.length === 0
-        ? products
-        : products.filter(product => selectedCategories.includes(product.category.toLowerCase()));
-    
-    // 更新所有下拉選單的箭頭顏色
-    updateDropdownArrows();
-    
-    displayProducts(filteredProducts);
-}
-
-// 添加新函數來更新箭頭顏色
-function updateDropdownArrows() {
-    document.querySelectorAll('.category-dropdown').forEach(dropdown => {
-        const dropdownContent = dropdown.querySelector('.category-dropdown-content');
-        const icon = dropdown.querySelector('.category-btn iconify-icon');
-        const categoryItems = dropdownContent.querySelectorAll('.category-item');
-        
-        // 檢查這個下拉選單中是否有被選中的項目
-        const hasSelectedItem = Array.from(categoryItems).some(item => 
-            selectedCategories.includes(item.getAttribute('data-category'))
-        );
-        
-        // 更新箭頭顏色
-        if (icon) {
-            if (hasSelectedItem) {
-                icon.style.color = 'var(--accent-color)'; // 使用紅色
-            } else {
-                icon.style.color = ''; // 恢復默認顏色
-            }
-        }
-    });
+    filteredProducts = selectedCategories.length === 0
+        ? allProducts
+        : allProducts.filter(product => selectedCategories.includes(product.category.toLowerCase()));
+    currentPage = 0;
+    displayProductsForPage(currentPage);
+    updatePaginationButtons();
 }
 
 // Search products
 document.getElementById("filterSearchInput").addEventListener("input", e => {
     const searchTerm = e.target.value.toLowerCase();
-    const filteredProducts = products.filter(
+    filteredProducts = allProducts.filter(
         product =>
             product.name.toLowerCase().includes(searchTerm) ||
             product.description.toLowerCase().includes(searchTerm) ||
             product.category.toLowerCase().includes(searchTerm)
     );
-    displayProducts(filteredProducts);
+    currentPage = 0;
+    displayProductsForPage(currentPage);
+    updatePaginationButtons();
 });
 
 document.getElementById("searchInput").addEventListener("input", e => {
     const searchTerm = e.target.value.toLowerCase();
-    const filteredProducts = products.filter(
+    filteredProducts = allProducts.filter(
         product =>
             product.name.toLowerCase().includes(searchTerm) ||
             product.description.toLowerCase().includes(searchTerm) ||
             product.category.toLowerCase().includes(searchTerm)
     );
-    displayProducts(filteredProducts);
+    currentPage = 0;
+    displayProductsForPage(currentPage);
+    updatePaginationButtons();
 });
 
 // Toggle dropdown visibility
@@ -327,6 +403,7 @@ document.querySelectorAll(".category-header").forEach(header => {
         }
         if (icon) {
             icon.classList.toggle("active");
+            icon.style.transform = icon.classList.contains("active") ? "rotate(180deg)" : "rotate(0deg)";
         }
     });
 });
@@ -334,20 +411,32 @@ document.querySelectorAll(".category-header").forEach(header => {
 // Initialize page on load
 document.addEventListener("DOMContentLoaded", () => {
     console.log("Page loaded");
+    cart = JSON.parse(getCookie("cart")) || [];
     initProducts();
-    updateCartDisplay(); // Ensure cart display is updated when the page loads
+    updateCartDisplay();
+    auth.onAuthStateChanged(user => {
+        if (user) listenCartChanges();
+    });
 });
 
-// 在渲染產品或更新頁面時，確保不會改變背景色
-function renderProducts(products) {
-    const productGrid = document.getElementById('productGrid');
-    productGrid.innerHTML = '';  // 清空現有內容
-    
-    products.forEach(product => {
-        const productCard = document.createElement('div');
-        productCard.className = 'product-card';
-        // 這裡不要設置背景色，使用 CSS 中定義的背景
-        
-        // ... 其他產品卡片內容 ...
-    });
-}
+// Pagination buttons event listeners
+document.getElementById('next-button').addEventListener('click', () => {
+    currentPage = (currentPage + 1) % Math.ceil(filteredProducts.length / productsPerPage);
+    displayProductsForPage(currentPage);
+    updatePaginationButtons();
+});
+
+document.getElementById('prev-button').addEventListener('click', () => {
+    currentPage = (currentPage - 1 + Math.ceil(filteredProducts.length / productsPerPage)) % Math.ceil(filteredProducts.length / productsPerPage);
+    displayProductsForPage(currentPage);
+    updatePaginationButtons();
+});
+
+// Products per page dropdown event listener
+document.getElementById('products-per-page').addEventListener('change', (e) => {
+    productsPerPage = parseInt(e.target.value, 10);
+    setCookie("productsPerPage", productsPerPage, 7);
+    currentPage = 0;
+    displayProductsForPage(currentPage);
+    updatePaginationButtons();
+});
