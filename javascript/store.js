@@ -32,10 +32,27 @@ async function initProducts() {
 
         filteredProducts = allProducts;
 
-        await displayProductsForPage(currentPage);
-        updatePaginationButtons();
+        // Check for category filter in URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const category = urlParams.get('category');
+        if (category) {
+            selectedCategories.push(category);
+            highlightSelectedCategory(category);
+            filterProducts();
+        } else {
+            await displayProductsForPage(currentPage);
+            updatePaginationButtons();
+        }
     } catch (error) {
         console.error("Error fetching products:", error);
+    }
+}
+
+// Highlight selected category
+function highlightSelectedCategory(category) {
+    const categoryItem = document.querySelector(`.category-item[data-category="${category}"]`);
+    if (categoryItem) {
+        categoryItem.classList.add("selected");
     }
 }
 
