@@ -17,7 +17,6 @@ async function initProducts() {
     const productGrid = document.getElementById("productGrid");
     if (!productGrid) {
         console.error("找不到 productGrid 元素");
-        return;
     }
 
     const productsPerPageDropdown = document.getElementById("products-per-page");

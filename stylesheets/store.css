@@ -530,6 +530,7 @@
     border-radius: 4px;
     padding: 5px 10px;
     transition: all 0.3s ease;
+    cursor: pointer;
 }
 /* 移除商品按鈕 */
 .remove-item {

@@ -24,6 +24,7 @@
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.1);
     transition: all 0.3s ease;
+    padding: 1em 2em;
 }
 
 .about-card:hover {
@@ -63,7 +64,8 @@
 }
 
 .story-section p {
-    font-weight: bold;
+    font-weight: 500;
+    color:rgb(228, 228, 228);
     line-height: 1.8;
     margin-bottom: 20px;
     font-size: 1.1em;

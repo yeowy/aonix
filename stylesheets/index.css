@@ -213,35 +213,30 @@ html, body {
 .category-8,
 .category-9 {
     box-sizing: border-box;
-    size: auto;
-    background: linear-gradient(to top, rgb(125, 120, 120), rgb(115, 115, 115), rgb(105, 105, 105), rgb(95, 95, 95), rgb(85, 85, 85), rgb(75, 75, 75), rgb(65, 65, 65), rgb(55, 55, 55), rgb(45, 45, 45), rgb(35, 35, 35), rgb(28, 35, 41));
+    background-blend-mode: soft-light, multiply;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
     border: 2px solid rgba(255, 255, 255, 0.413);
     box-shadow: 0 0 20px rgba(255, 0, 0, 0.226), 
-    inset 0 0 15px rgba(255, 255, 255, 0.32), 0 10px 20px rgba(0, 0, 0, 0.5);
+                inset 0 0 15px rgba(255, 255, 255, 0.32), 
+                0 10px 20px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease, box-shadow 0.5s ease;
 }
+
 .category-1 {
     width: 100%;
     height: 25%;
     background: 
         url("https://xoticpc.com/cdn/shop/files/XPCKB.png?v=1734722691") center/cover no-repeat,
         linear-gradient(90deg, rgba(137, 54, 52, 0.319), rgba(45, 3, 151, 0.549));
-        background-blend-mode: soft-light;
-        background-blend-mode: multiply;
-        backdrop-filter: blur(5px);
-        -webkit-backdrop-filter: blur(5px);
 }
 
 .category-2 {
-    
     width: 50%;
     height: 35%;
     background: 
         url("/aonix/imgs/pd/header.png") center/cover no-repeat,
-        linear-gradient(90deg,rgba(18, 1, 63, 0.549) , rgba(167, 61, 59, 0.319));
-        background-blend-mode: soft-light;
-        background-blend-mode: multiply;
-        backdrop-filter: blur(5px);
-        -webkit-backdrop-filter: blur(5px);
+        linear-gradient(90deg, rgba(18, 1, 63, 0.549), rgba(167, 61, 59, 0.319));
 }
 
 .category-3 {
@@ -250,10 +245,6 @@ html, body {
     background: 
         url("/aonix/imgs/pd/supply.png") center/cover no-repeat,
         linear-gradient(90deg, rgba(137, 54, 52, 0.319), rgba(45, 3, 151, 0.381));
-        background-blend-mode: soft-light;
-        background-blend-mode: multiply;
-        backdrop-filter: blur(5px);
-        -webkit-backdrop-filter: blur(5px);
 }
 
 .category-4 {
@@ -262,11 +253,7 @@ html, body {
     background: 
         url("/aonix/imgs/pd/pcase.png") center/cover no-repeat,
         linear-gradient(0deg, rgba(128, 29, 27, 0.319), rgba(10, 3, 140, 0.381));
-        background-blend-mode: soft-light;
-        background-blend-mode: multiply;
-        backdrop-filter: blur(5px);
-        -webkit-backdrop-filter: blur(5px);
-        background-size: 50%;
+    background-size: 50%;
 }
 
 .category-5 {
@@ -275,23 +262,15 @@ html, body {
     background: 
         url("/aonix/imgs/pd/mouse.png") center/cover no-repeat,
         linear-gradient(0deg, rgba(128, 29, 27, 0.319), rgba(10, 3, 140, 0.381));
-        background-blend-mode: soft-light;
-        background-blend-mode: multiply;
-        backdrop-filter: blur(5px);
-        -webkit-backdrop-filter: blur(5px);
-        background-size: 50%;
+    background-size: 50%;
 }
 
 .category-6 {
     width: 50%;
     height: 35%;
     background: 
-    url("/aonix/imgs/pd/memory.png") center/cover no-repeat,
-    linear-gradient(0deg,rgba(10, 3, 140, 0.381), rgba(128, 29, 27, 0.319) );
-    background-blend-mode: soft-light;
-    background-blend-mode: multiply;
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
+        url("/aonix/imgs/pd/memory.png") center/cover no-repeat,
+        linear-gradient(0deg, rgba(10, 3, 140, 0.381), rgba(128, 29, 27, 0.319));
     background-size: 50%;
 }
 
@@ -299,12 +278,8 @@ html, body {
     width: 100%;
     height: 35%;
     background: 
-    url("/aonix/imgs/pd/pc.png") center/cover no-repeat,
-    linear-gradient(0deg,rgba(10, 3, 140, 0.381), rgba(128, 29, 27, 0.319) );
-    background-blend-mode: soft-light;
-    background-blend-mode: multiply;
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
+        url("/aonix/imgs/pd/pc.png") center/cover no-repeat,
+        linear-gradient(0deg, rgba(10, 3, 140, 0.381), rgba(128, 29, 27, 0.319));
     background-size: 30%;
 }
 
@@ -312,12 +287,8 @@ html, body {
     width: calc(50% - 0.5em);
     height: 30%;
     background: 
-    url("/aonix/imgs/pd/moniter.png") center/cover no-repeat,
-    linear-gradient(0deg,rgba(8, 3, 120, 0.471), rgba(128, 29, 27, 0.319) );
-    background-blend-mode: soft-light;
-    background-blend-mode: multiply;
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
+        url("/aonix/imgs/pd/moniter.png") center/cover no-repeat,
+        linear-gradient(0deg, rgba(8, 3, 120, 0.471), rgba(128, 29, 27, 0.319));
     background-size: 50%;
 }
 
@@ -325,55 +296,18 @@ html, body {
     width: 50%;
     height: 30%;
     background: 
-    url("/aonix/imgs/pd/cooler.png") center/cover no-repeat,
-    linear-gradient(0deg, rgba(128, 29, 27, 0.319), rgba(10, 3, 140, 0.381));
-    background-blend-mode: soft-light;
-    background-blend-mode: multiply;
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
-    
+        url("/aonix/imgs/pd/cooler.png") center/cover no-repeat,
+        linear-gradient(0deg, rgba(128, 29, 27, 0.319), rgba(10, 3, 140, 0.381));
 }
 
-.category-1:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(211, 208, 208, 0.718);
-}
-
-.category-2:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(211, 208, 208, 0.718);
-}
-
-.category-3:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(211, 208, 208, 0.718);
-}
-
-.category-4:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(211, 208, 208, 0.718);
-}
-
-.category-5:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(211, 208, 208, 0.718);
-}
-
-.category-6:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(211, 208, 208, 0.718);
-}
-
-.category-7:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(211, 208, 208, 0.718);
-}
-
-.category-8:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(211, 208, 208, 0.718);
-}
-
+.category-1:hover,
+.category-2:hover,
+.category-3:hover,
+.category-4:hover,
+.category-5:hover,
+.category-6:hover,
+.category-7:hover,
+.category-8:hover,
 .category-9:hover {
     transform: translateY(-5px);
     box-shadow: 0 5px 15px rgba(211, 208, 208, 0.718);
@@ -436,10 +370,6 @@ html, body {
     height: 92vh;
     width: 100%;
     padding: 2em;
-    /* background-image: url("/aonix/imgs/last-section.webp");
-    background-size: cover;
-    background-position: center;
-    background: url('/aonix/imgs/last-section.webp') no-repeat center center; */
 }
 
 .last-section h1 {
