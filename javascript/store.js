@@ -1,7 +1,7 @@
-import {getCookie, setCookie} from './base.js';
+import { getCookie, setCookie } from './base.js';
 import { fetchProducts } from "./products.js";
 import { auth, db } from './firebase-config.js';
-import { addDoc, collection, query, orderBy, getDocs, doc, getDoc, setDoc, updateDoc, increment, deleteDoc, onSnapshot } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+import { addDoc, collection, query, orderBy, getDocs, doc, getDoc, setDoc, updateDoc, increment, deleteDoc, onSnapshot, where } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
 
 // Initialize product display
 async function initProducts() {
@@ -23,7 +23,7 @@ async function initProducts() {
 
         filteredProducts = allProducts;
 
-        displayProductsForPage(currentPage);
+        await displayProductsForPage(currentPage);
         updatePaginationButtons();
     } catch (error) {
         console.error("Error fetching products:", error);
@@ -49,11 +49,11 @@ async function fetchAllProducts() {
 }
 
 // Display products for the current page
-function displayProductsForPage(page) {
+async function displayProductsForPage(page) {
     const start = page * productsPerPage;
     const end = start + productsPerPage;
     const productsToDisplay = filteredProducts.slice(start, end);
-    displayProducts(productsToDisplay);
+    await displayProducts(productsToDisplay);
 }
 
 // Update pagination buttons
@@ -95,52 +95,58 @@ function updateCategoryCounts(products) {
 }
 
 // Display products
-function displayProducts(productsToDisplay) {
+async function displayProducts(productsToDisplay) {
     const productGrid = document.getElementById("productGrid");
-    productGrid.innerHTML = productsToDisplay
-        .map(
-            product =>
-            `<div class="product-card">
+    const productHTML = await Promise.all(productsToDisplay.map(async product => {
+        const reviews = await fetchReviews(product.id);
+        const totalReviews = reviews.length;
+        const averageRating = totalReviews > 0 ? (reviews.reduce((sum, review) => sum + review.rating, 0) / totalReviews).toFixed(1) : '0.0';
+
+        return `
+            <div class="product-card">
                 <div class="product-img">
                     <a href="product_review.html?id=${product.id}">
                         <img src="${product.images[0]}" alt="${product.name}" draggable="false">
                     </a>
                 </div>
                 <div class="product-details">
-
                     <div class="product-brand">${product.brand}</div>
                     <div class="product-name"><a href="product_review.html?id=${product.id}"><h5>${product.name}</h5></a></div>
-                        <div class="product-tags">
-                            <div class="tag">${product.features[0]}</div>
-                            <div class="tag">${product.features[1]}</div>    
-                            <div class="tag">${product.features[2]}</div>    
-                        </div>
-
+                    <div class="product-tags">
+                        <div class="tag">${product.features[0]}</div>
+                        <div class="tag">${product.features[1]}</div>    
+                        <div class="tag">${product.features[2]}</div>    
+                    </div>
                     <div class="product-description">${product.description}</div>
-
                     <div class="product-bottom">
                         <div class="product-bottom-left">
                             <div class="product-rating">
-                                <span class="rating">${product.ratings.average}
+                                <span class="rating">${averageRating}
                                 <iconify-icon
                                 icon="mdi:star"
                                 width="auto"
                                 height="auto"
                                 class="star-icon">
                                 </iconify-icon></span>
-                                <span class="rating-count">(${product.ratings.reviewsCount} reviews)</span>    
+                                <span class="rating-count">(${totalReviews} reviews)</span>    
                             </div>
                         </div>
-
                         <div class="product-bottom-right">
                             <div class="product-price">$${product.price.toLocaleString()}</div>
                             <button class="add-to-cart-btn" onclick="addToCart('${product.id}')">Purchase</button>
                         </div> 
                     </div>
                 </div>
-        </div>`
-        )
-        .join("");
+            </div>`;
+    }));
+    productGrid.innerHTML = productHTML.join("");
+}
+
+// Fetch reviews from Firestore
+async function fetchReviews(productId) {
+    const q = query(collection(db, 'reviews'), where('productId', '==', productId));
+    const querySnapshot = await getDocs(q);
+    return querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
 }
 
 // Toggle cart modal visibility
