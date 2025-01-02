@@ -127,3 +127,7 @@ window.addEventListener('load', () => {
         item.classList.add('fall-in');
     });
 });
+
+// ...existing code...
+showMoreButton.innerHTML = '<iconify-icon icon="mdi:plus" width="24" height="24"></iconify-icon>';
+// ...existing code...

@@ -136,12 +136,14 @@ async function loadReviews() {
 
         if (displayedReviews < reviews.length) {
             const showMoreButton = document.createElement('button');
-            showMoreButton.textContent = 'Show More Reviews';
+            showMoreButton.innerHTML = 'See more...';
             showMoreButton.classList.add('show-more-btn');
             showMoreButton.style.display = 'block';
             showMoreButton.style.margin = '20px auto';
-            showMoreButton.style.backgroundColor = 'black';
+            showMoreButton.style.backgroundColor = '#1a1a1c';
             showMoreButton.style.color = 'white'; 
+            showMoreButton.style.border = 'none';
+            showMoreButton.style.cursor = 'pointer';
             showMoreButton.addEventListener('click', () => {
                 showMoreButton.remove();
                 displayNextReviews();
@@ -299,7 +301,7 @@ async function loadRecommendedProducts() {
 
         const productsGrid = document.querySelector('.products-grid');
         productsGrid.innerHTML = recommendedProducts.map(product => `
-            <div class="product-card" onclick="location.href='/aonix/pages/product_review.html?id=${product.id}'">
+            <div class="card product-card" onclick="location.href='/aonix/pages/product_review.html?id=${product.id}'">
                 <img src="${product.images[0]}" alt="${product.name}">
                 <h3>${product.name}</h3>
                 <div class="price">$${product.price.toLocaleString()}</div>
