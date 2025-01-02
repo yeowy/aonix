@@ -20,41 +20,34 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
-            const orders = {};
+            const orders = [];
 
             for (const docSnapshot of purchasesSnapshot.docs) {
                 const data = docSnapshot.data();
-                const orderTime = new Date(data.orderDate).toISOString().slice(0, 19);
-                if (!orders[orderTime]) {
-                    orders[orderTime] = [];
-                }
-
+                const orderDate = new Date(data.orderDate).toLocaleString();
                 const productsRef = collection(docSnapshot.ref, "products");
                 const productsSnapshot = await getDocs(productsRef);
 
-                for (const productDoc of productsSnapshot.docs) {
-                    const productData = productDoc.data();
-                    orders[orderTime].push(productData);
-                }
+                const items = productsSnapshot.docs.map(productDoc => productDoc.data());
+                orders.push({ orderDate, items });
             }
 
-            const sortedOrderTimes = Object.keys(orders).sort((a, b) => new Date(b) - new Date(a));
+            orders.sort((a, b) => new Date(b.orderDate) - new Date(a.orderDate));
             shoppingHistoryContainer.innerHTML = "";
 
-            for (const orderTime of sortedOrderTimes) {
-                const items = orders[orderTime];
+            for (const order of orders) {
                 const orderDiv = document.createElement("div");
                 orderDiv.classList.add("order");
 
                 const orderHeader = document.createElement("div");
                 orderHeader.classList.add("order-header");
-                orderHeader.textContent = `Order Date: ${new Date(orderTime).toLocaleString()}`;
+                orderHeader.textContent = `Order Date: ${order.orderDate}`;
                 orderDiv.appendChild(orderHeader);
 
                 const orderItemsDiv = document.createElement("div");
                 orderItemsDiv.classList.add("order-items");
 
-                items.forEach(item => {
+                order.items.forEach(item => {
                     const historyItem = document.createElement("div");
                     historyItem.innerHTML = `
                         <a href="/aonix/pages/product_review.html?id=${item.productId}">${item.itemName}</a>

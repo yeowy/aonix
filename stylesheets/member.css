@@ -81,6 +81,33 @@ html {
     margin-top: 20px;
 }
 
+.shopping-history-container,
+.reviews-container {
+    width: 100%;
+    margin-top: 20px;
+    max-height: 370px; /* Adjust as needed */
+    overflow-y: auto;
+    padding-top: 1.5em;
+}
+
+/* スクロールバーのスタイル */
+.shopping-history-container::-webkit-scrollbar,
+.reviews-container::-webkit-scrollbar {
+    width: 12px;
+}
+
+.shopping-history-container::-webkit-scrollbar-track,
+.reviews-container::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.shopping-history-container::-webkit-scrollbar-thumb,
+.reviews-container::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 0, 0, 0.8);
+    border-radius: 6px;
+    border: 3px solid rgba(255, 255, 255, 0.1);
+}
+
 .order {
     margin-bottom: 20px;
     background: rgba(255, 255, 255, 0.05);
