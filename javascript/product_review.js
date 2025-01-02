@@ -45,6 +45,46 @@ async function initPage() {
 
     // Load recommended products
     loadRecommendedProducts();
+
+    // Check if user has purchased the product
+    await checkPurchaseHistory();
+}
+
+// Check if user has purchased the product
+async function checkPurchaseHistory() {
+    if (!currentUser) {
+        disableReviewForm("You must be logged in to write a review.");
+        return;
+    }
+
+    const purchasesRef = collection(db, "users", currentUser.uid, "purchases");
+    const purchasesSnapshot = await getDocs(purchasesRef);
+
+    let hasPurchased = false;
+
+    for (const docSnapshot of purchasesSnapshot.docs) {
+        const productsRef = collection(docSnapshot.ref, "products");
+        const productsSnapshot = await getDocs(productsRef);
+
+        for (const productDoc of productsSnapshot.docs) {
+            if (productDoc.data().productId === productId) {
+                hasPurchased = true;
+                break;
+            }
+        }
+
+        if (hasPurchased) break;
+    }
+
+    if (!hasPurchased) {
+        disableReviewForm("You must purchase this product to write a review.");
+    }
+}
+
+// Disable review form
+function disableReviewForm(message) {
+    const reviewForm = document.getElementById("reviewForm");
+    reviewForm.innerHTML = `<p class="disabled-message">${message}</p>`;
 }
 
 // Update rating summary
@@ -121,12 +161,13 @@ async function loadReviews() {
                 <div class="review-content">
                     ${review.content}
                     <div class="review-actions">
+                        ${review.userId === currentUser.uid ? `
                         <button class="edit-btn" onclick="editReview('${review.id}')">
                             <iconify-icon icon="mdi:pencil"></iconify-icon>
                         </button>
                         <button class="delete-btn" onclick="deleteReview('${review.id}')">
                             <iconify-icon icon="mdi:delete"></iconify-icon>
-                        </button>
+                        </button>` : ''}
                     </div>
                 </div>
             </div>
@@ -229,9 +270,14 @@ document.querySelectorAll('.rating-area .star-icon').forEach(star => {
 window.deleteReview = async function(reviewId) {
     if (confirm('確定要刪除這則評論嗎？')) {
         try {
-            await deleteDoc(doc(db, 'reviews', reviewId));
-            updateRatingSummary();
-            loadReviews();
+            const reviewDoc = await getDoc(doc(db, 'reviews', reviewId));
+            if (reviewDoc.exists() && reviewDoc.data().userId === currentUser.uid) {
+                await deleteDoc(doc(db, 'reviews', reviewId));
+                updateRatingSummary();
+                loadReviews();
+            } else {
+                alert('You can only delete your own reviews.');
+            }
         } catch (error) {
             console.error('Error deleting review:', error);
         }
