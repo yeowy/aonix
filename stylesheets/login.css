@@ -23,13 +23,18 @@ html {
 }
 /* 登入介面 */
 .form-container {
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
+
     padding: 35px;
     padding-top: 0;
     width: 35%;
     max-width: 400px;
     min-width: 300px; /* 最小幅を設定 */
+    background: rgba(25, 25, 28, 0.4);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    box-shadow: 0 8px 15px rgba(187, 186, 186, 0.275);
 }
 
 #register-email {

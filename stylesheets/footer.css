@@ -9,5 +9,5 @@ footer {
     gap: 2rem;
     background: rgba(20, 20, 20, 0.95);
     border-top: 1px solid rgba(255, 0, 0, 0.8);
-    box-shadow: 0 0 10px rgba(255, 0, 0, 0.8), 0 0 20px rgba(255, 0, 0, 0.6), 0 0 30px rgba(255, 0, 0, 0.4), 0 0 40px rgba(255, 0, 0, 0.2);
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.612), 0 0 20px rgba(255, 0, 0, 0.448);
 }

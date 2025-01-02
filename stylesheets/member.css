@@ -103,7 +103,7 @@ html {
 
 .shopping-history-container::-webkit-scrollbar-thumb,
 .reviews-container::-webkit-scrollbar-thumb {
-    background-color: rgba(255, 0, 0, 0.8);
+    background-color: rgba(116, 114, 114, 0.8);
     border-radius: 6px;
     border: 3px solid rgba(255, 255, 255, 0.1);
 }
@@ -139,6 +139,7 @@ html {
 
 .order-items a {
     color: white;
+    filter: drop-shadow(0 0 3px rgba(255, 0, 0, 1));
     text-decoration: none;
 }
 
@@ -206,9 +207,6 @@ html {
     height: 20px;
 }
 
-.input-container hover {
-    
-}
 
 .input-container input {
     flex: 1;
@@ -243,4 +241,88 @@ html {
     border-top: 1px solid grey;
     border-bottom: 1px solid grey;
     padding: 1rem;
+}
+
+/* 修改評論容器的滾動條樣式 */
+.reviews-container {
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-right: 12px; /* 為滾動條預留空間 */
+}
+
+.reviews-container::-webkit-scrollbar {
+    width: 12px;
+}
+
+.reviews-container::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.reviews-container::-webkit-scrollbar-thumb {
+    background-color: rgba(116, 114, 114, 0.8);
+    border-radius: 6px;
+    border: 3px solid rgba(255, 255, 255, 0.1);
+}
+
+/* 隱藏水平滾動條 */
+.reviews-container::-webkit-scrollbar-horizontal {
+    display: none;
+}
+
+.review-item {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+}
+
+.review-item:hover {
+    transform: translateX(5px);
+    box-shadow: 0 5px 15px rgba(255, 0, 0, 0.2);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+/* 商品名稱和日期樣式 */
+.review-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid rgba(178, 173, 173, 0.254);
+}
+
+.review-product {
+    font-size: 1.1em;
+    color: white;
+    filter: drop-shadow(0 0 3px rgba(255, 0, 0, 1));
+    margin-right: 20px; 
+    display: inline-block; 
+}
+
+.review-date {
+    color: white;
+    font-size: 0.9em;
+    display: inline-block; 
+}
+
+/* 星級評分樣式 */
+.review-rating {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 15px;
+}
+
+.review-rating iconify-icon {
+    color: gold;
+    filter: drop-shadow(0 0 2px rgba(255, 215, 0, 0.5));
+}
+
+/* 評論內容樣式 */
+.review-text {
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.6;
+    margin-top: 10px;
 }

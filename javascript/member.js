@@ -72,54 +72,52 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // 加載評論歷史
+    function createReviewItem(review, productName, reviewDate) {
+        const reviewItem = document.createElement('div');
+        reviewItem.classList.add('review-item');
+        
+        // 創建星級評分
+        const stars = Array(5).fill('').map((_, i) => `
+            <iconify-icon 
+                icon="${i < review.rating ? 'mdi:star' : 'mdi:star-outline'}"
+                width="20" 
+                height="20"
+            ></iconify-icon>
+        `).join('');
+
+        reviewItem.innerHTML = `
+            <div class="review-header">
+                <div class="review-product">${productName}</div>
+                <div class="review-date">${reviewDate}</div>
+            </div>
+            <div class="review-rating">${stars}</div>
+            <div class="review-text">${review.reviewText}</div>
+        `;
+
+        return reviewItem;
+    }
+
     async function loadReviewHistory(userId) {
         try {
-            const reviewsRef = collection(db, "users", userId, "reviews");
+            const reviewsRef = collection(db, 'users', userId, 'reviews');
             const reviewsSnapshot = await getDocs(reviewsRef);
-            const reviewsContainer = document.getElementById("reviews");
+            const reviewsContainer = document.getElementById('reviews');
 
             if (reviewsSnapshot.empty) {
-                reviewsContainer.textContent = "No reviews yet";
+                reviewsContainer.innerHTML = '<div class="no-reviews">No reviews yet</div>';
                 return;
             }
 
-            reviewsContainer.innerHTML = "";
+            reviewsContainer.innerHTML = '';
             const reviews = reviewsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-
-            // Sort reviews by date in descending order
             reviews.sort((a, b) => new Date(b.reviewDate) - new Date(a.reviewDate));
 
             for (const review of reviews) {
-                const reviewItem = document.createElement("div");
-                reviewItem.classList.add("review-item");
-
+                const productDoc = await getDoc(doc(db, 'products', review.productId));
+                const productName = productDoc.exists() ? productDoc.data().name : 'Unknown Product';
                 const reviewDate = new Date(review.reviewDate).toLocaleString();
-                const productDoc = await getDoc(doc(db, "products", review.productId));
-                const productName = productDoc.exists() ? productDoc.data().name : "Unknown Product";
-
-                // Create star rating elements
-                const stars = Array(5)
-                    .fill("")
-                    .map(
-                        (_, i) => `
-                    <iconify-icon 
-                        icon="${i < review.rating ? "mdi:star" : "mdi:star-outline"}"
-                        width="20" 
-                        height="20"
-                        style="color: gold;"
-                    ></iconify-icon>
-                `
-                    )
-                    .join("");
-
-                reviewItem.innerHTML = `
-                    <div class="text-glow">${productName} - ${reviewDate}</div>
-                    <div class="review-comment">
-                        <div class="review-rating">${stars}</div>
-                        <div>${review.reviewText}</div>
-                    </div>
-                    
-                `;
+                
+                const reviewItem = createReviewItem(review, productName, reviewDate);
                 reviewsContainer.appendChild(reviewItem);
             }
         } catch (error) {
