@@ -113,9 +113,12 @@ document.addEventListener("DOMContentLoaded", () => {
                     .join("");
 
                 reviewItem.innerHTML = `
-                    <div class="review-rating">${stars}</div>
-                    <div>${productName} - ${reviewDate}</div>
-                    <div>${review.reviewText}</div>
+                    <div class="text-glow">${productName} - ${reviewDate}</div>
+                    <div class="review-comment">
+                        <div class="review-rating">${stars}</div>
+                        <div>${review.reviewText}</div>
+                    </div>
+                    
                 `;
                 reviewsContainer.appendChild(reviewItem);
             }
