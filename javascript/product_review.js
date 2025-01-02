@@ -1,6 +1,6 @@
 // Import Firebase services
 import { db, auth } from './firebase-config.js';
-import { doc, getDoc, collection, addDoc, query, where, getDocs, updateDoc, deleteDoc } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+import { doc, getDoc, collection, addDoc, query, where, getDocs, updateDoc, deleteDoc, setDoc, increment } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
 import { onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
 
 // Import the fetchProducts function
@@ -13,6 +13,7 @@ const productId = urlParams.get('id');
 // Initialize review data
 let currentRating = 0;
 let currentUser = null;
+let quantity = 1;
 
 // Initialize page
 async function initPage() {
@@ -357,6 +358,36 @@ async function loadRecommendedProducts() {
         `).join('');
     } catch (error) {
         console.error('Error loading recommended products:', error);
+    }
+}
+
+// Update quantity
+window.updateQuantity = function(change) {
+    quantity = Math.max(1, quantity + change);
+    document.getElementById('quantity').textContent = quantity;
+}
+
+// Add product to cart
+window.addToCart = async function() {
+    const user = auth.currentUser;
+    if (!user) {
+        alert("You must be logged in to add items to the cart!");
+        return;
+    }
+    try {
+        const cartItemRef = doc(db, "users", user.uid, "cart", productId);
+        const snapshot = await getDoc(cartItemRef);
+        if (snapshot.exists()) {
+            await updateDoc(cartItemRef, { quantity: increment(quantity) });
+        } else {
+            await setDoc(cartItemRef, {
+                productId: productId,
+                quantity: quantity
+            });
+        }
+        alert("Added to cart!");
+    } catch (error) {
+        console.error("Error adding to cart:", error);
     }
 }
 
