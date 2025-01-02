@@ -45,15 +45,16 @@
 /* 故事區塊樣式 */
 .story-section {
     margin-top: 40px;
-    padding: 40px;
+    padding: 5% 15%; 
     background: rgba(255, 255, 255, 0.05);
     border-radius: 10px;
     border: 1px solid rgba(255, 255, 255, 0.1);
     color: white;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
+    max-width: 1200px;
+    margin: 0 auto;
 }
-
 .story-section h2 {
     font-size: 2em;
     margin-bottom: 20px;
@@ -62,6 +63,7 @@
 }
 
 .story-section p {
+    font-weight: bold;
     line-height: 1.8;
     margin-bottom: 20px;
     font-size: 1.1em;
