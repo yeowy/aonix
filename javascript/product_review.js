@@ -47,7 +47,9 @@ async function initPage() {
     loadRecommendedProducts();
 
     // Check if user has purchased the product
-    await checkPurchaseHistory();
+    if (currentUser) {
+        await checkPurchaseHistory();
+    }
 }
 
 // Check if user has purchased the product
@@ -161,7 +163,7 @@ async function loadReviews() {
                 <div class="review-content">
                     ${review.content}
                     <div class="review-actions">
-                        ${review.userId === currentUser.uid ? `
+                        ${review.userId === currentUser?.uid ? `
                         <button class="edit-btn" onclick="editReview('${review.id}')">
                             <iconify-icon icon="mdi:pencil"></iconify-icon>
                         </button>
@@ -366,6 +368,6 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             currentUser = null;
         }
+        initPage();
     });
-    initPage();
 });
