@@ -9,6 +9,7 @@
 
 .products-container {
     flex: 1;
+    min-height: 93vh;
 }
 /* 商品導航 */
 .page-nav {
@@ -426,7 +427,7 @@
     width: 100%;
     max-width: 400px;
     height: 100%;
-    z-index: 1000;
+    z-index: 100000;
 }
 
 /* 購物車內容區域 */
@@ -621,14 +622,15 @@
 }
 
 /* Mobile responsive */
-@media (max-width: 768px) {
+@media (max-width: 1380px) {
     .product-card {
         flex-direction: column;
         height: auto;
     }
 
     .product-img img {
-        height: auto;
+        height: 276px;
+        width: 230px;
         margin-bottom: 1rem;
     }
 
