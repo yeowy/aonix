@@ -106,7 +106,7 @@ async function updateRatingSummary() {
 
     // Update UI
     document.querySelector('.rating-number').textContent = averageRating;
-    document.querySelector('.total-reviews').textContent = `${totalReviews} 則評論`;
+    document.querySelector('.total-reviews').textContent = `(${totalReviews} reviews)`;
 
     // Update average rating stars
     const averageStars = document.createElement('div');

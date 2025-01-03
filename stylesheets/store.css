@@ -314,6 +314,7 @@
 .product-bottom-right {
     display: flex;
     gap: 1em;
+    align-items: center;
 }
 
 .product-rating {
@@ -690,3 +691,6 @@
     }
 }
 
+.write-review p {
+    text-align: left;
+}

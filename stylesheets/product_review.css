@@ -41,11 +41,11 @@ header {
     font-size: 24px;
     color: var(--accent-color);
     font-weight: bold;
-    margin-bottom: 20px;
+    margin-bottom: 0;
 }
 
 .product-image {
-    min-width: 400px;
+    width: 400px;
     height: 400px;
     border-radius: 8px;
     overflow: hidden;
@@ -59,15 +59,17 @@ header {
 
 /* 評分摘要區域 */
 .rating-summary {
+    display: flex;
     margin-top: 20px;
     color: white;
+    align-items: center;
+    gap: 10px;
 }
 
 .average-rating {
     display: flex;
     align-items: center;
     gap: 10px;
-    margin-bottom: 10px;
 }
 
 .rating-number {
@@ -76,7 +78,7 @@ header {
 }
 
 .total-reviews {
-    color: white;
+    color: rgba(255, 255, 255, 0.206);
 }
 
 /* 評論區域樣式 */
@@ -119,7 +121,6 @@ header {
     align-items: center;
     justify-content: center;
     gap: 5px;
-    margin-bottom: 10px;
 }
 
 .star-icon {
@@ -402,4 +403,9 @@ header {
     transform: translateY(-2px);
 }
 
-/* ...existing code... */
+.purchase-container {
+    margin-left: auto;
+    margin-right: 1em;
+    display: flex;
+    gap: 20px;
+}
