@@ -30,7 +30,7 @@ async function initPage() {
 
     // Fill product information
     document.querySelector('.product-name').textContent = product.name;
-    document.querySelector('.product-description').textContent = product.description;
+    document.querySelector('.product-description').textContent = product.longdiscription;
     document.querySelector('.product-price').textContent = `$${product.price.toLocaleString()}`;
     
     // Create and set product image
