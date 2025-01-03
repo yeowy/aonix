@@ -133,14 +133,14 @@ async function loadReviews() {
     const reviews = await fetchReviews();
 
     if (reviews.length === 0) {
-        reviewsList.innerHTML = '<h2>商品評論</h2><p class="no-reviews">暫無評論</p>';
+        reviewsList.innerHTML = '<h2 class="text-glow">商品評論</h2><p class="no-reviews">暫無評論</p>';
         return;
     }
 
     // Sort reviews by date in descending order
     reviews.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-    reviewsList.innerHTML = '<h2>商品評論</h2>';
+    reviewsList.innerHTML = '<h2 class="text-glow">商品評論</h2>';
 
     let displayedReviews = 0;
 

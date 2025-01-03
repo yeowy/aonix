@@ -52,3 +52,10 @@ header a:hover {
 .header-icons iconify-icon:hover {
     color: var(--accent-color);
 }
+
+/* Media query for mobile */
+@media (max-width: 768px) {
+    #translateButton {
+        display: none;
+    }
+}

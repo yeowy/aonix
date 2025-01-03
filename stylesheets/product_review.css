@@ -17,6 +17,7 @@ header {
     padding: 4em 2em;
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
+    flex-wrap: wrap-reverse;
 }
 
 .product-details {
@@ -307,7 +308,7 @@ header {
 
 .products-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(375px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 20px;
     margin-top: 20px;
 }
@@ -408,4 +409,66 @@ header {
     margin-right: 1em;
     display: flex;
     gap: 20px;
+}
+
+@media (max-width: 768px) {
+    .product-section {
+        padding: 1em 2em;
+        border: unset;
+        backdrop-filter: unset;
+        background: unset;
+        box-shadow: unset;
+        background-color: unset;
+        padding-top: 0;
+    }
+
+    .review-section {
+        padding: 1em 2em;
+        border: unset;
+        backdrop-filter: unset;
+        background: unset;
+        box-shadow: unset;
+        background-color: unset;
+        padding-top: 1em;
+        border-top: 1px solid rgb(255, 255, 255);
+        border-radius: 0;
+    }
+
+    .product-name {
+        font-size: 2rem;
+    }
+
+    .product-description {
+        font-size: 1rem;
+    }
+
+    .recommended-products {
+        border-top: 1px solid rgb(255, 255, 255);
+    }
+
+    .review-item {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.391);
+    }
+
+    .product-price {
+        font-size: 20px;
+    }
+
+    .product-image {
+        width: 300px;
+        height: 300px;
+    }
+
+    .rating-summary {
+        padding: 0 1em;
+        font-size: 0.9rem;
+    }
+
+    .products-grid {
+        gap: 5em;
+    }
+
+    .products-grid .price {
+        margin-bottom: 14px;
+    }
 }

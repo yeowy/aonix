@@ -326,3 +326,63 @@ html {
     line-height: 1.6;
     margin-top: 10px;
 }
+
+@media (max-width: 768px) {
+    .member-container {
+        flex-direction: column;
+        width: 100%;
+        flex-wrap: wrap;
+    }
+
+    .left-menu {
+        width: 200px;
+        height: 200px;
+    }
+
+    .preferences-content {
+        width: 100%;
+        height: auto;
+    }
+
+    .profile-info {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .image-box, .profile-info img {
+        width: 100%;
+        height: auto;
+    }
+
+    .profile-details {
+        margin-left: 0;
+        text-align: center;
+    }
+
+    .menu-item {
+        justify-content: center;
+    }
+
+    .order-items > div {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .order-items img {
+        width: 100%;
+        height: auto;
+    }
+
+    .review-item {
+        padding: 10px;
+    }
+
+    .review-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .review-product, .review-date {
+        margin-right: 0;
+    }
+}

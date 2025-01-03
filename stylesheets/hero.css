@@ -87,3 +87,9 @@
         transform: translateY(0);
     }
 }
+
+@media (max-width: 480px) {
+    .hero-left h1 {
+        font-size: 2.6rem;
+    }
+}

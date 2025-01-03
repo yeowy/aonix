@@ -670,6 +670,8 @@
 
     .filter-section {
         position: unset;
+        padding: 1em;
+        
     }
 
     .store-container {
@@ -680,14 +682,22 @@
         display: none;
     }
 
-    .filter-section {
-        display: none;
+    .left-container {
+        position: sticky;
+        top: 4%;
     }
 
+    .filter-section .category-dropdown, .line, .page-nav {
+        display: none;
+    }
     .product-img {
         width: auto;
         height: auto;
         object-fit: auto;
+    }
+
+    .carousel {
+        display: none;
     }
 }
 
