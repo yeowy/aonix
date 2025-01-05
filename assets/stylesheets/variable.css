@@ -1,0 +1,30 @@
+:root {
+    /* COLOURS */
+    --primary-color: #131313;
+    --secondary-color: #FCFBFF;
+    --accent-color: #ff0000;
+    --neon-glow: 0 0 10px rgba(255, 0, 0, 0.5);
+    --header-glow: 0 2px 15px rgba(255, 0, 0, 0.15);
+    --text-glow: 0 0 5px rgba(255, 0, 0, 0.3);
+    --background-overlay: rgba(0, 0, 0, 0.8);
+    --light-background: rgba(255, 255, 255, 0.1);
+    --border-color: rgba(255, 255, 255, 0.2);
+    
+    /* HEADER */
+    --header-height: 7vh;
+    
+    /* FULLPAGE HEIGHT */
+    --fullpage: calc(100vh - var(--header-height));
+
+    /* TRANSITIONS */
+    --transition-normal: all 0.3s ease;
+    
+    /* SPACING */
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+}
+
+body {
+    background: linear-gradient(135deg, rgba(7, 7, 7, 0.95), rgba(14, 12, 12, 0.9));
+}
+

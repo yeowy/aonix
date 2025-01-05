@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
             document.querySelector("header").innerHTML = data;
         });
 
-    fetch("/aonix/pages/footer.html")
+    fetch("/aonix//pages/footer.html")
         .then(response => response.text())
         .then(data => {
             document.querySelector("footer").innerHTML = data;
@@ -27,11 +27,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
             // Check for developer mode cookie and set stylesheet accordingly
             const developerMode = getCookie("developerMode");
-            let link = document.querySelector('link[href="/aonix/stylesheets/developer.css"]');
+            let link = document.querySelector('link[href="/aonix/assets/stylesheets/developer.css"]');
             if (!link) {
                 link = document.createElement("link");
                 link.rel = "stylesheet";
-                link.href = "/aonix/stylesheets/developer.css";
+                link.href = "/aonix/assets/stylesheets/developer.css";
                 document.head.appendChild(link);
             }
             link.disabled = developerMode !== "true";
@@ -54,11 +54,11 @@ function handleAccountRedirect() {
 
 // Toggle developer mode stylesheet
 window.toggleDeveloperMode = function () {
-    let link = document.querySelector('link[href="/aonix/stylesheets/developer.css"]');
+    let link = document.querySelector('link[href="/aonix/assets/stylesheets/developer.css"]');
     if (!link) {
         link = document.createElement("link");
         link.rel = "stylesheet";
-        link.href = "/aonix/stylesheets/developer.css";
+        link.href = "/aonix/assets/stylesheets/developer.css";
         document.head.appendChild(link);
     }
     link.disabled = !link.disabled;

@@ -1,0 +1,95 @@
+@import url("reset.css");
+@import url("font.css");
+@import url("variable.css");
+@import url("header.css");
+@import url("footer.css");
+
+/* SECTIONS */
+/* First section of page */
+.section-1 {
+    width: 100wh;
+    height: 86vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.fullpage {
+    width: 100wh;
+    height: 86vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* CARD STYLING */
+.card {
+    background: rgba(25, 25, 28, 0.7);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    padding: 2em 3em;
+    margin-top: 0;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    
+    border-radius: 10px;
+}
+
+/* .card::after {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    border-radius: 10px;
+    box-shadow: 0 0 5px rgba(255, 0, 0, 0.8), 0 0 10px rgba(255, 0, 0, 0.6), 0 0 15px rgba(255, 0, 0, 0.4), 0 0 20px rgba(255, 0, 0, 0.2);
+    z-index: -1;
+} */
+
+/* BUTTON STYLING */
+.button-1 {
+    display: inline-block;
+    background: var(--accent-color);
+    color: var(--secondary-color);
+    border: 1px solid var(--accent-color);
+    padding: 1rem 2rem;
+    border-radius: 4em;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: var(--transition-normal);
+}
+
+.button-1 {
+    background: rgb(110, 1, 1);
+    transform: translateY(-2px);
+    box-shadow: var(--neon-glow);
+}
+
+/* HOVER EFFECTS */
+.hover-scale {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    position: relative;
+    display: inline-block;
+}
+
+.hover-scale:hover {
+    transform: scale(1.1);
+}
+
+/* GLOW EFFECTS */
+.glow {
+    /* filter: drop-shadow(0 0 3px rgba(255, 0, 0, 1)); */
+    box-shadow: 0 0 30px rgba(255, 0, 0, 0.1), inset 0 0 15px rgba(255, 255, 255, 0.1);
+    /* box-shadow: 0 0 30px rgba(255, 0, 0, 0.238), inset 0 0 15px rgba(255, 255, 255, 0.267); */
+    /* box-shadow: 0 0 10px rgba(255, 0, 0, 0.8), 0 0 20px rgba(255, 0, 0, 0.6), 0 0 30px rgba(255, 0, 0, 0.4), 0 0 40px rgba(255, 0, 0, 0.2); */
+}
+
+.text-glow {
+    filter: drop-shadow(0 0 3px rgba(255, 0, 0, 1));
+}
+
+.cart-total {
+    margin-bottom: 1em;
+}
