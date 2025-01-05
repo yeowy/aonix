@@ -1,0 +1,114 @@
+.carousel {
+    width: 101%;
+    height: 40vh;
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+    margin: 0;  
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    background: rgb(0, 0, 0);
+}
+
+.carousel .container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    left: 0;
+    display: flex;
+    transition: all 1s;
+}
+.carousel .container a {
+    width: 100%;
+    height: 100%;
+
+    flex-shrink: 0;
+}
+
+.carousel .container a img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+.carousel .container  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+/* 左右按鈕 */
+.carousel .shift .btn {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto 0;
+    background: rgba(0, 0, 0, 0.8);
+    color: var(--secondary-color);
+    width: 50px;
+    height: 50px;
+    border-radius: 8px;
+    font-size: 30px;
+    font-weight: 300;
+    line-height: 50px;
+    text-align: center;
+    cursor: pointer;
+    user-select: none;
+    opacity: 0;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 0, 0, 0.2);
+}
+
+.carousel .shift .left {
+    left: 30px;
+}
+
+.carousel .shift .right {
+    right: 30px;
+}
+
+.carousel .shift .btn:hover {
+    background: rgba(255, 0, 0, 0.2);
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.3);
+    transform: scale(1.1);
+}
+
+/* 下方指示器 */
+.carousel .bottom {
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    width: max-content;
+    display: flex;
+    gap: 10px;
+    z-index: 2;
+}
+
+.carousel .bottom .indicator {
+    height: 4px;
+    width: 40px;
+    background-color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 2px;
+}
+
+.carousel .bottom .indicator.active {
+    background-color: var(--accent-color);
+    box-shadow: 0 0 10px rgba(250, 248, 248, 0.5);
+}
+
+.carousel:hover .bottom .indicator {
+    opacity: 1;
+}
+
+.carousel:hover .shift .btn {
+    opacity: 1;
+}
+
+.carousel .bottom .indicator:hover {
+    background-color: var(--accent-color);
+    transform: scaleY(1.5);
+}
