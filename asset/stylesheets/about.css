@@ -32,9 +32,13 @@
     box-shadow: 0 10px 20px rgba(255, 0, 0, 0.2);
 }
 
+.about-card p {
+    color: white;
+    filter: drop-shadow(0 0 3px rgba(255, 0, 0, 1));
+}
 .about-card img {
     width: 100%;
-    height: 100%;
+    height: 75%;
     object-fit: cover;
     transition: transform 0.3s ease;
 }
