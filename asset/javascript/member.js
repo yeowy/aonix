@@ -56,8 +56,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 order.items.forEach(item => {
                     const historyItem = document.createElement("div");
                     historyItem.innerHTML = `
-                        <a href="/aonix/asset/pages/product_review.html?id=${item.productId}">${item.itemName}</a>
-                        <a href="/aonix/asset/pages/product_review.html?id=${item.productId}">
+                        <a href="/aonix/pages/product_review.html?id=${item.productId}">${item.itemName}</a>
+                        <a href="/aonix/pages/product_review.html?id=${item.productId}">
                             <img src="${item.images[0]}" alt="${item.itemName}">
                         </a>`;
                     orderItemsDiv.appendChild(historyItem);

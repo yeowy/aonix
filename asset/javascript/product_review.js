@@ -22,7 +22,7 @@ async function initPage() {
     const productSnapshot = await getDoc(productDoc);
     if (!productSnapshot.exists()) {
         // Redirect to store page if product does not exist
-        window.location.href = '/aonix/asset/pages/store.html';
+        window.location.href = '/aonix/pages/store.html';
         return;
     }
 
@@ -350,7 +350,7 @@ async function loadRecommendedProducts() {
 
         const productsGrid = document.querySelector('.products-grid');
         productsGrid.innerHTML = recommendedProducts.map(product => `
-            <div class="card product-card" onclick="location.href='/aonix/asset/pages/product_review.html?id=${product.id}'">
+            <div class="card product-card" onclick="location.href='/aonix/pages/product_review.html?id=${product.id}'">
                 <img src="${product.images[0]}" alt="${product.name}">
                 <h3>${product.name}</h3>
                 <div class="price">$${product.price.toLocaleString()}</div>

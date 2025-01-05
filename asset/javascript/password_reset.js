@@ -21,7 +21,7 @@ resetButton.addEventListener('click', async (e) => {
         
         // Redirect after 3 seconds
         setTimeout(() => {
-            window.location.href = '/aonix/asset/pages/login.html';
+            window.location.href = '/aonix/pages/login.html';
         }, 3000);
     } catch (error) {
         resetError.style.color = '#ff4d4d';
