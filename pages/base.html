@@ -1,0 +1,25 @@
+<!-- <div class="search-hint" id="searchHint">
+    <input type="text" id="searchInput" placeholder="Search for products..." />
+</div> -->
+
+<!-- 購物車介面 預設隱藏 -->
+<div class="cart-modal" id="cartModal">
+    <div class="cart-content">
+        <div class="cart-header">
+            <p>Your cart</p>
+            <div class="close-cart" onclick="toggleCart()">
+                <iconify-icon icon="mdi:close"></iconify-icon>
+            </div>
+        </div>
+
+        <div class="cart-items" id="cartItems"></div>
+
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span>$<span id="cartTotal">0</span></span>
+            </div>
+            <button class="checkout-btn" onclick="checkout()"> Checkout </button>
+        </div>
+    </div>
+</div>
