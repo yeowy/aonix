@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link rel="stylesheet" href="/aonix/asset/stylesheets/base.css" />
+        <link rel="stylesheet" href="/aonix/asset/stylesheets/login.css" />
+        <link rel="stylesheet" href="/aonix/asset/stylesheets/store.css" />
+        <link rel="stylesheet" href="/aonix/asset/stylesheets/product_review.css" />
+
+        <title>商品評價 - aonix.</title>
+    </head>
+    <body style="overflow: auto;">
+
+        <header></header>
+        <!-- Main content section -->
+        <main class="review-container">
+            <!-- Product details section -->
+            <div class="card glow product-section">
+                <div class="product-details">
+                    <h1 class="text-glow product-name"><!-- Filled by JS --></h1>
+                    <p class="product-description"><!-- Filled by JS --></p>
+                    <div class="product-bottom-right">
+                        <div class="product-price"><!-- Filled by JS --></div>
+                        <div class="purchase-container">
+                            <div class="quantity-controls">
+                                <button onclick="updateQuantity(-1)">-</button>
+                                <span id="quantity">1</span>
+                                <button onclick="updateQuantity(1)">+</button>
+                            </div>
+                            <button class="add-to-cart-btn" onclick="addToCart()">Purchase</button>
+                        </div>
+                        
+                    </div> 
+
+                    <div class="rating-summary">
+                        <div class="average-rating">
+                            <span class="rating-number"><!-- Filled by JS --></span>
+                            <div class="star">
+                                <!-- Average rating stars filled by JS -->
+                            </div>
+                        </div>
+                        <span class="total-reviews"><!-- Filled by JS --></span>
+                    </div>
+                </div>
+
+                <div class="product-image">
+                    <!-- Product image filled by JS -->
+                </div>
+            </div>
+
+            <!-- Review section -->
+            <div class="card glow review-section">
+                <h2 class="text-glow">Write a review...</h2>
+                <div class="write-review">
+                    <div class="rating-area">
+                        <div class="star">
+                            
+                    </div>
+
+                    <!-- Review form -->
+                    <form id="reviewForm" class="review-form">
+                        <textarea placeholder="Enter your thoughts..." required minlength="10" maxlength="500"></textarea>
+                        <div class="review-row">
+                            <div id="review-submit"><button type="submit">發布評價</button></div>
+                            <div id="review-text"><span class="rating-text">Please choose a rating:</span></div>
+                            <!-- Star icons for rating -->
+                            <iconify-icon
+                                icon="mdi:star-outline"
+                                width="24"
+                                height="24"
+                                data-index="1"
+                                class="star-icon"
+                            ></iconify-icon>
+                            <iconify-icon
+                                icon="mdi:star-outline"
+                                width="24"
+                                height="24"
+                                data-index="2"
+                                class="star-icon"
+                            ></iconify-icon>
+                            <iconify-icon
+                                icon="mdi:star-outline"
+                                width="24"
+                                height="24"
+                                data-index="3"
+                                class="star-icon"
+                            ></iconify-icon>
+                            <iconify-icon
+                                icon="mdi:star-outline"
+                                width="24"
+                                height="24"
+                                data-index="4"
+                                class="star-icon"
+                            ></iconify-icon>
+                            <iconify-icon
+                                icon="mdi:star-outline"
+                                width="24"
+                                height="24"
+                                data-index="5"
+                                class="star-icon"
+                            ></iconify-icon>
+                        </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="reviews-list">
+                    <h2 class="text-glow">商品評論</h2>
+                    <!-- Reviews list filled by JS -->
+                </div>
+            </div>
+
+            <div class="recommended-products">
+                <h2 class="text-glow">推薦商品</h2>
+                <div class="products-grid">
+                    <!-- Products will be filled by JS -->
+                </div>
+            </div>
+        </main>
+
+        <!-- Scripts -->
+        <script type="module" src="/aonix/asset/javascript/base.js"></script>
+        <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+        <script src="/aonix/asset/javascript/search.js"></script>
+        <script type="module" src="/aonix/asset/javascript/store.js"></script>
+        <script type="module" src="/aonix/asset/javascript/product_review.js"></script>
+
+        <footer></footer>
+    </body>
+</html>

@@ -1,0 +1,95 @@
+.hero {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: calc(100vh - var(--header-height));
+    overflow: hidden;
+    background-image: url("/aonix/asset/imgs/hero-bg-optimized.webp");
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    z-index: 1;
+    padding: 0 2rem;
+    background: url('/aonix/asset/imgs/hero-bg-optimized.webp') no-repeat center center;
+    height: 93vh;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out;
+}
+
+.hero-overlay.fade-in {
+    opacity: 1;
+}
+
+.hero-left {
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    padding: 2rem;
+    color: white;
+    opacity: 0;
+    transform: translateY(50px);
+    animation: fall-in 1.5s forwards;
+}
+
+.hero-left h1 {
+    font-size: 4.5rem;
+    margin-bottom: 1.5rem;
+    color: var(--secondary-color);
+    text-shadow: 0 0 25px rgba(255, 0, 0, 0.8), 0 0 35px rgba(212, 208, 208, 0.4), 0 0 45px rgba(128, 125, 125, 0.2);
+    line-height: 1.35;
+}
+
+.hero-left p {
+    font-size: 1.5rem;
+    line-height: 1.85;
+    margin-bottom: 2rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.hero-left .button {
+    display: inline-block;
+    background: var(--accent-color);
+    color: var(--secondary-color);
+    border: 1px solid var(--accent-color);
+    padding: 1rem 2rem;
+    border-radius: 4em;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: var(--transition-normal);
+}
+
+.hero-left .button:hover {
+    background: rgb(110, 1, 1);
+    transform: translateY(-2px);
+    box-shadow: var(--neon-glow);
+}
+
+.hero-left > * {
+    opacity: 0;
+    transform: translateY(50px);
+    animation: fall-in 1.5s forwards;
+}
+
+@keyframes fall-in {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-left h1 {
+        font-size: 2.6rem;
+    }
+}

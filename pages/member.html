@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link rel="stylesheet" href="/aonix/asset/stylesheets/base.css" />
+        <link rel="stylesheet" href="/aonix/asset/stylesheets/index.css" />
+        <link rel="stylesheet" href="/aonix/asset/stylesheets/store.css" />
+        <link rel="stylesheet" href="/aonix/asset/stylesheets/login.css" />
+        <link rel="stylesheet" href="/aonix/asset/stylesheets/member.css" />
+
+        <title>aonix.</title>
+    </head>
+    <body style="overflow: auto">
+        <header></header>
+
+        <div class="fullpage">
+            <div class="member-container">
+                <!-- 左側選單 -->
+                <div class="left-menu">
+                    <div class="card glow preferences-menu">
+                        <h2>Preferences</h2>
+                        <div class="menu-items">
+                            <div class="menu-item">
+                                <span>Profile</span>
+                                <iconify-icon icon="mdi:chevron-right"></iconify-icon>
+                            </div>
+                            <div class="menu-item">
+                                <span>Orders</span>
+                                <iconify-icon icon="mdi:chevron-right"></iconify-icon>
+                            </div>
+                            <div class="menu-item">
+                                <span>Reviews</span>
+                                <iconify-icon icon="mdi:chevron-right"></iconify-icon>
+                            </div>
+                            <div class="menu-item">
+                                <span>My Cards</span>
+                                <iconify-icon icon="mdi:chevron-right"></iconify-icon>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button id="logout-button" class="button">Logout</button>
+                </div>
+
+                <!-- 右側內容區 -->
+                <div class="card glow preferences-content"></div>
+            </div>
+        </div>
+        <script src="/aonix/asset/javascript/search.js"></script>
+        <script type="module" src="/aonix/asset/javascript/base.js"></script>
+        <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+        <script type="module" src="/aonix/asset/javascript/store.js"></script>
+        <script type="module" src="/aonix/asset/javascript/accountRedirect.js"></script>
+        <script type="module" src="/aonix/asset/javascript/member.js"></script>
+
+        <footer></footer>
+    </body>
+</html>

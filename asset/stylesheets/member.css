@@ -1,0 +1,388 @@
+body, html {
+    color: white;
+}
+
+html {
+    font-size: clamp(14px, 1.5vw, 18px);
+    scroll-behavior: smooth;
+}
+
+.member-container {
+    display: flex;
+    width: 1500px;
+    height: auto;
+    margin: 0;
+    gap: 20px;
+}
+
+.left-menu span {
+    font-weight: 400;
+}
+
+.preferences-menu {
+    height: 410px;
+    padding: 2em 3em;
+}
+
+.preferences-menu h2 {
+    margin-bottom: 10px;
+    margin-top: 0;
+    color: white;
+    font-size: 2.441rem;
+    filter: drop-shadow(0 0 3px rgba(255, 0, 0, 1));
+}
+
+#logout-button {
+    border-radius: 10px;
+}
+
+.menu-items {
+    display: flex;
+    flex-direction: column;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin: 0.8em 0;
+    padding: 10px 15px;
+    color: white;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.menu-item:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateX(5px);
+}
+
+.menu-item iconify-icon {
+    color: #666;
+}
+
+.preferences-content {
+    padding-top: 1.5em;
+    width: 1500px;
+    height: 480px;
+}
+
+.preferences-content h2 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    color: white;
+    filter: drop-shadow(0 0 3px rgba(255, 0, 0, 1));
+}
+
+.shopping-history-container,
+.reviews-container {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.shopping-history-container,
+.reviews-container {
+    width: 100%;
+    margin-top: 20px;
+    max-height: 370px; /* Adjust as needed */
+    overflow-y: auto;
+    padding-top: 1.5em;
+}
+
+/* スクロールバーのスタイル */
+.shopping-history-container::-webkit-scrollbar,
+.reviews-container::-webkit-scrollbar {
+    width: 12px;
+}
+
+.shopping-history-container::-webkit-scrollbar-track,
+.reviews-container::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.shopping-history-container::-webkit-scrollbar-thumb,
+.reviews-container::-webkit-scrollbar-thumb {
+    background-color: rgba(116, 114, 114, 0.8);
+    border-radius: 6px;
+    border: 3px solid rgba(255, 255, 255, 0.1);
+}
+
+.order {
+    margin-bottom: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.order-header {
+    color: white;
+    margin-bottom: 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 10px;
+}
+
+.order-items {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.order-items > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 6px;
+}
+
+.order-items a {
+    color: white;
+    filter: drop-shadow(0 0 3px rgba(255, 0, 0, 1));
+    text-decoration: none;
+}
+
+.order-items img {
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+/* CONTENT STYLING */
+/* User profile */
+.profile-info {
+    display: flex;
+    justify-content: center;
+    gap: 1.6em;
+    size: fit-content;
+    padding-bottom: 1.8em;
+    font-size: 14px;
+}
+
+.image-box {
+    size: fit-content;
+    width: 350px;
+    height: 350px;
+}
+.profile-info img {
+    width: 350px;
+    height: 350px;
+    border-radius: 10px;
+}
+
+.profile-details {
+    margin-left: 2rem;
+}
+
+.input-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-container input {
+    flex: 1;
+    padding-right: 40px; /* Space for the icon */
+    cursor: not-allowed;
+}
+
+.input-container input:enabled {
+    border: 1px solid rgba(255, 0, 0, 0.601);
+    cursor: text;
+}
+
+.input-container button {
+    position: absolute;
+    right: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: white;
+}
+
+.input-container button iconify-icon {
+    width: 20px;
+    height: 20px;
+}
+
+
+.input-container input {
+    flex: 1;
+    padding-right: 40px; /* Space for the icon */
+    cursor: not-allowed;
+}
+
+.input-container button {
+    top: 35%;
+    position: absolute;
+    right: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: white;
+}
+
+.input-container button iconify-icon {
+    width: 20px;
+    height: 20px;
+}
+
+.review-comment {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+}
+
+.review-item {
+    display: grid;
+    place-items: center;
+    border-top: 1px solid grey;
+    border-bottom: 1px solid grey;
+    padding: 1rem;
+}
+
+/* 修改評論容器的滾動條樣式 */
+.reviews-container {
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-right: 12px; /* 為滾動條預留空間 */
+}
+
+.reviews-container::-webkit-scrollbar {
+    width: 12px;
+}
+
+.reviews-container::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.reviews-container::-webkit-scrollbar-thumb {
+    background-color: rgba(116, 114, 114, 0.8);
+    border-radius: 6px;
+    border: 3px solid rgba(255, 255, 255, 0.1);
+}
+
+/* 隱藏水平滾動條 */
+.reviews-container::-webkit-scrollbar-horizontal {
+    display: none;
+}
+
+.review-item {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+}
+
+.review-item:hover {
+    transform: translateX(5px);
+    box-shadow: 0 5px 15px rgba(255, 0, 0, 0.2);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+/* 商品名稱和日期樣式 */
+.review-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid rgba(178, 173, 173, 0.254);
+}
+
+.review-product {
+    font-size: 1.1em;
+    color: white;
+    filter: drop-shadow(0 0 3px rgba(255, 0, 0, 1));
+    margin-right: 20px; 
+    display: inline-block; 
+}
+
+.review-date {
+    color: white;
+    font-size: 0.9em;
+    display: inline-block; 
+}
+
+/* 星級評分樣式 */
+.review-rating {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 15px;
+}
+
+.review-rating iconify-icon {
+    color: gold;
+    filter: drop-shadow(0 0 2px rgba(255, 215, 0, 0.5));
+}
+
+/* 評論內容樣式 */
+.review-text {
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.6;
+    margin-top: 10px;
+}
+
+@media (max-width: 768px) {
+    .member-container {
+        flex-direction: column;
+        width: 100%;
+        flex-wrap: wrap;
+    }
+
+    .left-menu {
+        width: 200px;
+        height: 200px;
+    }
+
+    .preferences-content {
+        width: 100%;
+        height: auto;
+    }
+
+    .profile-info {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .image-box, .profile-info img {
+        width: 100%;
+        height: auto;
+    }
+
+    .profile-details {
+        margin-left: 0;
+        text-align: center;
+    }
+
+    .menu-item {
+        justify-content: center;
+    }
+
+    .order-items > div {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .order-items img {
+        width: 100%;
+        height: auto;
+    }
+
+    .review-item {
+        padding: 10px;
+    }
+
+    .review-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .review-product, .review-date {
+        margin-right: 0;
+    }
+}

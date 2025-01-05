@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link rel="stylesheet" href="/aonix/asset/stylesheets/base.css" />
+        <link rel="stylesheet" href="/aonix/asset/stylesheets/index.css" />
+        <link rel="stylesheet" href="/aonix/asset/stylesheets/store.css" />
+        <link rel="stylesheet" href="/aonix/asset/stylesheets/hero.css" />
+        <link rel="stylesheet" href="/aonix/asset/stylesheets/carousel.css" />
+
+        <title>aonix.</title>
+    </head>
+    <body>
+    
+        <header></header>
+
+        <!-- Loading screen -->
+        <div id="loading-screen">
+            <div class="loading-background"></div>
+            </div>
+        </div>
+
+        <!-- Hero section -->
+        <section class="hero fullpage">
+            <div class="hero-overlay"></div>
+            <div class="hero-left">
+                <h1>Power up your PC with AONIX.</h1>
+                <p>
+                    Whether you're a gamer, creator, or professional, AONIX has everything you need to build and upgrade
+                    your dream PC. Explore our wide selection of high-performance components designed for reliability
+                    and excellence.
+                </p>
+                <a href="/aonix/pages/store.html" class="button">Upgrade now</a>
+            </div>
+        </section>
+
+        <!-- Featured section -->
+        <div class="featured" style="display: none;">
+
+            <!-- Carousel -->
+            <div class="carousel">
+                <div class="container">
+                    <a href="/aonix/pages/product_review.html?id=IPoLURD5QQAPV4EtsgJ9">
+                        <img draggable="false" src="/aonix/asset/imgs/carousel-1.webp" />
+                    </a>
+                    
+                    <a href="/aonix/pages/product_review.html?id=btYTClqfXsW0YniACU7J">
+                        <img draggable="false" src="/aonix/asset/imgs/carousel-2.webp" />
+                    </a>
+                    <a href="/aonix/pages/product_review.html?id=IPoLURD5QQAPV4EtsgJ9">
+                        <img draggable="false" src="/aonix/asset/imgs/carousel-3.webp" />
+                    </a>
+                </div>
+                <div class="shift">
+                    <div class="btn left" onclick="leftShift()">&lt;</div>
+                    <div class="btn right" onclick="rightShift()">&gt;</div>
+                </div>
+                <div class="bottom"></div>
+            </div>
+            
+            
+            <!-- Best sellers (filled by js) -->
+            <div class="best-sellers"></div>
+        </div>
+
+        <!-- Categories section -->
+        <div class="categories-section" style="display: none;">
+
+            <h1>Categories</h1>
+
+            <div class="category-container">
+                <div class="categories">
+                    <a href="/aonix/pages/store.html?category=keyboards" class="category-1">
+                        <p>GAMING KEYBOARDS</p>
+                    </a>
+                    <a href="/aonix/pages/store.html?category=headsets" class="category-2">
+                        <p>GAMING HEADSETS</p>
+                    </a>
+                    <a href="/aonix/pages/store.html?category=power supplies" class="category-3">
+                        <p>POWER SUPPLIES</p>
+                    </a>
+                    <a href="/aonix/pages/store.html?category=full-tower" class="category-4">
+                        <p>FULL TOWER CASES</p>
+                    </a>
+                </div>
+
+                <div class="categories">
+                    <a href="/aonix/pages/store.html?category=mise" class="category-5">
+                        <p>GAMING MOUSE</p>
+                    </a>
+                    <a href="/aonix/pages/store.html?category=ram" class="category-6">
+                        <p>MEMORY</p>
+                    </a>
+                    <a href="/aonix/pages/store.html?category=mid-tower" class="category-7">
+                        <p>MID TOWER CASES</p>
+                    </a>
+                    <a href="/aonix/pages/store.html?category=monitors" class="category-8">
+                        <p>MONITORS</p>
+                    </a>
+                    <a href="/aonix/pages/store.html?category=cpu coolers" class="category-9">
+                        <p>CPU COOLERS</p>
+                    </a>
+                </div>
+            </div>
+         </div>
+
+        <div class="last-section hidden">
+            <div class="box">
+                <h1 class="flash-text">What are you waiting for?</h1>
+            </div>
+
+            <div id="but" class="box"><a href="/aonix/asset/pages/store.html" class="button">Upgrade now</a></div>
+            <div class="invisible-box" onclick="scrollToTop()"></div>
+        </div>
+
+        <script type="module" src="/aonix/asset/javascript/base.js"></script>
+        <script type="module" src="/aonix/asset/javascript/index.js"></script>
+        <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+        <script src="/aonix/asset/javascript/search.js"></script>
+        <script type="module" src="/aonix/asset/javascript/store.js"></script>
+        <script type="module" src="/aonix/asset/javascript/accountRedirect.js"></script>
+        <script src="/aonix/asset/javascript/carousel.js"></script>
+        <!-- <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script> -->
+
+        <footer></footer>
+    </body>
+</html>
