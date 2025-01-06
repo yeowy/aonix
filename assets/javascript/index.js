@@ -42,13 +42,13 @@ async function fetchBestSellers() {
             featuredProductDiv.innerHTML = `
                 <h1>${titles[index]}</h1>
                 <div>
-                    <a href="product_review.html?id=${product.id}">
+                    <a href="/aonix/pages/product_review.html?id=${product.id}">
                         ${productImage}
                     </a>
                 </div>
                 <div class="product-details">
                     <div class="product-brand">${productBrand}</div>
-                    <div class="product-name"><a href="product_review.html?id=${product.id}"><h5>${productName}</h5></a></div>
+                    <div class="product-name"><a href="/aonix/pages/product_review.html?id=${product.id}"><h5>${productName}</h5></a></div>
                     <div class="product-tags">
                         <div class="tag">${productFeature1}</div>
                         <div class="tag">${productFeature2}</div>
